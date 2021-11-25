@@ -12,11 +12,11 @@ const Login = () => {
                     <p>Login to start your tasty Burgir adventure!</p>
                 </div>
                 <form action="" className="login-form">
-                    <label>
+                    <label htmlFor="email">
                         Email:
                         <input type="text" name="email" />
                     </label>
-                    <label>
+                    <label htmlFor="password">
                         Password:
                         <input type="password" />
                     </label>
