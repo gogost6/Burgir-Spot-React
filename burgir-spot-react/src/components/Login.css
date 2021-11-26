@@ -1,0 +1,72 @@
+.container {
+    background-color: rgba(255, 255, 255, 0.712);
+    color: black;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 42px;
+    height: 90vh;
+}
+
+.img-wraper {
+    width: 42%;
+    margin-left: 5%;
+}
+
+.img-wraper img{
+    width: 100%;
+    height: auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-self: self-start;
+    margin-top: 6%;
+    width: 100%;
+}
+
+.login-form label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.login-form label input {
+    border: none;
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0);;
+}
+
+.content-wraper {
+    display: flex;
+    align-items: center;
+    align-content: flex-start;
+    flex-direction: column;
+    font-size: 30px;
+    margin-right: 5%;
+}
+
+.content-wraper h1,
+.content-wraper p{
+    margin: 0;
+    padding: 0;
+}
+
+.btn {
+    border-radius: 20px;
+    border: none;
+    width: 24%;
+    margin: 0 18px;
+    padding: 14px 0px;
+    font-size: 17px;
+}
+
+.btn.burgir-color {
+    background-color: #f9b856;
+}
+
+.btn-wraper {
+    display: flex;
+}
