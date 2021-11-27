@@ -50,7 +50,7 @@ const Register = () => {
                 </form>
             </section>
             <section className="img-wraper right">
-                <img src="images/Man_eating_hamburger.jpg" alt="man-e-ham" />
+                <img src="images/hungry-man.jpg" alt="man-e-ham" />
             </section>
         </div>
     );
