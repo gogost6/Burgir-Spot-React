@@ -21,7 +21,6 @@ module.exports = (app) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    mongoose.set("useFindAndModify", false);
   
     const db = mongoose.connection;
     db.on("error", (err) => {

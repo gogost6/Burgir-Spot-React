@@ -40,7 +40,7 @@ router.post(
 
 router.post("/search-burgirs", async (req, res) => {
   try {
-    const searchResults = await req.storage.getCarsByCriteria(req.body);
+    const searchResults = await req.storage.getBurgirsByCriteria(req.body);
     res.json(searchResults);
   } catch (err) {
     console.log(err);

@@ -1,10 +1,10 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
 function App() {
     return (
