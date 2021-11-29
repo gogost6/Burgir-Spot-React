@@ -29,7 +29,7 @@ router.post(
     .trim()
     .custom((value, { req }) => {
       if (value != req.body.password) {
-        throw new Error("Passwords don't match");
+        throw "Passwords don't match";
       }
       return true;
     }),
@@ -39,7 +39,7 @@ router.post(
       const errors = Object.values(validationResult(req).mapped());
 
       if (errors.length > 0) {
-        throw new Error(errors.map((e) => e.msg).join("\n"));
+        throw errors.map((e) => e.msg);
       }
 
       const existingByEmail = await userService.getUserByEmail(email);
@@ -49,15 +49,15 @@ router.post(
       );
 
       if (existingByEmail) {
-        throw new Error("Email is registered already");
+        throw "Email is registered already";
       }
 
       if (existingByUsername) {
-        throw new Error("Username is taken!");
+        throw "Username is taken!";
       }
 
       if (existingByTelephone) {
-        throw new Error("Telephone is being used by other user!");
+        throw "Telephone is being used by other user!";
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -80,7 +80,7 @@ router.post(
       res.json(userViewModel);
     } catch (err) {
       console.log(err);
-      res.status(401).json({ err });
+      res.status(401).json(err);
     }
   }
 );
@@ -102,16 +102,16 @@ router.post(
 
       const errors = Object.values(validationResult(req).mapped());
       if (errors.length > 0) {
-        throw new Error(errors.map((e) => e.msg).join("\n"));
+        throw errors.map((e) => e.msg).join("\n");
       }
       const user = await userService.getUserByUsername(username);
 
       if (!user) {
-        throw new Error("Wrong username or password!");
+        throw "Wrong username or password!";
       } else {
         const isMatch = await bcrypt.compare(password, user.hashedPassword);
         if (!isMatch) {
-          throw new Error("Wrong username or password!");
+          throw "Wrong username or password!";
         } else {
           const userViewModel = {
             _id: user._id,
@@ -154,7 +154,7 @@ router.post(
       const isOldPassword = await bcrypt.compare(value, user.hashedPassword);
 
       if (!isOldPassword) {
-        throw new Error("Old password doesn't match!");
+        throw "Old password doesn't match!";
       }
       return true;
     }),
@@ -177,11 +177,11 @@ router.post(
       );
 
       if (existingByUsername && curUsername != username) {
-        throw new Error("Username is taken!");
+        throw "Username is taken!";
       }
 
       if (existingByTelephone && curTelephone != telephone) {
-        throw new Error("Telephone is being used by other user!");
+        throw "Telephone is being used by other user!";
       }
       const hashedPassword = await bcrypt.hash(newPassword, 10);
       const userUpdateModel = { username, telephone, hashedPassword };

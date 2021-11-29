@@ -1,6 +1,6 @@
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from '../../services/authService/authService'
+import { registerUser } from '../../services/authService'
 
 const Register = () => {
     const onSubmit = (e) => {
@@ -8,7 +8,14 @@ const Register = () => {
 
         let formData = new FormData(e.currentTarget);
         let data = Object.fromEntries(formData);
-        registerUser(data).then(res => console.log(res));
+        registerUser(data)
+            .then(res => {
+                console.log(res);
+                localStorage.setItem('user-data', JSON.stringify(res))
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     return (
@@ -26,7 +33,7 @@ const Register = () => {
                         id="username"
                         placeholder="Username"
                     />
-                     <input
+                    <input
                         type="telephone"
                         name="telephone"
                         id="telephone"
