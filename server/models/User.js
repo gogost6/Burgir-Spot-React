@@ -5,8 +5,9 @@ const schema = {
     username: { type: String, required: true },
     telephone: { type: String, required: true },
     hashedPassword: { type: String, required: true },
-    createdAutos: [{ type: Schema.Types.ObjectId, ref: 'Auto' }],
-    favourite: [{ type: Schema.Types.ObjectId, ref: 'Auto' }]
+    createdBurgirs: [{ type: Schema.Types.ObjectId, ref: 'Burgir' }],
+    favouriteBurgirs: [{ type: Schema.Types.ObjectId, ref: 'Burgir' }],
+    likedBurgirs:  [{ type: Schema.Types.ObjectId, ref: 'Burgir' }],
 };
 
 module.exports = model('User', schema);

@@ -25,7 +25,7 @@ router.post(
     .trim()
     .isLength({ min: 4 })
     .withMessage("The password input should be atleast 4 characters long!"),
-  body("rePass")
+  body("repassword")
     .trim()
     .custom((value, { req }) => {
       if (value != req.body.password) {
@@ -127,7 +127,7 @@ router.post(
       }
     } catch (err) {
       console.log(err);
-      res.status(401).json({ });
+      res.status(401).json({});
     }
   }
 );
@@ -210,10 +210,10 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/free-username/:username", async (req, res) => {
-    res.json(!!(await userService.getUserByUsername(req.params.username))); 
+  res.json(!!(await userService.getUserByUsername(req.params.username)));
 });
 
 router.get("/free-email/:email", async (req, res) => {
-  res.json(!!(await userService.getUserByEmail(req.params.email))); 
+  res.json(!!(await userService.getUserByEmail(req.params.email)));
 });
 module.exports = router;
