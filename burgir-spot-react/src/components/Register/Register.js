@@ -1,11 +1,15 @@
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from '../../services/authService/authService'
 
 const Register = () => {
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(e.currentTarget);
-    }
+
+        let formData = new FormData(e.currentTarget);
+        let data = Object.fromEntries(formData);
+        registerUser(data).then(res => console.log(res));
+    };
 
     return (
         <div className="container">
@@ -15,17 +19,18 @@ const Register = () => {
                     <p>Register to start your tasty Burgir adventure!</p>
                 </div>
                 <form method="POST" className="login-form" onSubmit={onSubmit}>
-                    <input
-                        type="text"
-                        name="email"
-                        id="email"
-                        placeholder="Email"
-                    />
+                    <input type="text" name="email" id="email" placeholder="Email" />
                     <input
                         type="text"
                         name="username"
                         id="username"
                         placeholder="Username"
+                    />
+                     <input
+                        type="telephone"
+                        name="telephone"
+                        id="telephone"
+                        placeholder="Telephone"
                     />
                     <input
                         type="password"
@@ -35,8 +40,8 @@ const Register = () => {
                     />
                     <input
                         type="password"
-                        name="rePassword"
-                        id="rePassword"
+                        name="repassword"
+                        id="repassword"
                         placeholder="Repeat password"
                     />
                     <section className="btn-wraper">
