@@ -41,7 +41,7 @@
 }
 
 .login-form input:placeholder-shown {
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .content-wraper {
@@ -49,7 +49,7 @@
     align-items: center;
     align-content: flex-start;
     flex-direction: column;
-    font-size: 30px;
+    font-size: 24px;
 }
 
 .content-wraper.right {
@@ -65,7 +65,7 @@
 .btn {
     border-radius: 20px;
     border: none;
-    width: 24%;
+    width: 28%;
     margin: 0 18px;
     padding: 14px 0px;
     font-size: 17px;
