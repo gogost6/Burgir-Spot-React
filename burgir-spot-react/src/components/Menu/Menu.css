@@ -21,3 +21,7 @@
     font-size: 15px;
     text-align: center;
 }
+
+.card :nth-child(3) {
+    align-self: center;
+}
