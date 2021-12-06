@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import * as authService from "../../services/authService";
 
@@ -8,46 +8,46 @@ const Header = () => {
             {authService.getUser() ? <>
                 <ul>
                 <li className="grow">
-                    <NavLink className="nav-link" to="/">
+                    <Link className="nav-link" to="/">
                         Home
-                    </NavLink>
+                    </Link>
                 </li>
                 <li>
-                    <NavLink className="nav-link" to="/menu">
+                    <Link className="nav-link" to="/menu">
                         Menu
-                    </NavLink>
+                    </Link>
                 </li>
                 <li>
-                    <NavLink className="nav-link" to="/user">
+                    <Link className="nav-link" to="/user">
                         User
-                    </NavLink>
+                    </Link>
                 </li>
                 <li>
-                    {/* <NavLink className="nav-link" to="/logout">
+                    {/* <Link className="nav-link" to="/logout">
                         Logout
-                    </NavLink> */}
+                    </Link> */}
                 </li>
             </ul>
             </> : <ul>
                 <li className="grow">
-                    <NavLink className="nav-link" to="/">
+                    <Link className="nav-link" to="/">
                         Home
-                    </NavLink>
+                    </Link>
                 </li>
                 <li>
-                    <NavLink className="nav-link" to="/menu">
+                    <Link className="nav-link" to="/menu">
                         Menu
-                    </NavLink>
+                    </Link>
                 </li>
                 <li>
-                    <NavLink className="nav-link" to="/login">
+                    <Link className="nav-link" to="/login">
                         Login
-                    </NavLink>
+                    </Link>
                 </li>
                 <li>
-                    <NavLink className="nav-link" to="/register">
+                    <Link className="nav-link" to="/register">
                         Register
-                    </NavLink>
+                    </Link>
                 </li>
             </ul>
             }

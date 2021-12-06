@@ -1,0 +1,9 @@
+.landing {
+    font-size: 40px;
+    color: rgba(245, 245, 245, 0.795);
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

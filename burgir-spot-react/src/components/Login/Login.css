@@ -73,6 +73,9 @@
 
 .btn.burgir-color {
     background-color: #f9b856;
+    color: black;
+    text-decoration: none;
+    text-align: center;
 }
 
 .btn.gray {

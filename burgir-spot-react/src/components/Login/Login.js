@@ -1,7 +1,28 @@
 import "./Login.css";
-import { Link } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from '../../services/authService';
 
 const Login = () => {
+    let onLogin = useContext(AuthContext);
+    let [error, setError] = useState('');
+    let navigate = useNavigate();
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        let formData = new FormData(e.currentTarget);
+        let data = Object.fromEntries(formData);
+        loginUser(data)
+        .then(res => {
+                onLogin(res);
+                navigate('/');
+            })
+            .catch(err => {
+                setError(err.message);
+            })
+    };
+
     return (
         <div className="container">
             <section className="img-wraper">
@@ -9,15 +30,15 @@ const Login = () => {
             </section>
             <section className="content-wraper right">
                 <div>
-                    <h1>Welcome back :)</h1>
+                    <h1>Welcome back!</h1>
                     <p>Login to start your tasty Burgir adventure!</p>
                 </div>
-                <form method="POST" className="login-form">
+                <form method="POST" className="login-form" onSubmit={onSubmit}>
                     <input
                         type="text"
-                        name="email"
-                        id="email"
-                        placeholder="Email"
+                        name="username"
+                        id="username"
+                        placeholder="Username"
                     />
                     <input
                         type="password"
@@ -25,6 +46,7 @@ const Login = () => {
                         id="password"
                         placeholder="Password"
                     />
+                    {error ? <p>{error}</p> : ''}
                     <section className="btn-wraper">
                         <button type="submit" className="btn burgir-color">
                             Login

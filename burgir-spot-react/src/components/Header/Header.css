@@ -1,24 +1,34 @@
 .header-container {
-    display: flex;
+  display: flex;
 }
 
 .header-container ul {
-    list-style-type: none;
-    width: 100%;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between;
+  list-style-type: none;
+  width: 100%;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .header-container ul li .nav-link {
-    text-decoration: none;
-    color: #f2d3c3;
+  text-decoration: none;
+  color: black;
+  background: rgb(235,235,235);
+  background: linear-gradient(90deg, rgba(235,235,235,1) 0%, rgba(218,218,218,1) 59%, rgba(136,172,180,1) 100%); 
+  filter: opacity(0.6);
+  padding: 10px 30px;
+  border-radius: 15px;
+}
+
+.header-container ul li .nav-link:active {
+    background: rgb(88,88,88);
+    background: linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgba(136,172,180,1) 100%); 
 }
 
 .header-container ul li.grow {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .header-container ul li {
-    flex-basis: 10%;
+  flex-basis: 10%;
 }

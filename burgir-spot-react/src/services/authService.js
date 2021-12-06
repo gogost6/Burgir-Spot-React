@@ -6,13 +6,34 @@ export const registerUser = async (data) => {
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        credentials: 'include'
     })
-
+    
     const result = await response.json();
 
     if (!response.ok) {
         throw result;
+    } else {
+        return result;
+    }
+}
+
+export const loginUser = async (data) => {
+    const response = await fetch(`${baseUrl}/login`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+    })
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw result;
+    } else {
+        return result;
     }
 }
 

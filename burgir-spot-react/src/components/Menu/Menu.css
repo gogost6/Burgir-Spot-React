@@ -1,0 +1,23 @@
+.container.pad {
+    padding: 35px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-wrap {
+    width: 80%;
+    align-self: center;
+}
+
+.image-wrap img {
+    width: 100%;
+    height: auto;
+}
+
+.cnt {
+    font-size: 15px;
+    text-align: center;
+}

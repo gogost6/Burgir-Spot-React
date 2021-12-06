@@ -1,8 +1,12 @@
 import "./Register.css";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from '../../services/authService'
 
 const Register = () => {
+    let [errors, setErrors] = useState([]);
+    let navigate = useNavigate();
+
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -10,11 +14,10 @@ const Register = () => {
         let data = Object.fromEntries(formData);
         registerUser(data)
             .then(res => {
-                console.log(res);
-                localStorage.setItem('user-data', JSON.stringify(res))
+                navigate('/');
             })
             .catch(err => {
-                console.log(err);
+                setErrors(err);
             })
     };
 
@@ -59,6 +62,13 @@ const Register = () => {
                             Log in?
                         </Link>
                     </section>
+                    {errors
+                        ? <div className='errors-wraper'>
+                            <ul>
+                                {errors.map(x => <li>{x}</li>)}
+                            </ul>
+                        </div>
+                        : ''}
                 </form>
             </section>
             <section className="img-wraper right">

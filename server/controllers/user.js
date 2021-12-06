@@ -99,7 +99,6 @@ router.post(
   async (req, res) => {
     try {
       const { username, password } = req.body;
-
       const errors = Object.values(validationResult(req).mapped());
       if (errors.length > 0) {
         throw errors.map((e) => e.msg).join("\n");
@@ -117,17 +116,20 @@ router.post(
             _id: user._id,
             email: user.email,
             username: user.username,
-            createdAutos: user.createdAutos,
+            createdBurgirs: user.createdBurgirs,
+            favouriteBurgirs: user.favouriteBurgirs,    
+            likedBurgirs: user.likedBurgirs,    
             telephone: user.telephone,
           };
           const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
+
           res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });
           res.json(userViewModel);
         }
       }
     } catch (err) {
       console.log(err);
-      res.status(401).json({});
+      res.status(401).json('Wrong username or password!');
     }
   }
 );
