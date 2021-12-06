@@ -7,6 +7,19 @@ const config = require("../config");
 const { isAuth, isGuest } = require("../middlewares/guards");
 const userService = require("../services/user");
 
+router.get('/', async (req, res) => {
+
+  if (req.cookies[config.COOKIE_NAME]) {
+      try {
+          const user = jwt.verify(req.cookies[config.COOKIE_NAME], config.TOKEN_SECRET);
+          return res.json(user)
+      } catch (err) {
+          return res.clearCookie(req.cookies[config.COOKIE_NAME]);
+      }
+  }
+  return res.json(undefined);
+});
+
 router.post(
   "/register",
   isGuest(),
