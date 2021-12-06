@@ -3,30 +3,22 @@ const { body, validationResult } = require("express-validator");
 const { isAuth, isOwner } = require("../middlewares/guards");
 const { preloadBurgir } = require("../middlewares/preload");
 router.post(
-  "/post-burgir",
+  "/create-burgir",
   isAuth(),
-  body("make").notEmpty().withMessage("The make should not be empty!"),
-  body("model").notEmpty().withMessage("The model should not be empty!"),
-  body("engine").notEmpty().withMessage("The engine should not be empty!"),
-  body("condition")
-    .notEmpty()
-    .withMessage("The condition should not be empty!"),
-  body("gears").notEmpty().withMessage("The gears should not be empty!"),
-  body("type").notEmpty().withMessage("The burgir type should not be empty!"),
+  body("name").notEmpty().withMessage("The name should not be empty!"),
   body("price").notEmpty().withMessage("The price should not be empty!"),
-  body("currency").notEmpty().withMessage("The currency should not be empty!"),
-  body("mileage").notEmpty().withMessage("The mileage should not be empty!"),
-  body("color").notEmpty().withMessage("The color should not be empty!"),
-  body("country").notEmpty().withMessage("The country should not be empty!"),
-  body("city").notEmpty().withMessage("The city should not be empty!"),
-  body("description")
+  body("meat").notEmpty().withMessage("The meat should not be empty!"),
+  body("vegetables")
     .notEmpty()
-    .withMessage("The description should not be empty!"),
+    .withMessage("The vegetables should not be empty!"),
+  body("imgUrl").notEmpty().withMessage("The image Url should not be empty!"),
   async (req, res) => {
     try {
+      console.log(req.body);
       const errors = Object.values(validationResult(req).mapped());
+
       if (errors.length > 0) {
-        throw new Error(errors.map((e) => e.msg).join("\n"));
+        throw errors.map((e) => e.msg);
       }
       const burgirData = await req.storage.create(req.body, req.user.email);
       console.log("Successfully added burgir to the db!");

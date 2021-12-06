@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import AuthContext from "../../context/AuthContext";
 import { useContext } from "react";
@@ -6,7 +6,6 @@ import { logoutHandled } from "../../services/authService";
 
 const Header = () => {
     let { user } = useContext(AuthContext);
-    let navigate = useNavigate();
     let logout = (e) => {
         e.preventDefault();
         logoutHandled().then(res => console.log(res)).catch(err => console.log(err))
@@ -23,6 +22,11 @@ const Header = () => {
                     <li>
                         <Link className="nav-link" to="/menu">
                             Menu
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="nav-link" to="/create">
+                            Create
                         </Link>
                     </li>
                     <li>

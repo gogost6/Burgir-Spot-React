@@ -36,11 +36,12 @@ async function getCarsByCriteria(data) {
 
 async function create(burgir, email) {
   let user = await User.findOne({ email });
-  Object.assign(burgir, { owner: user });
+  const burgerData = Object.assign(burgir, { owner: user });
   const record = new Burgir(burgir);
   await record.save();
   user.createdBurgirs.push(record);
   await user.save();
+  return burgerData;
 }
 
 async function getById(id) {

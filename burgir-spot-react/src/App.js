@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import Menu from "./components/Menu/Menu";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import Create from "./components/Create/Create";
 import { getUser } from "./services/authService";
 
 import AuthContext from './context/AuthContext';
@@ -48,6 +49,7 @@ function App() {
                         <Route path="/menu" element={<Menu />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/create" element={<Create />} />
                     </Routes>
                 </div>
             </>
