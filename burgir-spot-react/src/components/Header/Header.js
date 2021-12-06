@@ -1,33 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import * as authService from "../../services/authService";
+import AuthContext from "../../context/AuthContext";
+import { useContext } from "react";
+import { logoutHandled } from "../../services/authService";
 
 const Header = () => {
+    let { user } = useContext(AuthContext);
+    let navigate = useNavigate();
+    let logout = (e) => {
+        e.preventDefault();
+        logoutHandled().then(res => console.log(res)).catch(err => console.log(err))
+    }
     return (
         <header className="header-container">
-            {authService.getUser() ? <>
+            {user._id ? <>
                 <ul>
-                <li className="grow">
-                    <Link className="nav-link" to="/">
-                        Home
-                    </Link>
-                </li>
-                <li>
-                    <Link className="nav-link" to="/menu">
-                        Menu
-                    </Link>
-                </li>
-                <li>
-                    <Link className="nav-link" to="/user">
-                        User
-                    </Link>
-                </li>
-                <li>
-                    {/* <Link className="nav-link" to="/logout">
-                        Logout
-                    </Link> */}
-                </li>
-            </ul>
+                    <li className="grow">
+                        <Link className="nav-link" to="/">
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="nav-link" to="/menu">
+                            Menu
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="nav-link" to="/user">
+                            User
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="nav-link" to="/" onClick={logout}>
+                            Logout
+                        </Link>
+                    </li>
+                </ul>
             </> : <ul>
                 <li className="grow">
                     <Link className="nav-link" to="/">

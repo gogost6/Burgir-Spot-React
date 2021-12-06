@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from '../../services/authService';
 
 const Login = () => {
-    let onLogin = useContext(AuthContext);
+    let { onLogin } = useContext(AuthContext);
     let [error, setError] = useState('');
     let navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const Login = () => {
         let formData = new FormData(e.currentTarget);
         let data = Object.fromEntries(formData);
         loginUser(data)
-        .then(res => {
+            .then(res => {
                 onLogin(res);
                 navigate('/');
             })
