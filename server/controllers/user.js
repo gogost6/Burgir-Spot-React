@@ -12,12 +12,12 @@ router.get('/', async (req, res) => {
   if (req.cookies[config.COOKIE_NAME]) {
       try {
           const user = jwt.verify(req.cookies[config.COOKIE_NAME], config.TOKEN_SECRET);
-          return res.json(user)
+          return res.json(user);
       } catch (err) {
           return res.clearCookie(req.cookies[config.COOKIE_NAME]);
       }
   }
-  return res.json(undefined);
+  return res.json('No user logged!');
 });
 
 router.post(
