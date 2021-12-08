@@ -13,7 +13,7 @@ const Create = () => {
 
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData);
-        createBurgir(data).then(res => console.log('here')).catch(err => setErrors(err));
+        createBurgir(data).then(res => navigate('/menu')).catch(err => setErrors(err));
     }
 
     return (
