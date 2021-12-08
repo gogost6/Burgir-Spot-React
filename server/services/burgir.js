@@ -12,28 +12,6 @@ async function getRecent() {
   return burgirs;
 }
 
-async function getCarsByCriteria(data) {
-  let obj = {};
-  let criteria = Object.entries(data)
-    .filter((x) => x[1] !== "")
-    .forEach((x) => {
-      if (x[0] == "minPrice" || x[0] == "maxPrice") {
-        obj.price = {};
-      }
-      if (x[0] == "dateMade") {
-        obj[x[0]] = { $gte: new Date(x[1].slice(6)) };
-      } else if (x[0] == "minPrice") {
-        Object.assign(obj.price, { $gte: Number(x[1]) });
-      } else if (x[0] == "maxPrice") {
-        Object.assign(obj.price, { $lt: Number(x[1]) });
-      } else {
-        obj[x[0]] = x[1];
-      }
-    });
-  const burgirs = Burgir.find(obj).lean();
-  return burgirs;
-}
-
 async function create(burgir, email) {
   let user = await User.findOne({ email });
   const burgerData = Object.assign(burgir, { owner: user });
@@ -90,6 +68,5 @@ module.exports = {
   getById,
   edit,
   deleteAuto,
-  getCarsByCriteria,
-  getRecent,
+  getRecent
 };
