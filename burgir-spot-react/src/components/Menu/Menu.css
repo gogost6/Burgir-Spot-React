@@ -1,11 +1,18 @@
 .container.pad {
     padding: 35px;
-    flex-wrap: wrap;
+}
+
+.container.pad h1 {
+   position: absolute;
+   top: 13%;
+   left: 44%;
 }
 
 .card {
     display: flex;
     flex-direction: column;
+    position: relative;
+    flex-basis: 34%;
 }
 
 .image-wrap {

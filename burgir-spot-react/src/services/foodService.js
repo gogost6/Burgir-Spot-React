@@ -1,4 +1,22 @@
-const url = 'http://localhost:5000/api/burgir'
+const url = 'http://localhost:5000/api/burgir';
+
+export const recentBurgirs = async () => {
+    const responce = await fetch(`${url}/recent-burgirs`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include'
+    });    
+
+    const result = await responce.json();
+    
+    if(!responce.ok) {
+        throw result;
+    } else {
+        return result; 
+    }
+}
 
 export const createBurgir = async (data) => {
     const responce = await fetch(`${url}/create-burgir`, {
