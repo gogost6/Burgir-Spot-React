@@ -2,7 +2,7 @@
     padding: 35px;
 }
 
-.container.pad h1 {
+.container .header {
    position: absolute;
    top: 13%;
    left: 44%;

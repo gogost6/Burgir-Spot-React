@@ -9,9 +9,6 @@ router.post(
   body("name").notEmpty().withMessage("The name should not be empty!"),
   body("price").notEmpty().withMessage("The price should not be empty!"),
   body("meat").notEmpty().withMessage("The meat should not be empty!"),
-  body("vegetables")
-    .notEmpty()
-    .withMessage("The vegetables should not be empty!"),
   body("imgUrl").notEmpty().withMessage("The image Url should not be empty!"),
   async (req, res) => {
     try {
@@ -95,23 +92,10 @@ router.post(
   "/edit/:id",
   preloadBurgir(),
   isOwner(),
-  body("make").notEmpty().withMessage("The make should not be empty!"),
-  body("model").notEmpty().withMessage("The model should not be empty!"),
-  body("engine").notEmpty().withMessage("The engine should not be empty!"),
-  body("condition")
-    .notEmpty()
-    .withMessage("The condition should not be empty!"),
-  body("gears").notEmpty().withMessage("The gears should not be empty!"),
-  body("type").notEmpty().withMessage("The burgir type should not be empty!"),
+  body("name").notEmpty().withMessage("The name should not be empty!"),
   body("price").notEmpty().withMessage("The price should not be empty!"),
-  body("currency").notEmpty().withMessage("The currency should not be empty!"),
-  body("mileage").notEmpty().withMessage("The mileage should not be empty!"),
-  body("color").notEmpty().withMessage("The color should not be empty!"),
-  body("country").notEmpty().withMessage("The country should not be empty!"),
-  body("city").notEmpty().withMessage("The city should not be empty!"),
-  body("description")
-    .notEmpty()
-    .withMessage("The description should not be empty!"),
+  body("meat").notEmpty().withMessage("The meat should not be empty!"),
+  body("imgUrl").notEmpty().withMessage("The image Url should not be empty!"),
   async (req, res) => {
     try {
       const errors = Object.values(validationResult(req).mapped());

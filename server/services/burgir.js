@@ -28,21 +28,11 @@ async function getById(id) {
 }
 
 async function edit(id, data) {
-  let burgir = await Burgir.findOne({ _id: id });
-  const images = data.imgUrl;
-  delete data.imgUrl;
-  console.log(burgir)
-  if(images) {
-      for (const img of images) {
-          burgir.imgUrl.push(img);
-      }
-      await burgir.save();
-  }
   let record = await Burgir.findByIdAndUpdate({ _id: id }, data);
   return record.save();
 }
 
-async function deleteAuto(id, userId) {
+async function deleteBurgir(id, userId) {
   const record = await User.findOneAndUpdate(
     { _id: userId },
     { $pull: { createdBurgirs: new mongoose.mongo.ObjectId(id) } },
@@ -67,6 +57,6 @@ module.exports = {
   getAll,
   getById,
   edit,
-  deleteAuto,
+  deleteBurgir,
   getRecent
 };

@@ -1,16 +1,19 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Menu from "./components/Menu/Menu";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Create from "./components/Create/Create";
+import Details from "./components/Details/Details";
+import Edit from "./components/Edit/Edit";
+
 import { getUser } from "./services/authService";
 
 import AuthContext from './context/AuthContext';
-import { useState } from "react";
 
 function App() {
     let [user, setUser] = useState({
@@ -50,6 +53,8 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/create" element={<Create />} />
+                        <Route path="/details/:id" element={<Details />} />
+                        <Route path="/edit/:id" element={<Create />} />
                     </Routes>
                 </div>
             </>

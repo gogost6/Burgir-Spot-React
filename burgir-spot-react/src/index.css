@@ -16,12 +16,18 @@ code {
 }
 
 .btn {
+    cursor: pointer;
     border-radius: 20px;
     border: none;
     width: 28%;
     margin: 0 18px;
     padding: 14px 0px;
     font-size: 17px;
+}
+
+.btn-wraper {
+    display: flex;
+    margin: 6% 0;
 }
 
 .btn.burgir-color {
