@@ -1,14 +1,3 @@
-.container {
-    background-color: rgba(255, 255, 255, 0.712);
-    color: black;
-    border-radius: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 42px;
-    height: 90vh;
-}
-
 .img-wraper {
     width: 42%;
     margin-left: 5%;
@@ -60,29 +49,6 @@
 .content-wraper p{
     margin: 0;
     padding: 0;
-}
-
-.btn {
-    border-radius: 20px;
-    border: none;
-    width: 28%;
-    margin: 0 18px;
-    padding: 14px 0px;
-    font-size: 17px;
-}
-
-.btn.burgir-color {
-    background-color: #f9b856;
-    color: black;
-    text-decoration: none;
-    text-align: center;
-}
-
-.btn.gray {
-    background-color: rgb(204, 200, 200);
-    color: black;
-    text-decoration: none;
-    text-align: center;
 }
 
 .btn-wraper {
