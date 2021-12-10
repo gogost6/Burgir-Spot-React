@@ -55,6 +55,24 @@ export const createBurgir = async (data) => {
     }
 }
 
+export const deleteBurgir = async (id) => {
+    const responce = await fetch(`${url}/delete/${id}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include'
+    });    
+
+    const result = await responce.json();
+    
+    if(!responce.ok) {
+        throw result;
+    } else {
+        return result; 
+    }
+}
+
 export const editBurgir = async (data, id) => {
     const responce = await fetch(`${url}/edit/${id}`, {
         method: 'POST',

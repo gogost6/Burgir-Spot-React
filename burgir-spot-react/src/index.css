@@ -44,6 +44,13 @@ code {
     text-align: center;
 }
 
+.btn.red {
+    background-color: rgba(185, 0, 0, 0.692);
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
 .container {
     background-color: rgba(255, 255, 255, 0.712);
     color: black;
