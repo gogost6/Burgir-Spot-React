@@ -33,8 +33,6 @@ const Details = () => {
 
     return (
         <div className="container">
-            <h1 className="header">Details page</h1>
-
             {burgir.name ?
                 (<div className="details-card">
                     <div className="i-w">

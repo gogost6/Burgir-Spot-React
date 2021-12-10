@@ -14,7 +14,6 @@ const Menu = () => {
     return (
         <>
             <div className="container pad">
-                <h1 className="header">Our menu</h1>
                 {burgirs.length > 0 ?
                     burgirs.map(x => (<div className="card" key={x._id}>
                         <div className="image-wrap">
