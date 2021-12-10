@@ -30,7 +30,7 @@ function App() {
         setUser(userData);
     };
 
-    let value = { onLogin, user };
+    let value = { onLogin, user, setUser};
 
     useEffect(() => {
         getUser()

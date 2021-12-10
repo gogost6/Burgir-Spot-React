@@ -5,11 +5,14 @@ import { useContext } from "react";
 import { logoutHandled } from "../../services/authService";
 
 const Header = () => {
-    let { user } = useContext(AuthContext);
+    let { user, setUser } = useContext(AuthContext);
+
     let logout = (e) => {
         e.preventDefault();
+        setUser([]);
         logoutHandled().then(res => console.log(res)).catch(err => console.log(err))
     }
+    
     return (
         <header className="header-container">
             {user._id ? <>

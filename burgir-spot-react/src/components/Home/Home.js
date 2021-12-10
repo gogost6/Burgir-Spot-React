@@ -7,7 +7,6 @@ const Home = () => {
                 <h3>The Best Restaurant in Sofia!</h3>
                 <h1>Taste it!</h1>
             </div>
-
         </>
     )
 }
