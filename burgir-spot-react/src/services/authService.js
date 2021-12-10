@@ -71,3 +71,21 @@ export const logoutHandled = async () => {
         return result;
     }
 }
+
+export const editHandled = async (data) => {
+    const response = await fetch(`${baseUrl}/edit`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+    })
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw result;
+    } else {
+        return result;
+    }
+}

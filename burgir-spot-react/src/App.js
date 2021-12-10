@@ -10,6 +10,8 @@ import Register from "./components/Register/Register";
 import Create from "./components/Burgir/Create/Create";
 import Details from "./components/Details/Details";
 import Edit from "./components/Burgir/Edit/Edit";
+import UserProfile from "./components/UserProfile/UserProfile";
+import EditProfile from "./components/UserProfile/Edit/EditProfile";
 
 import { getUser } from "./services/authService";
 
@@ -55,6 +57,9 @@ function App() {
                         <Route path="/create" element={<Create />} />
                         <Route path="/details/:id" element={<Details />} />
                         <Route path="/edit/:id" element={<Edit />} />
+                        <Route path="/user" element={<UserProfile />}>
+                            <Route path="edit" element={<EditProfile />}/>
+                        </Route>
                     </Routes>
                 </div>
             </>

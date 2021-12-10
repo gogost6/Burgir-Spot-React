@@ -1,0 +1,30 @@
+.user-container {
+    background: rgba(0, 0, 0, 0.747);
+    color: white;
+    border-radius: 20px;
+    width: 40%;
+    max-height: 180vh;
+    margin: 0 auto;
+}
+
+.w {
+    text-align: center;
+    padding-top: 25px;
+}
+
+.profile-img {
+    width: 24%;
+    border-radius: 91px;
+}
+
+.icons-ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    font-size: 35px;
+    padding: 0px 22%;
+}
+
+.bnt-wrapper-edit-profile {
+    margin: 9% 0px;
+}

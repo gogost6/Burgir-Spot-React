@@ -165,6 +165,7 @@ router.post(
       if (value == "") {
         return true;
       }
+
       const user = await userService.getUserByUsername(req.user.username);
       const isOldPassword = await bcrypt.compare(value, user.hashedPassword);
 
@@ -176,37 +177,44 @@ router.post(
   async (req, res) => {
     try {
       const {
-        id,
+        _id,
         username,
         telephone,
-        oldPassword,
+        email,
         newPassword,
-        curUsername,
-        curTelephone,
+        oldUsername,
+        oldTelephone,
+        oldEmail
       } = req.body;
-      validationResult(req).throw();
+      // validationResult(req).throw();
 
       const existingByUsername = await userService.getUserByUsername(username);
       const existingByTelephone = await userService.getUserByTelephone(
         telephone
       );
+      const existingByEmail = await userService.getUserByEmail(email);
 
-      if (existingByUsername && curUsername != username) {
+      if (existingByUsername && username != oldUsername) {
         throw "Username is taken!";
       }
 
-      if (existingByTelephone && curTelephone != telephone) {
+      if (existingByTelephone && oldTelephone != telephone) {
         throw "Telephone is being used by other user!";
       }
+
+      if (existingByEmail && oldEmail != email) {
+        throw "Email is taken!";
+      }
+
       const hashedPassword = await bcrypt.hash(newPassword, 10);
-      const userUpdateModel = { username, telephone, hashedPassword };
-      const user = await userService.updateUser(id, userUpdateModel);
+      const userUpdateModel = { username, telephone, email, hashedPassword };
+      const user = await userService.updateUser(_id, userUpdateModel);
 
       const userViewModel = {
         _id: user._id,
         email: user.email,
         username: user.username,
-        createdAutos: user.createdAutos,
+        createdBurgirs: user.createdBurgirs,
         telephone: user.telephone,
       };
       res.clearCookie(config.COOKIE_NAME);
@@ -214,8 +222,8 @@ router.post(
       res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });
       res.json(userViewModel);
     } catch (err) {
-      console.log(err.errors.map((e) => e.msg));
-      res.status(401).json({ msg: err.errors.map((e) => e.msg) });
+      console.log(err);
+      res.status(401).json({ msg: err });
     }
   }
 );
