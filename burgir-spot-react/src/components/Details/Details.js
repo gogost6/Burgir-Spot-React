@@ -14,7 +14,7 @@ const Details = () => {
     const { id } = params;
     useEffect(() => {
         burgirDetails(id).then(res => setBurgir(res)).catch(err => console.log(err))
-    }, []);
+    }, [id]);
 
     const editBtn = () => {
         if (user._id) {

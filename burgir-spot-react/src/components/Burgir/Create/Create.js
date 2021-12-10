@@ -1,11 +1,10 @@
 import "./Create.css";
 import Select from 'react-select';
 import * as option from '../options';
-import { createBurgir, burgirDetails, editBurgir } from '../../../services/foodService';
-import { arrHandler, arrValueHandler, changeValue, changeMeatValue } from '../index'
+import { createBurgir } from '../../../services/foodService';
+import { arrHandler, changeValue, changeMeatValue } from '../index'
 import { useNavigate } from "react-router";
-import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useState } from "react";
 
 const Create = () => {
     let [state, setState] = useState({
@@ -26,10 +25,7 @@ const Create = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
-        const data = Object.fromEntries(formData);
-
-        createBurgir(data).then(res => navigate('/menu')).catch(err => setErrors(err));
+        createBurgir(state).then(res => navigate('/menu')).catch(err => setErrors(err));
     }
 
     return (<div className="container wrap">

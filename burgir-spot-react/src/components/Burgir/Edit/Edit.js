@@ -32,14 +32,10 @@ const Edit = () => {
                     setBurgir(res);
                 }).catch(err => console.log(err));
         }
-    }, []);
+    }, [id]);
 
     const onSubmit = (e) => {
         e.preventDefault();
-
-        const formData = new FormData(e.currentTarget);
-        const data = Object.fromEntries(formData);
-
         editBurgir(burgir, id).then(res => navigate('/menu')).catch(err => setErrors(err));
     }
 
