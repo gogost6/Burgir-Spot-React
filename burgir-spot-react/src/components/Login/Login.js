@@ -19,7 +19,7 @@ const Login = () => {
                 navigate('/');
             })
             .catch(err => {
-                setError(err.message);
+                setError(err);
             })
     };
 
