@@ -29,7 +29,7 @@ const Create = () => {
     }
 
     return (<div className="container wrap">
-        <h1>Share your own Burgir!</h1>
+        <h1 className="h1">Share your own Burgir!</h1>
         <form method="POST" className="create-form" onSubmit={onSubmit}>
             <div className="form-item-wrapper">
                 <label htmlFor="name">Burger name:</label>
