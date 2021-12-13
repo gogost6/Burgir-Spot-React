@@ -16,6 +16,7 @@ import EditProfile from "./components/UserProfile/Edit/EditProfile";
 import { getUser } from "./services/authService";
 
 import AuthContext from './context/AuthContext';
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
     let [user, setUser] = useState({
@@ -60,6 +61,7 @@ function App() {
                         <Route path="/user" element={<UserProfile />}>
                             <Route path="edit" element={<EditProfile />}/>
                         </Route>
+                        <Route path="*" element={<NotFound/>} />
                     </Routes>
                 </div>
             </>
