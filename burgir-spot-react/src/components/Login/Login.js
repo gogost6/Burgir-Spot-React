@@ -1,22 +1,22 @@
 import "./Login.css";
 import AuthContext from "../../context/AuthContext";
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from '../../services/authService';
 
 const Login = () => {
     let { onLogin } = useContext(AuthContext);
     let [error, setError] = useState('');
-    let navigate = useNavigate();
 
     const onSubmit = (e) => {
         e.preventDefault();
+
         let formData = new FormData(e.currentTarget);
         let data = Object.fromEntries(formData);
+        
         loginUser(data)
             .then(res => {
                 onLogin(res);
-                navigate('/');
             })
             .catch(err => {
                 setError(err);

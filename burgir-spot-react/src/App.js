@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Header from "./components/Header/Header";
@@ -12,13 +12,18 @@ import Details from "./components/Details/Details";
 import Edit from "./components/Burgir/Edit/Edit";
 import UserProfile from "./components/UserProfile/UserProfile";
 import EditProfile from "./components/UserProfile/Edit/EditProfile";
+import NotFound from "./components/NotFound/NotFound";
 
 import { getUser } from "./services/authService";
 
 import AuthContext from './context/AuthContext';
-import NotFound from "./components/NotFound/NotFound";
+
+import LoggedUserGuard from "./guards/LoggedUserGuard";
+import GuestGuard from './guards/GuestGuard';
 
 function App() {
+    let navigate = useNavigate();
+    const { state } = useLocation();
     let [user, setUser] = useState({
         _id: "",
         email: "",
@@ -31,9 +36,10 @@ function App() {
 
     let onLogin = (userData) => {
         setUser(userData);
+        navigate(state?.path || '/');
     };
 
-    let value = { onLogin, user, setUser};
+    let value = { onLogin, user, setUser };
 
     useEffect(() => {
         getUser()
@@ -53,15 +59,21 @@ function App() {
                     <Routes>
                         <Route path="/" exact element={<Home />} />
                         <Route path="/menu" element={<Menu />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/create" element={<Create />} />
+                        <Route path="/login" element={<GuestGuard><Login /></GuestGuard>} />
+                        <Route path="/register" element={<GuestGuard><Register /></GuestGuard>} />
                         <Route path="/details/:id" element={<Details />} />
+                        <Route path="/create" element={<LoggedUserGuard>
+                            <Create />
+                        </LoggedUserGuard>} />
                         <Route path="/edit/:id" element={<Edit />} />
-                        <Route path="/user" element={<UserProfile />}>
-                            <Route path="edit" element={<EditProfile />}/>
+                        <Route path="/user" element={<LoggedUserGuard>
+                            <UserProfile />
+                        </LoggedUserGuard>}>
+                            <Route path="edit" element={<LoggedUserGuard>
+                                <EditProfile />
+                            </LoggedUserGuard>} />
                         </Route>
-                        <Route path="*" element={<NotFound/>} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>
             </>
