@@ -18,10 +18,9 @@ const Details = () => {
     let [userData, setUserData] = useState({});
 
     useEffect(() => {
-        console.log(user.username);
         fullUserDataByUsername(user.username).then(res => setUserData(res)).catch(err => console.log(err))
         burgirDetails(id).then(res => setBurgir(res)).catch(err => console.log(err));
-    }, [id]);
+    }, [id, user]);
 
 
     const userButtons = () => {
@@ -30,7 +29,6 @@ const Details = () => {
             deleteBurgir(id).then(res => navigate('/')).catch(err => console.log(err))
         }
         if (userData._id) {
-            console.log(userData);
             if (userData.createdBurgirs.includes(id)) {
                 return (<>
                     <Link className="btn gray" to={`/edit/${id}`}>Edit</Link>
