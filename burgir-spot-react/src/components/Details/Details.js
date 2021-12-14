@@ -2,6 +2,7 @@ import "./Details.css";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { burgirDetails, deleteBurgir } from '../../services/foodService';
+import { fullUserDataByUsername } from '../../services/authService'
 import AuthContext from "../../context/AuthContext";
 import { useContext } from "react";
 
@@ -14,19 +15,23 @@ const Details = () => {
 
     let [burgir, setBurgir] = useState({});
     let [price, setPrice] = useState(1);
+    let [userData, setUserData] = useState({});
 
     useEffect(() => {
-        burgirDetails(id).then(res => setBurgir(res)).catch(err => console.log(err))
+        console.log(user.username);
+        fullUserDataByUsername(user.username).then(res => setUserData(res)).catch(err => console.log(err))
+        burgirDetails(id).then(res => setBurgir(res)).catch(err => console.log(err));
     }, [id]);
 
-    
+
     const userButtons = () => {
         const onDelete = (e) => {
             e.preventDefault();
             deleteBurgir(id).then(res => navigate('/')).catch(err => console.log(err))
         }
-        if (user._id) {
-            if (user.createdBurgirs.includes(id)) {
+        if (userData._id) {
+            console.log(userData);
+            if (userData.createdBurgirs.includes(id)) {
                 return (<>
                     <Link className="btn gray" to={`/edit/${id}`}>Edit</Link>
                     <Link className="btn red" to={`/menu`} onClick={onDelete}>Delete</Link>

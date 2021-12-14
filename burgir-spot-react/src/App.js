@@ -40,7 +40,6 @@ function App() {
     };
 
     let value = { onLogin, user, setUser };
-
     useEffect(() => {
         getUser()
             .then(response => {

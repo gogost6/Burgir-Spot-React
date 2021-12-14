@@ -12,7 +12,6 @@ router.post(
   body("imgUrl").notEmpty().withMessage("The image Url should not be empty!"),
   async (req, res) => {
     try {
-      console.log(req.body);
       const errors = Object.values(validationResult(req).mapped());
 
       if (errors.length > 0) {
@@ -20,7 +19,7 @@ router.post(
       }
       const burgirData = await req.storage.create(req.body, req.user.email);
       console.log("Successfully added burgir to the db!");
-      res.json(burgirData);
+      res.json(JSON.stringify(burgirData));
     } catch (err) {
       console.log(err);
       res.status(406).json(err);

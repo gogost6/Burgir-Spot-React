@@ -18,6 +18,25 @@ export const getUser = async () => {
     }
 }
 
+export const fullUserDataByUsername = async (username) => { 
+    const response = await fetch(`${baseUrl}/full-user-data-by-username` , { 
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({username})
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw result;
+    } else {
+        return result;
+    }
+}
+
 export const registerUser = async (data) => {
     const response = await fetch(`${baseUrl}/register`, {
         method: 'POST',
