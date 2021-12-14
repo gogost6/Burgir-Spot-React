@@ -15,27 +15,7 @@
     height: 55%;
 }
 
-.container.wrap {
-    flex-wrap: wrap;
-    height: 65vh;
-    margin-top: 4%;
-}
-
-.container .h1 {
-    align-self: center;
-    margin: 20px;
-    flex-basis: 11%;
-}
-
 .btn-wrapper-create {
     width: 100%;
     margin-top: 20px;
-}
-
-.p-err {
-    flex-basis: 24%;
-    margin: 0px 17%;
-    background: #ff0000a1;
-    padding: 6px 10px;
-    border-radius: 23px;
 }

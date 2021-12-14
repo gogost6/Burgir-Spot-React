@@ -7,27 +7,23 @@ import { editHandled } from '../../../services/authService';
 import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
-    let navigate = useNavigate()
     let { setState } = useContext(UserContext);
     let { user, setUser } = useContext(AuthContext);
+
     let [userData, setUserData] = useState(user);
     let [errors, setErrors] = useState([]);
-    // let [state, setState] = useState(false);
-    // let [username, setUsername] = useState(user.username);
-    // let [email, setEmail] = useState(user.email);
     let [oldPassword, setOldPassword] = useState('');
     let [newPassword, setNewPassword] = useState('');
-    // let [telephone, setTelephone] = useState(user.telephone);
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // const formData = new FormData(e.currentTarget);
-        // const data = Object.fromEntries(formData);
-        const result = Object.assign(userData, { oldTelephone: user.telephone, oldUsername: user.username, oldEmail: user.email, oldPassword, newPassword })
-        editHandled(result).then(res =>{setUser(userData); setState(false)}).catch(err => console.log(err));
+
+        const result = Object.assign(userData, { oldTelephone: user.telephone, oldUsername: user.username, oldEmail: user.email, oldPassword, newPassword });
+        editHandled(result).then(res => { setUser(userData); setState(false) })
+            .catch(err => setErrors(err.msg));
     }
 
-    const editForm = (<form method="POST" className="edit-form" onSubmit={onSubmit} >
+    const editForm = (<><form method="POST" className="edit-form" onSubmit={onSubmit} >
         <label htmlFor="email">Email</label>
         <input type="text" name="email" id="email" value={userData.email} onChange={(e) => changeValue(e, 'email', setUserData)} />
         <label htmlFor="username">Username</label>
@@ -39,7 +35,16 @@ const EditProfile = () => {
         <label htmlFor="newPassword">New Password</label>
         <input type="password" name="newPassword" id="newPassword" onChange={(e) => setNewPassword(e.target.value)} />
         <button className="btn gray">Edit</button>
-    </form >);
+    </form >
+        {errors
+            ? <div className='errors-wraper'>
+                <ul>
+                    {errors.map(x => <li>{x}</li>)}
+                </ul>
+            </div>
+            : ''}
+    </>
+    );
 
     return (editForm)
 }

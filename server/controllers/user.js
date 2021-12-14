@@ -128,7 +128,6 @@ router.post(
                 throw errors.map((e) => e.msg).join("\n");
             }
             const user = await userService.getUserByUsername(username);
-
             if (!user) {
                 throw "Wrong username or password!";
             } else {
@@ -163,6 +162,10 @@ router.post(
         .withMessage("The username should contain only chars!")
         .isLength({ min: 5 })
         .withMessage("The username should be atleast 5 chars!"),
+    body("email")
+        .trim()
+        .isEmail()
+        .withMessage("The email input should be valid!"),
     body("telephone")
         .trim()
         .isNumeric()
@@ -194,7 +197,12 @@ router.post(
                 oldTelephone,
                 oldEmail
             } = req.body;
-            // validationResult(req).throw();
+
+            const errors = Object.values(validationResult(req).mapped());
+
+            if (errors.length > 0) {
+                throw errors.map((e) => e.msg);
+            }
 
             const existingByUsername = await userService.getUserByUsername(username);
             const existingByTelephone = await userService.getUserByTelephone(

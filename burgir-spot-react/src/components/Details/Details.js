@@ -52,7 +52,7 @@ const Details = () => {
                     <div className="i-w">
                         <img src={burgir.imgUrl} alt="img" />
                     </div>
-                    <form className="details-wrapper">
+                    <div className="details-wrapper">
                         <h1>{burgir.name}</h1>
                         <p><strong>Meat:</strong> {burgir.meat}</p>
                         {burgir.vegetables ? (<p><strong>Vegetables:</strong> {burgir.vegetables.join(', ')}</p>) : ''}
@@ -60,11 +60,13 @@ const Details = () => {
                         {burgir.sauces ? (<p><strong>Sauces:</strong> {burgir.sauces.join(', ')}</p>) : ''}
                         {burgir.bonus ? (<p><strong>Bonus:</strong> {burgir.bonus.join(', ')}</p>) : ''}
                         <label htmlFor="quantity"><strong>Quantity:</strong></label>
-                        <input type="number" id="quantity" name="quantity" onChange={priceHandler} value={price} />
+                        <input type="number" id="quantity" name="quantity" min={1} onChange={priceHandler} value={price} />
                         <h3>Total: {burgir.price * price}$</h3>
+                    </div>
+                    <div className="btn-wrapper">
                         <button className="btn burgir-color">Buy</button>
                         {userButtons()}
-                    </form>
+                    </div>
                 </div>)
                 : <p>Loading...</p>}
         </div>

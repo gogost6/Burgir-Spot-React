@@ -61,3 +61,23 @@ code {
     margin: 10px 42px;
     height: 90vh;
 }
+
+.container.wrap {
+    flex-wrap: wrap;
+    height: 65vh;
+    margin-top: 4%;
+}
+
+.container .h1 {
+    align-self: center;
+    margin: 20px;
+    flex-basis: 11%;
+}
+
+.p-err {
+    flex-basis: 24%;
+    margin: 0px 17%;
+    background: #ff0000a1;
+    padding: 6px 10px;
+    border-radius: 23px;
+}

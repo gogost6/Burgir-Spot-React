@@ -1,6 +1,7 @@
 .details-card {
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
 }
 
 .details-wrapper {
@@ -11,7 +12,7 @@
     margin-right: 5%;
 }
 
-.details-wrapper p{
+.details-wrapper p {
     margin: 0;
     font-size: 20px;
 }
@@ -22,6 +23,13 @@
     margin-left: 9%;
 }
 
-.i-w img{
+.i-w img {
     width: 100%;
+}
+
+.btn-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
 }

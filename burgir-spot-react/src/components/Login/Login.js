@@ -46,7 +46,6 @@ const Login = () => {
                         id="password"
                         placeholder="Password"
                     />
-                    {error ? <p>{error}</p> : ''}
                     <section className="btn-wraper">
                         <button type="submit" className="btn burgir-color">
                             Login
@@ -55,6 +54,7 @@ const Login = () => {
                             Create account
                         </Link>
                     </section>
+                    {error ? <p className="p-err">{error}</p> : ''}
                 </form>
             </section>
         </div>
