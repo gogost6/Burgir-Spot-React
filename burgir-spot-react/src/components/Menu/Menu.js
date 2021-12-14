@@ -20,6 +20,7 @@ const Menu = () => {
                             <img src={x.imgUrl} alt="img" />
                         </div>
                         <div className="cnt">
+                            <p><strong>{x.name}</strong></p>
                             <p>Price: {x.price}$</p>
                             <p>{x.description}</p>
                         </div>
