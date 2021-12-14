@@ -37,7 +37,7 @@ const Create = () => {
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="price">Price:</label>
-                <input type="text" name="price" id="price" onChange={(e) => changeValue(e, 'price', setState)} />
+                <input type="number" name="price" id="price" onChange={(e) => changeValue(e, 'price', setState)} />
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="meat">Meat</label>
