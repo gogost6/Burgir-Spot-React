@@ -91,7 +91,7 @@ const Register = () => {
                             Log in?
                         </Link>
                     </section>
-                    {errors ? <p>Error in database!</p> : ''}
+                    {errors.length > 0 ? <p>Error in database!</p> : ''}
                 </form>
             </section>
             <section className="img-wraper right">
