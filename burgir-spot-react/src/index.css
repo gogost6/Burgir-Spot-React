@@ -81,3 +81,11 @@ code {
     padding: 6px 10px;
     border-radius: 23px;
 }
+
+.p-alert {
+    flex-basis: 24%;
+    margin: 0px 17%;    
+    background: #fffb0ca1;
+    padding: 6px 10px;
+    border-radius: 23px;
+}
