@@ -253,7 +253,7 @@ router.post(
             const isOldPassword = await bcrypt.compare(value, user.hashedPassword);
 
             if (!isOldPassword) {
-                throw "Old password doesn't match!";
+                throw "Passwords don't match!";
             }
             return true;
         }),

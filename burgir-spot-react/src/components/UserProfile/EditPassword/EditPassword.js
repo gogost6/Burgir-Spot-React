@@ -30,8 +30,8 @@ const EditPassword = () => {
     </form >
         {errors
             ? <div className='errors-wraper'>
-                <ul>
-                    {errors.map(x => <li>{x}</li>)}
+                <ul style={{'list-style-type': 'none'}}>
+                    {errors.map(x => <li className="p-err">{x}</li>)}
                 </ul>
             </div>
             : ''}

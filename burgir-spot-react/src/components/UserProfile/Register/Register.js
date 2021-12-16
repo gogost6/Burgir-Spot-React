@@ -7,7 +7,6 @@ import AuthContext from "../../../context/AuthContext";
 const Register = () => {
     let { onLogin } = useContext(AuthContext);
     let [isSubmitted, setIsSubmitted] = useState(false);
-    let [errors, setErrors] = useState([]);
     let [username, setUsername] = useState('');
     let [email, setEmail] = useState('');
     let [telephone, setTelephone] = useState('');
@@ -27,7 +26,6 @@ const Register = () => {
             })
             .catch(err => {
                 setIsSubmitted(true);
-                setErrors(err);
             })
     };
 
@@ -91,7 +89,6 @@ const Register = () => {
                             Log in?
                         </Link>
                     </section>
-                    {errors.length > 0 ? <p>Error in database!</p> : ''}
                 </form>
             </section>
             <section className="img-wraper right">
