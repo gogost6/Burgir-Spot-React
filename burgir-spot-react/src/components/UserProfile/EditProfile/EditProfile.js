@@ -12,13 +12,17 @@ const EditProfile = () => {
 
     let [userData, setUserData] = useState(user);
     let [errors, setErrors] = useState([]);
-    let [oldPassword, setOldPassword] = useState('');
-    let [newPassword, setNewPassword] = useState('');
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const result = Object.assign(userData, { oldTelephone: user.telephone, oldUsername: user.username, oldEmail: user.email, oldPassword, newPassword });
+        const result = Object.assign(userData,
+            {
+                oldTelephone: user.telephone,
+                oldUsername: user.username,
+                oldEmail: user.email
+            });
+            console.log(result);
         editHandled(result).then(res => { setUser(userData); setState(false) })
             .catch(err => setErrors(err.msg));
     }
@@ -30,10 +34,6 @@ const EditProfile = () => {
         <input type="text" name="username" id="username" value={userData.username} onChange={(e) => changeValue(e, 'username', setUserData)} />
         <label htmlFor="telephone">Telephone</label>
         <input type="text" name="telephone" id="telephone" value={userData.telephone} onChange={(e) => changeValue(e, 'telephone', setUserData)} />
-        <label htmlFor="oldPassword">Old Password</label>
-        <input type="password" name="oldPassword" id="oldPassword" onChange={(e) => setOldPassword(e.target.value)} />
-        <label htmlFor="newPassword">New Password</label>
-        <input type="password" name="newPassword" id="newPassword" onChange={(e) => setNewPassword(e.target.value)} />
         <button className="btn gray">Edit</button>
     </form >
         {errors

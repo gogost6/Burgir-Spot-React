@@ -46,10 +46,10 @@ router.post(
         .custom((value) => {
             const telephoneRegex = new RegExp(/\+359[0-9]{9}/);
             if (!telephoneRegex.test(value)) {
-              throw ('Telephone is invalid!');
+                throw ('Telephone is invalid!');
             }
             return true;
-          }),
+        }),
     body("password")
         .trim()
         .isLength({ min: 4 })
@@ -176,20 +176,10 @@ router.post(
         .withMessage("The email input should be valid!"),
     body("telephone")
         .trim()
-        .isNumeric()
-        .withMessage("The telephone input should contain only numbers!"),
-    body("oldPassword")
-        .trim()
-        .custom(async (value, { req }) => {
-            if (value == "") {
-                return true;
-            }
-
-            const user = await userService.getUserByUsername(req.user.username);
-            const isOldPassword = await bcrypt.compare(value, user.hashedPassword);
-
-            if (!isOldPassword) {
-                throw "Old password doesn't match!";
+        .custom((value) => {
+            const telephoneRegex = new RegExp(/\+359[0-9]{9}/);
+            if (!telephoneRegex.test(value)) {
+                throw ('Telephone is invalid!');
             }
             return true;
         }),
@@ -228,6 +218,68 @@ router.post(
 
             if (existingByEmail && oldEmail != email) {
                 throw "Email is taken!";
+            }
+
+            const userUpdateModel = { username, telephone, email };
+            const user = await userService.updateUser(_id, userUpdateModel);
+
+            const userViewModel = {
+                _id: user._id,
+                email: user.email,
+                username: user.username,
+                telephone: user.telephone
+            };
+            res.clearCookie(config.COOKIE_NAME);
+            const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
+            res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });
+            res.json(userViewModel);
+        } catch (err) {
+            console.log(err);
+            res.status(401).json({ msg: err });
+        }
+    }
+);
+
+router.post(
+    "/edit-password",
+    body("newPassword")
+        .trim()
+        .isLength({ min: 4 })
+        .withMessage("The password should be atleast 4 chars!"),
+    body("oldPassword")
+        .trim()
+        .custom(async (value, { req }) => {
+            const user = await userService.getUserByUsername(req.user.username);
+            const isOldPassword = await bcrypt.compare(value, user.hashedPassword);
+
+            if (!isOldPassword) {
+                throw "Old password doesn't match!";
+            }
+            return true;
+        }),
+    async (req, res) => {
+        try {
+            const {
+                _id,
+                username,
+                telephone,
+                email,
+                newPassword,
+                oldPassword,
+            } = req.body;
+
+            const errors = Object.values(validationResult(req).mapped());
+
+            if (errors.length > 0) {
+                throw errors.map((e) => e.msg);
+            }
+
+            if(newPassword === '' || newPassword.length < 4) {
+                throw 'New password error!';
+            }
+
+            if(oldPassword === '' || oldPassword.length < 4) {
+                throw 'Old password error!';
             }
 
             const hashedPassword = await bcrypt.hash(newPassword, 10);

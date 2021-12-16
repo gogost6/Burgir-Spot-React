@@ -11,7 +11,8 @@ import Create from "./components/Burgir/Create/Create";
 import Details from "./components/Burgir/Details/Details";
 import Edit from "./components/Burgir/Edit/Edit";
 import UserProfile from "./components/UserProfile/UserProfile";
-import EditProfile from "./components/UserProfile/Edit/EditProfile";
+import EditProfile from "./components/UserProfile/EditProfile/EditProfile";
+import EditPassword from "./components/UserProfile/EditPassword/EditPassword";
 import NotFound from "./components/NotFound/NotFound";
 
 import { getUser } from "./services/authService";
@@ -65,11 +66,12 @@ function App() {
                             <Create />
                         </LoggedUserGuard>} />
                         <Route path="/edit/:id" element={<Edit />} />
-                        <Route path="/user" element={<LoggedUserGuard>
-                            <UserProfile />
-                        </LoggedUserGuard>}>
-                            <Route path="edit" element={<LoggedUserGuard>
+                        <Route path="/user" element={<LoggedUserGuard><UserProfile /></LoggedUserGuard>}>
+                            <Route path="edit-profile" element={<LoggedUserGuard>
                                 <EditProfile />
+                            </LoggedUserGuard>} />
+                            <Route path="edit-password" element={<LoggedUserGuard>
+                                <EditPassword />
                             </LoggedUserGuard>} />
                         </Route>
                         <Route path="*" element={<NotFound />} />

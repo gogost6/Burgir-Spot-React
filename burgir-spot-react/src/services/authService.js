@@ -108,3 +108,21 @@ export const editHandled = async (data) => {
         return result;
     }
 }
+
+export const editPasswordHandled = async (data) => {
+    const response = await fetch(`${baseUrl}/edit-password`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+    })
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw result;
+    } else {
+        return result;
+    }
+}

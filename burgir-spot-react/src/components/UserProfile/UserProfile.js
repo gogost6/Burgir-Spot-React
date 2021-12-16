@@ -13,15 +13,17 @@ const UserProfile = () => {
     let [state, setState] = useState(false);
 
     let navigate = useNavigate();
-    
+
     const onClick = (e) => {
         e.preventDefault();
         setState(true);
-        navigate('edit');
+        e.target.pathname === "/user/edit-profile"
+            ? navigate('edit-profile')
+            : navigate('edit-password');
     }
 
     return (
-        <UserContext.Provider value={{setState: setState}}>
+        <UserContext.Provider value={{ setState: setState }}>
             <div className="user-container">
                 <div className="w">
                     <img src="images/profile-img.jpg" alt="img" className="profile-img" />
@@ -29,8 +31,8 @@ const UserProfile = () => {
                         <h2>{user.email}</h2>
                         <h1><strong>1000</strong> followers</h1>
                         <div className="bnt-wrapper-edit-profile">
-                            <Link to="edit" className="btn burgir-color" onClick={onClick}>Edit Profile</Link>
-                            {/* <Link to="/created-burgirs" className="btn gray">Created Burgirs</Link> */}
+                            <Link to="edit-profile" className="btn burgir-color" onClick={onClick}>Edit Profile</Link>
+                            <Link to="edit-password" className="btn gray" onClick={onClick}>Edit Password</Link>
                         </div>
                         <p>Hey there, we are glad you use our tasty site.</p>
                         <ul className="icons-ul">
