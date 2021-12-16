@@ -1,8 +1,8 @@
 import "./Register.css";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { registerUser } from '../../services/authService';
-import AuthContext from "../../context/AuthContext";
+import { registerUser } from '../../../services/authService';
+import AuthContext from "../../../context/AuthContext";
 
 const Register = () => {
     let { onLogin } = useContext(AuthContext);

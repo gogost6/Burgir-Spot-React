@@ -1,9 +1,9 @@
 import "./Details.css";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import { burgirDetails, deleteBurgir } from '../../services/foodService';
-import { fullUserDataByUsername } from '../../services/authService'
-import AuthContext from "../../context/AuthContext";
+import { burgirDetails, deleteBurgir } from '../../../services/foodService';
+import { fullUserDataByUsername } from '../../../services/authService'
+import AuthContext from "../../../context/AuthContext";
 import { useContext } from "react";
 
 const Details = () => {

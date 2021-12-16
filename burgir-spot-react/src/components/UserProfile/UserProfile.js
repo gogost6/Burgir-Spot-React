@@ -12,14 +12,14 @@ const UserProfile = () => {
     let { user } = useContext(AuthContext);
     let [state, setState] = useState(false);
 
-
     let navigate = useNavigate();
+    
     const onClick = (e) => {
         e.preventDefault();
         setState(true);
         navigate('edit');
     }
-    console.log('state from userProfile ' + state);
+
     return (
         <UserContext.Provider value={{setState: setState}}>
             <div className="user-container">

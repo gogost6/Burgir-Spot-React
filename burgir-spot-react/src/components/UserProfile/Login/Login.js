@@ -1,8 +1,8 @@
 import "./Login.css";
-import AuthContext from "../../context/AuthContext";
+import AuthContext from "../../../context/AuthContext";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { loginUser } from '../../services/authService';
+import { loginUser } from '../../../services/authService';
 
 const Login = () => {
     let { onLogin } = useContext(AuthContext);
