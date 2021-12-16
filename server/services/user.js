@@ -39,9 +39,8 @@ async function getUserByUsername(username) {
 }
 
 async function getUserByTelephone(telephone) {
-    const pattern = new RegExp(`^${telephone}$`, 'i');
     if (telephone) {
-        return await User.findOne({ telephone: { $regex: pattern } }).lean();
+        return await User.findOne({ telephone }).lean();
     } else {
         return false;
     }

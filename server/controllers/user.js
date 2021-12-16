@@ -43,8 +43,13 @@ router.post(
         .withMessage("The username should be atleast 5 chars!"),
     body("telephone")
         .trim()
-        .isNumeric()
-        .withMessage("The telephone input should contain only numbers!"),
+        .custom((value) => {
+            const telephoneRegex = new RegExp(/\+359[0-9]{9}/);
+            if (!telephoneRegex.test(value)) {
+              throw ('Telephone is invalid!');
+            }
+            return true;
+          }),
     body("password")
         .trim()
         .isLength({ min: 4 })
@@ -60,6 +65,7 @@ router.post(
     async (req, res) => {
         try {
             const { email, username, telephone, password } = req.body;
+            console.log(telephone);
             const errors = Object.values(validationResult(req).mapped());
 
             if (errors.length > 0) {
@@ -68,9 +74,11 @@ router.post(
 
             const existingByEmail = await userService.getUserByEmail(email);
             const existingByUsername = await userService.getUserByUsername(username);
-            const existingByTelephone = await userService.getUserByTelephone(
-                telephone
-            );
+            // const existingByTelephone = await userService.getUserByTelephone(
+            //     telephone
+            // );
+
+            //FIX THIS VALIDATOR
 
             if (existingByEmail) {
                 throw "Email is registered already";
@@ -80,9 +88,9 @@ router.post(
                 throw "Username is taken!";
             }
 
-            if (existingByTelephone) {
-                throw "Telephone is being used by other user!";
-            }
+            // if (existingByTelephone) {
+            //     throw "Telephone is being used by other user!";
+            // }
 
             const hashedPassword = await bcrypt.hash(password, 10);
             const user = await userService.createUser(
