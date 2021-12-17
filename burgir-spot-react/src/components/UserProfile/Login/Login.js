@@ -16,6 +16,7 @@ const Login = () => {
         
         loginUser(data)
             .then(res => {
+                localStorage.setItem('logged', true);
                 onLogin(res);
             })
             .catch(err => {

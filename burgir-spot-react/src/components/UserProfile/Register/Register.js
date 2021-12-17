@@ -22,6 +22,7 @@ const Register = () => {
         let data = Object.fromEntries(formData);
         registerUser(data)
             .then(res => {
+                localStorage.setItem('logged', true);
                 onLogin(res);
             })
             .catch(err => {

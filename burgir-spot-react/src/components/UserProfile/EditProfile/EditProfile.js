@@ -1,14 +1,11 @@
 import "./EditProfile.css";
-import UserContext from '../../../context/UserContext';
 import AuthContext from "../../../context/AuthContext";
 import { useContext, useState } from "react";
 import { changeValue } from '../../../utils/functions';
 import { editHandled } from '../../../services/authService';
-import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
-    let { setState } = useContext(UserContext);
-    let { user, setUser } = useContext(AuthContext);
+    let { user, setUser, setUserState } = useContext(AuthContext);
 
     let [userData, setUserData] = useState(user);
     let [isSubmitted, setIsSubmitted] = useState(false);
@@ -26,7 +23,7 @@ const EditProfile = () => {
                 oldEmail: user.email
             });
         console.log(result);
-        editHandled(result).then(res => { setUser(userData); setState(false) })
+        editHandled(result).then(res => { setUser(userData); setUserState(false) })
             .catch(err => setIsSubmitted(true));
     }
 

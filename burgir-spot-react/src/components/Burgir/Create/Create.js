@@ -19,28 +19,28 @@ const Create = () => {
         vegetables: []
     });
 
+    let [isSubmitted, setIsSubmitted] = useState(false);
+
     const navigate = useNavigate();
-    const [errors, setErrors] = useState([]);
 
     const onSubmit = (e) => {
         e.preventDefault();
-
-        createBurgir(state).then(res => navigate('/menu')).catch(err => setErrors(err));
+        createBurgir(state).then(res => navigate('/menu')).catch(err => setIsSubmitted(true));
     }
 
     return (<div className="container wrap">
         <h1 className="h1">Share your own Burgir!</h1>
         <form method="POST" className="create-form" onSubmit={onSubmit}>
             <div className="form-item-wrapper">
-                <label htmlFor="name">Burger name:</label>
-                <input type="text" name="name" id="name" onChange={(e) => changeValue(e, 'name', setState)} />
+                <label htmlFor="name">*Burger name:</label>
+                <input type="text" name="name" id="name" value={state.name} onChange={(e) => changeValue(e, 'name', setState)} />
             </div>
             <div className="form-item-wrapper">
-                <label htmlFor="price">Price:</label>
+                <label htmlFor="price">*Price:</label>
                 <input type="number" name="price" id="price" onChange={(e) => changeValue(e, 'price', setState)} />
             </div>
             <div className="form-item-wrapper">
-                <label htmlFor="meat">Meat</label>
+                <label htmlFor="meat">*Meat</label>
                 <Select options={option.meatOptions} name="meat" id="meat" onChange={(e) => changeMeatValue(e, setState)} />
             </div>
             <div className="form-item-wrapper">
@@ -72,15 +72,16 @@ const Create = () => {
                 <input type="text" name="description" id="description" onChange={(e) => changeValue(e, 'description', setState)} />
             </div>
             <div className="form-item-wrapper">
-                <label htmlFor="imgUrl">Image Url:</label>
+                <label htmlFor="imgUrl">*Image Url:</label>
                 <input type="text" name="imgUrl" id="imgUrl" onChange={(e) => changeValue(e, 'imgUrl', setState)} />
             </div>
             <div className="btn-wrapper-create">
-                <button className="btn burgir-color">Preview</button>
+                {/* <button className="btn burgir-color">Preview</button> */}
                 <button className="btn">Create</button>
             </div>
         </form>
-        {errors.length > 0 ? <p className="p-err">Opsss you stil have some errors!</p> : ''}
+        {isSubmitted ? <p className="p-err">Please fill all required fields!</p> : ''}
+        <p style={{ 'marginLeft': '200px', 'fontSize': '12px' }}>Inputs with * are required!</p>
     </div>);
 }
 

@@ -5,8 +5,7 @@ import { useContext, useState } from "react";
 import { editPasswordHandled } from '../../../services/authService'
 
 const EditPassword = () => {
-    let { user, setUser } = useContext(AuthContext);
-    let { setState } = useContext(UserContext);
+    let { user, setUser, setUserState } = useContext(AuthContext);
 
     let [userData, setUserData] = useState(user);
     let [errors, setErrors] = useState([]);
@@ -17,7 +16,7 @@ const EditPassword = () => {
         e.preventDefault();
 
         const data = { ...user, oldPassword, newPassword };
-        editPasswordHandled(data).then(res => { setUser(userData); setState(false) })
+        editPasswordHandled(data).then(res => { setUser(userData); setUserState(false) })
             .catch(err => setErrors(err.msg));
     }
 
@@ -30,8 +29,8 @@ const EditPassword = () => {
     </form >
         {errors
             ? <div className='errors-wraper'>
-                <ul style={{'list-style-type': 'none'}}>
-                    {errors.map(x => <li className="p-err">{x}</li>)}
+                <ul style={{'listStyleType': 'none'}}>
+                    {errors.map(x => <li className="p-err" key={Math.random()}>{x}</li>)}
                 </ul>
             </div>
             : ''}

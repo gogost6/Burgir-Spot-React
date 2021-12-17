@@ -19,7 +19,7 @@ router.post(
       }
       const burgirData = await req.storage.create(req.body, req.user.email);
       console.log("Successfully added burgir to the db!");
-      res.json(JSON.stringify(burgirData));
+      res.json(burgirData);
     } catch (err) {
       console.log(err);
       res.status(406).json(err);

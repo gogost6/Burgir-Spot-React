@@ -1,13 +1,11 @@
-import { Navigate, useLocation } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
-import { useContext } from "react";
+import { Navigate, useLocation, Outlet } from "react-router-dom";
 
 const LoggedUserGuard = ({ children }) => {
     const location = useLocation();
-    const { user } = useContext(AuthContext);
-
-    if (user._id) {
-        return children;
+    const logged = localStorage.getItem('logged');
+    
+    if (logged !== null) {
+        return <Outlet/>
     } else {
         return <Navigate to='/login' replace state={{ path: location.pathname }} />;
     }

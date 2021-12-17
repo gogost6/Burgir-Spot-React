@@ -25,6 +25,8 @@ import GuestGuard from './guards/GuestGuard';
 function App() {
     let navigate = useNavigate();
     const { state } = useLocation();
+    let [userState, setUserState] = useState(false);
+
     let [user, setUser] = useState({
         _id: "",
         email: "",
@@ -40,7 +42,7 @@ function App() {
         navigate(state?.path || '/');
     };
 
-    let value = { onLogin, user, setUser };
+    let value = { onLogin, user, setUser, userState, setUserState };
     useEffect(() => {
         getUser()
             .then(response => {
@@ -62,17 +64,13 @@ function App() {
                         <Route path="/login" element={<GuestGuard><Login /></GuestGuard>} />
                         <Route path="/register" element={<GuestGuard><Register /></GuestGuard>} />
                         <Route path="/details/:id" element={<Details />} />
-                        <Route path="/create" element={<LoggedUserGuard>
-                            <Create />
-                        </LoggedUserGuard>} />
-                        <Route path="/edit/:id" element={<Edit />} />
-                        <Route path="/user" element={<LoggedUserGuard><UserProfile /></LoggedUserGuard>}>
-                            <Route path="edit-profile" element={<LoggedUserGuard>
-                                <EditProfile />
-                            </LoggedUserGuard>} />
-                            <Route path="edit-password" element={<LoggedUserGuard>
-                                <EditPassword />
-                            </LoggedUserGuard>} />
+                        <Route element={<LoggedUserGuard />}>
+                            <Route path="/create" element={<Create />} />
+                            <Route path="/edit/:id" element={<Edit />} />
+                            <Route path="/user" element={<UserProfile />}>
+                                <Route path="edit-profile" element={<EditProfile />} />
+                                <Route path="edit-password" element={<EditPassword />} />
+                            </Route>
                         </Route>
                         <Route path="*" element={<NotFound />} />
                     </Routes>

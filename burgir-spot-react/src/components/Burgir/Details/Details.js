@@ -14,7 +14,7 @@ const Details = () => {
     const { id } = params;
 
     let [burgir, setBurgir] = useState({});
-    let [price, setPrice] = useState(1);
+    let [quantity, setQuantity] = useState(1);
     let [userData, setUserData] = useState({});
 
     useEffect(() => {
@@ -40,10 +40,19 @@ const Details = () => {
         }
     };
 
-    const priceHandler = (e) => {
-        const newPrice = e.target.value;
-        setPrice(Number(newPrice));
+    const quantityHandler = (e) => {
+        const newQuantity = e.target.value;
+        setQuantity(Number(newQuantity));
     }
+
+    // const buyBurgir = (e) => {
+    //     e.preventDefault();
+    //     addToBucket({
+    //         quantity,
+    //         price: burgir.price,
+    //         name: burgir.name
+    //     });
+    // }
 
     return (
         <div className="container">
@@ -60,11 +69,11 @@ const Details = () => {
                         {burgir.sauces ? (<p><strong>Sauces:</strong> {burgir.sauces.join(', ')}</p>) : ''}
                         {burgir.bonus ? (<p><strong>Bonus:</strong> {burgir.bonus.join(', ')}</p>) : ''}
                         <label htmlFor="quantity"><strong>Quantity:</strong></label>
-                        <input type="number" id="quantity" name="quantity" min={1} onChange={priceHandler} value={price} />
-                        <h3>Total: {burgir.price * price}$</h3>
+                        <input type="number" id="quantity" name="quantity" min={1} onChange={quantityHandler} value={quantity} />
+                        <h3>Total: {burgir.price * quantity}$</h3>
                     </div>
                     <div className="btn-wrapper">
-                        <button className="btn burgir-color">Buy</button>
+                        {/* <button className="btn burgir-color" onClick={buyBurgir}>Buy</button> */}
                         {userButtons()}
                     </div>
                 </div>)
