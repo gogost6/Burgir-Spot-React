@@ -82,11 +82,9 @@ const Login = () => {
                                 ...utils.inputBorderStyle.normal,
                                 ...(passwordHover ? utils.inputBorderStyle.hover : null),
                                 ...(password === '' && isSubmitted ? utils.inputBorderStyle.error : null)
-                                // ...(password.length < 4 && isSubmitted ? inputBorderStyle.error : null)
                             }}
                         />
                         {password === '' && isSubmitted ? utils.inputErr('password') : ''}
-                        {/* {password.length < 4 && isSubmitted ? <p style={{ 'color': 'red' }}>Password must be 4 or more characters</p> : ''} */}
                         <section className="btn-wraper">
                             <button type="submit" className="btn burgir-color">
                                 Login
