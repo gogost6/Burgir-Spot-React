@@ -26,12 +26,12 @@ const Header = () => {
                             Home
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link className="nav-link" to="/order">
                             <FontAwesomeIcon icon={faShoppingCart} />
                             1
                         </Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link className="nav-link" to="/menu">
                             Menu

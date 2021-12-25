@@ -6,8 +6,7 @@ import { faFacebook, faTwitter, faLinkedin, faInstagram } from '@fortawesome/fre
 
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import AuthContext from '../../context/AuthContext';
-import UserContext from '../../context/UserContext';
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 const UserProfile = () => {
     let { user, userState, setUserState } = useContext(AuthContext);
