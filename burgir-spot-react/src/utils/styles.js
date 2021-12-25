@@ -7,7 +7,7 @@ export const inputLengthErr = (name, num) => {
 }
 
 export const usedErr = (name) => {
-    return (<p style={{ 'color': 'yellow' }}>{name} is used by other user!</p>)
+    return (<p style={{ 'color': 'red' }}>{name} is used by other user!</p>)
 }
 
 export const inputValidErr = (name) => {

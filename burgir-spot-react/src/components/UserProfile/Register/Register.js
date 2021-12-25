@@ -1,15 +1,17 @@
 import "./Register.css";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { registerUser } from '../../../services/authService';
 import AuthContext from "../../../context/AuthContext";
 import * as utils from '../../../utils/styles';
-
+import { usedUsername, usedEmail } from '../../../services/authService';
 
 const Register = () => {
     let { onLogin } = useContext(AuthContext);
     let [isSubmitted, setIsSubmitted] = useState(false);
     let [username, setUsername] = useState('');
+    let [usedUsernameState, setUsedUsernameState] = useState(false);
+    let [usedEmailState, setUsedEmailState] = useState(false);
     let [email, setEmail] = useState('');
     let [telephone, setTelephone] = useState('');
     let [password, setPassword] = useState('');
@@ -25,16 +27,30 @@ const Register = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        setIsSubmitted(true);
 
         let formData = new FormData(e.currentTarget);
         let data = Object.fromEntries(formData);
+
+        if (data.username.length > 4) {
+            usedUsername(data.username)
+                .then(res => setUsedUsernameState(res))
+                .catch(err => console.log(err))
+        }
+
+        if (emailRegex.test(data.email)) {
+            usedEmail(data.email)
+                .then(res => setUsedEmailState(res))
+                .catch(err => console.log(err))
+        }
+
         registerUser(data)
             .then(res => {
                 localStorage.setItem('logged', true);
                 onLogin(res);
             })
             .catch(err => {
-                setIsSubmitted(true);
+                console.log(err);
             })
     };
 
@@ -60,11 +76,13 @@ const Register = () => {
                             ...utils.inputBorderStyle.normal,
                             ...(emailHover ? utils.inputBorderStyle.hover : null),
                             ...(email === '' && isSubmitted ? utils.inputBorderStyle.error : null),
-                            ...(!emailRegex.test(email) && isSubmitted ? utils.inputBorderStyle.error : null)
+                            ...(!emailRegex.test(email) && isSubmitted ? utils.inputBorderStyle.error : null),
+                            ...(usedEmailState ? utils.inputBorderStyle.error : null)
                         }} />
                     {email === '' && isSubmitted ? utils.inputErr('email') : ''}
                     {!emailRegex.test(email) && isSubmitted ? utils.inputValidErr('Email') : ''}
-                    <label htmlFor="username" style={{'marginTop': '5px'}}>Username</label>
+                    {usedEmailState ? utils.usedErr('Email') : ''}
+                    <label htmlFor="username" style={{ 'marginTop': '5px' }}>Username</label>
                     <input
                         type="text"
                         name="username"
@@ -82,13 +100,14 @@ const Register = () => {
                             ...utils.inputBorderStyle.normal,
                             ...(usernameHover ? utils.inputBorderStyle.hover : null),
                             ...(username === '' && isSubmitted ? utils.inputBorderStyle.error : null),
-                            ...(username.length < 5 && isSubmitted ? utils.inputBorderStyle.error : null)
+                            ...(username.length < 5 && isSubmitted ? utils.inputBorderStyle.error : null),
+                            ...(usedUsernameState ? utils.inputBorderStyle.error : null)
                         }}
                     />
                     {username === '' && isSubmitted ? utils.inputErr('username') : ''}
                     {username.length < 5 && isSubmitted ? utils.inputLengthErr('Username', 5) : ''}
-                    {/* {username.length < 5 && isSubmitted ? utils.inputLengthErr('Username', 5) : ''} */}
-                    <label htmlFor="telephone" style={{'marginTop': '5px'}}>Telephone</label>
+                    {usedUsernameState ? utils.usedErr('Username') : ''}
+                    <label htmlFor="telephone" style={{ 'marginTop': '5px' }}>Telephone</label>
                     <input
                         type="tel"
                         name="telephone"
@@ -111,7 +130,7 @@ const Register = () => {
                     />
                     {telephone === '' && isSubmitted ? utils.inputErr('telephone') : ''}
                     {!telephoneRegex.test(telephone) && isSubmitted ? utils.inputValidErr('Telephone') : ''}
-                    <label htmlFor="password" style={{'marginTop': '5px'}}>Password</label>
+                    <label htmlFor="password" style={{ 'marginTop': '5px' }}>Password</label>
                     <input
                         type="password"
                         name="password"
@@ -134,7 +153,7 @@ const Register = () => {
                     />
                     {password === '' && isSubmitted ? utils.inputErr('password') : ''}
                     {password.length < 4 && isSubmitted ? utils.inputLengthErr('Password', 4) : ''}
-                    <label htmlFor="repassword" style={{'marginTop': '5px'}}>Repeat password</label>
+                    <label htmlFor="repassword" style={{ 'marginTop': '5px' }}>Repeat password</label>
                     <input
                         type="password"
                         name="repassword"

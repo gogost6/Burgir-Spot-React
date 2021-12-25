@@ -126,3 +126,37 @@ export const editPasswordHandled = async (data) => {
         return result;
     }
 }
+
+export const usedUsername = async (username) => {
+    const response = await fetch(`${baseUrl}/free-username/${username}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include'
+    })
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw result;
+    } else {
+        return result;
+    }
+}
+
+export const usedEmail = async (email) => {
+    const response = await fetch(`${baseUrl}/free-email/${email}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include'
+    })
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw result;
+    } else {
+        return result;
+    }
+}
