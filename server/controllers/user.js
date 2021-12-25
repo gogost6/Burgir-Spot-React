@@ -122,7 +122,7 @@ router.post(
     isGuest(),
     body("username")
         .trim()
-        .isLength({ min: 4 })
+        .isLength({ min: 5 })
         .withMessage("The username input should be atleast 4 characters long!")
         .isAlphanumeric()
         .withMessage("The username should contain only chars!"),
