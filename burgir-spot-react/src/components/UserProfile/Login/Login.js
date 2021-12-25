@@ -3,7 +3,7 @@ import AuthContext from "../../../context/AuthContext";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { loginUser } from '../../../services/authService';
-import * as utilStyles from '../../../utils/styles'
+import * as utils from '../../../utils/styles'
 
 
 const Login = () => {
@@ -58,12 +58,12 @@ const Login = () => {
                             setUsernameHover(false);
                         }}
                         style={{
-                            ...utilStyles.inputBorderStyle.normal,
-                            ...(usernameHover ? utilStyles.inputBorderStyle.hover : null),
-                            ...(username === '' && isSubmitted ? utilStyles.inputBorderStyle.error : null),
+                            ...utils.inputBorderStyle.normal,
+                            ...(usernameHover ? utils.inputBorderStyle.hover : null),
+                            ...(username === '' && isSubmitted ? utils.inputBorderStyle.error : null),
                         }}
                     />
-                        {username === '' && isSubmitted ? utilStyles.inputErr('username') : ''}
+                        {username === '' && isSubmitted ? utils.inputErr('username') : ''}
                         <label htmlFor="password" style={{ 'marginTop': '15px' }}>Password</label>
                         <input
                             type="password"
@@ -79,13 +79,13 @@ const Login = () => {
                                 setPasswordHover(false);
                             }}
                             style={{
-                                ...utilStyles.inputBorderStyle.normal,
-                                ...(passwordHover ? utilStyles.inputBorderStyle.hover : null),
-                                ...(password === '' && isSubmitted ? utilStyles.inputBorderStyle.error : null)
+                                ...utils.inputBorderStyle.normal,
+                                ...(passwordHover ? utils.inputBorderStyle.hover : null),
+                                ...(password === '' && isSubmitted ? utils.inputBorderStyle.error : null)
                                 // ...(password.length < 4 && isSubmitted ? inputBorderStyle.error : null)
                             }}
                         />
-                        {password === '' && isSubmitted ? utilStyles.inputErr('password') : ''}
+                        {password === '' && isSubmitted ? utils.inputErr('password') : ''}
                         {/* {password.length < 4 && isSubmitted ? <p style={{ 'color': 'red' }}>Password must be 4 or more characters</p> : ''} */}
                         <section className="btn-wraper">
                             <button type="submit" className="btn burgir-color">
