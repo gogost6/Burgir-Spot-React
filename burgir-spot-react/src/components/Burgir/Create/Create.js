@@ -65,7 +65,6 @@ const Create = () => {
                 <label htmlFor="price">*Price:</label>
                 <input type="number" name="price" id="price"
                     className="required"
-                    defaultValue={1}
                     onChange={(e) => changeValue(e, 'price', setState)}
                     onMouseEnter={() => {
                         setPriceHover(true);

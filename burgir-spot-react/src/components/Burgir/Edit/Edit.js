@@ -75,7 +75,6 @@ const Edit = () => {
             <div className="form-item-wrapper">
                 <label htmlFor="price">*Price:</label>
                 <input type="text" name="price" id="price" value={burgir.price}
-                    defaultValue={1}
                     className="required"
                     onChange={(e) => changeValue(e, 'price', setBurgir)}
                     onMouseEnter={() => {
