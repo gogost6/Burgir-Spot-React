@@ -50,6 +50,7 @@ const Login = () => {
                         name="username"
                         id="username"
                         value={username}
+                        placeholder="ivancho22"
                         onChange={(e) => setUsername(e.target.value)}
                         onMouseEnter={() => {
                             setUsernameHover(true);
