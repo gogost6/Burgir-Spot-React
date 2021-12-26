@@ -5,6 +5,7 @@ import { createBurgir } from '../../../services/foodService';
 import { arrHandler, changeValue, changeMeatValue } from '../index'
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import * as utils from '../../../utils/styles'
 
 const Create = () => {
     let [state, setState] = useState({
@@ -19,13 +20,25 @@ const Create = () => {
         vegetables: []
     });
 
+    const colorStyles = {
+        control: (styles) => ({...styles, 'border': '2px solid red'}),
+    }
+
+    let [error, setError] = useState('');
+
+    let [nameHover, setNameHover] = useState(false);
+    let [priceHover, setPriceHover] = useState(false);
+    let [imgUrlHover, setImgHover] = useState(false);
+
     let [isSubmitted, setIsSubmitted] = useState(false);
 
     const navigate = useNavigate();
 
     const onSubmit = (e) => {
         e.preventDefault();
-        createBurgir(state).then(res => navigate('/menu')).catch(err => setIsSubmitted(true));
+        setError('');
+        setIsSubmitted(true);
+        createBurgir(state).then(res => navigate('/menu')).catch(err => setError('Please fill all fields!'));
     }
 
     return (<div className="container wrap">
@@ -33,15 +46,46 @@ const Create = () => {
         <form method="POST" className="create-form" onSubmit={onSubmit}>
             <div className="form-item-wrapper">
                 <label htmlFor="name">*Burger name:</label>
-                <input type="text" name="name" id="name" value={state.name} onChange={(e) => changeValue(e, 'name', setState)} />
+                <input type="text" name="name" id="name" value={state.name}
+                    className="required"
+                    onChange={(e) => changeValue(e, 'name', setState)}
+                    onMouseEnter={() => {
+                        setNameHover(true);
+                    }}
+                    onMouseLeave={() => {
+                        setNameHover(false);
+                    }}
+                    style={{
+                        ...utils.inputBorderStyle.normal,
+                        ...(nameHover ? utils.inputBorderStyle.hover : null),
+                        ...(state.name === '' && isSubmitted ? utils.inputBorderStyle.error : null),
+                    }} />
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="price">*Price:</label>
-                <input type="number" name="price" id="price" onChange={(e) => changeValue(e, 'price', setState)} />
+                <input type="number" name="price" id="price"
+                    className="required"
+                    onChange={(e) => changeValue(e, 'price', setState)}
+                    onMouseEnter={() => {
+                        setPriceHover(true);
+                    }}
+                    onMouseLeave={() => {
+                        setPriceHover(false);
+                    }}
+                    style={{
+                        ...utils.inputBorderStyle.normal,
+                        ...(priceHover ? utils.inputBorderStyle.hover : null),
+                        ...(state.price === 0 && isSubmitted ? utils.inputBorderStyle.error : null),
+                        ...(state.price === '' && isSubmitted ? utils.inputBorderStyle.error : null),
+                    }}
+                />
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="meat">*Meat</label>
-                <Select options={option.meatOptions} name="meat" id="meat" onChange={(e) => changeMeatValue(e, setState)} />
+                <Select options={option.meatOptions} name="meat" id="meat" 
+                onChange={(e) => changeMeatValue(e, setState)} 
+                styles={state.meat == '' && isSubmitted ? colorStyles : ''}
+                />
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="vegetables">Vegetables</label>
@@ -73,15 +117,28 @@ const Create = () => {
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="imgUrl">*Image Url:</label>
-                <input type="text" name="imgUrl" id="imgUrl" onChange={(e) => changeValue(e, 'imgUrl', setState)} />
+                <input type="text" name="imgUrl" id="imgUrl"
+                    onChange={(e) => changeValue(e, 'imgUrl', setState)}
+                    className="required"
+                    onMouseEnter={() => {
+                        setImgHover(true);
+                    }}
+                    onMouseLeave={() => {
+                        setImgHover(false);
+                    }}
+                    style={{
+                        ...utils.inputBorderStyle.normal,
+                        ...(imgUrlHover ? utils.inputBorderStyle.hover : null),
+                        ...(state.imgUrl === '' && isSubmitted ? utils.inputBorderStyle.error : null),
+                    }} />
             </div>
             <div className="btn-wrapper-create">
                 {/* <button className="btn burgir-color">Preview</button> */}
                 <button className="btn">Create</button>
             </div>
         </form>
-        {isSubmitted ? <p className="p-err">Please fill all required fields!</p> : ''}
         <p style={{ 'marginLeft': '200px', 'fontSize': '12px' }}>Inputs with * are required!</p>
+        <p className={error !== '' ? 'p-err hidethis' : ''} style={{ 'opacity': 1, 'display': 'block' }}>{error}</p>
     </div>);
 }
 

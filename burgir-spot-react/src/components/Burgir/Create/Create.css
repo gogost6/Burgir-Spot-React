@@ -23,3 +23,14 @@
 .p-err.create {
     margin: 10px 0;
 }
+.create-form .required {
+    border-radius: 5px;
+}
+
+.create-form .required:hover {
+    border: 1px solid #bd7100;
+}
+
+.create-form .required:focus {
+    outline: none;
+}
