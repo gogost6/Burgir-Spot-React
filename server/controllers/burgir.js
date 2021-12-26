@@ -92,6 +92,13 @@ router.post(
   preloadBurgir(),
   isOwner(),
   body("name").notEmpty().withMessage("The name should not be empty!"),
+  body("price").custom((value) => {
+    if (+value < 1) {
+      throw 'Price is below 1!'
+    } else {
+      return true
+    }
+  }),
   body("price").notEmpty().withMessage("The price should not be empty!"),
   body("meat").notEmpty().withMessage("The meat should not be empty!"),
   body("imgUrl").notEmpty().withMessage("The image Url should not be empty!"),
