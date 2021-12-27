@@ -3,9 +3,11 @@ import AuthContext from "../../../context/AuthContext";
 import { useContext, useState } from "react";
 import { changeValue } from '../../../utils/functions';
 import { editHandled } from '../../../services/authService';
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
     let { user, setUser, setUserState } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     let [userData, setUserData] = useState(user);
     let [isSubmitted, setIsSubmitted] = useState(false);
@@ -22,25 +24,29 @@ const EditProfile = () => {
                 oldUsername: user.username,
                 oldEmail: user.email
             });
-        console.log(result);
         editHandled(result).then(res => { setUser(userData); setUserState(false) })
             .catch(err => setIsSubmitted(true));
     }
 
     const editForm = (<><form method="POST" className="edit-form" onSubmit={onSubmit} >
         <label htmlFor="email">Email</label>
-        <input type="text" name="email" id="email" value={userData.email} onChange={(e) => changeValue(e, 'email', setUserData)} />
+        <input type="text" name="email" id="email" value={userData.email}
+            onChange={(e) => changeValue(e, 'email', setUserData)} />
         {userData.email === '' && isSubmitted ? <p className="p-err">Email should not be empty!</p> : ''}
         {!emailRegex.test(userData.email) && isSubmitted ? <p className="p-alert">Email should be valid!</p> : ''}
         <label htmlFor="username">Username</label>
-        <input type="text" name="username" id="username" value={userData.username} onChange={(e) => changeValue(e, 'username', setUserData)} />
+        <input type="text" name="username" id="username" value={userData.username}
+            onChange={(e) => changeValue(e, 'username', setUserData)} />
         {userData.username === '' && isSubmitted ? <p className="p-err">Username should not be empty!</p> : ''}
         {userData.username.length < 5 && isSubmitted ? <p className="p-alert">Username should be atleast 5 chars!</p> : ''}
         <label htmlFor="telephone">Telephone</label>
-        <input type="text" name="telephone" id="telephone" value={userData.telephone} onChange={(e) => changeValue(e, 'telephone', setUserData)} />
+        <input type="text" name="telephone" id="telephone" value={userData.telephone}
+            onChange={(e) => changeValue(e, 'telephone', setUserData)} />
         {userData.telephone === '' && isSubmitted ? <p className="p-err">Telephone should not be empty!</p> : ''}
         {!telephoneRegex.test(userData.telephone) && isSubmitted ? <p className="p-alert">Telephone should be valid Bulgarian number!</p> : ''}
         <button className="btn gray">Edit</button>
+        <button className="btn burgir-color" style={{ 'margin': '15px 0' }}
+            onClick={(e) => { e.preventDefault(); navigate(-1); setUserState(false)}}>Go back</button>
     </form >
     </>
     );
