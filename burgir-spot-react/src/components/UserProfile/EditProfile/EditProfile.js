@@ -24,7 +24,7 @@ const EditProfile = () => {
         const oldTelephone = user.telephone;
         const oldUsername = user.username;
         const oldEmail = user.email;
-        //fix this shit bro...
+
         const oldData = {
             oldTelephone,
             oldUsername,
@@ -32,7 +32,6 @@ const EditProfile = () => {
         }
 
         let result = {...userData, ...oldData};
-        console.log(result);
 
         editHandled(result)
             .then(res => {
