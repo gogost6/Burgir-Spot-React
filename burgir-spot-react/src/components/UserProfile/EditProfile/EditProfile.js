@@ -24,18 +24,20 @@ const EditProfile = () => {
         const oldTelephone = user.telephone;
         const oldUsername = user.username;
         const oldEmail = user.email;
-
+        //fix this shit bro...
         const oldData = {
             oldTelephone,
             oldUsername,
             oldEmail
         }
 
-        let result = Object.assign(userData, oldData);
+        let result = {...userData, ...oldData};
+        console.log(result);
 
         editHandled(result)
             .then(res => {
                 dispatch(userAuthentication(userData));
+                navigate('/user');
             })
             .catch(err => setIsSubmitted(true));
     }
