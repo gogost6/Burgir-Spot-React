@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -14,39 +14,41 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import EditProfile from "./components/UserProfile/EditProfile/EditProfile";
 import EditPassword from "./components/UserProfile/EditPassword/EditPassword";
 import NotFound from "./components/NotFound/NotFound";
+import Demo from "./components/Demo/Demo";
+
+import { userAuthentication } from "./features/user/userSlice";
+import { useDispatch } from "react-redux";
 
 import { getUser } from "./services/authService";
-
-import AuthContext from './context/AuthContext';
 
 import LoggedUserGuard from "./guards/LoggedUserGuard";
 import GuestGuard from './guards/GuestGuard';
 
 function App() {
-    let navigate = useNavigate();
-    const { state } = useLocation();
-    let [userState, setUserState] = useState(false);
+    // let navigate = useNavigate();
+    // const { state } = useLocation();
+    const dispatch = useDispatch();
+    // let [userState, setUserState] = useState(false);
 
-    let [user, setUser] = useState({
-        _id: "",
-        email: "",
-        username: "",
-        createdBurgirs: [],
-        favouriteBurgirs: [],
-        likedBurgirs: [],
-        telephone: ""
-    });
+    // let [user, setUser] = useState({
+    //     _id: "",
+    //     email: "",
+    //     username: "",
+    //     createdBurgirs: [],
+    //     favouriteBurgirs: [],
+    //     likedBurgirs: [],
+    //     telephone: ""
+    // });
 
-    let onLogin = (userData) => {
-        setUser(userData);
-        navigate(state?.path || '/');
-    };
+    // let onLogin = (userData) => {
+    //     setUser(userData);
+    //     navigate(state?.path || '/');
+    // };
 
-    let value = { onLogin, user, setUser, userState, setUserState };
     useEffect(() => {
         getUser()
             .then(response => {
-                setUser(response);
+                dispatch(userAuthentication(response));
             })
             .catch((err) => {
                 console.log(err);
@@ -54,29 +56,28 @@ function App() {
     }, [])
 
     return (
-        <AuthContext.Provider value={value}>
-            <>
-                <Header />
-                <div className="router">
-                    <Routes>
-                        <Route path="/" exact element={<Home />} />
-                        <Route path="/menu" element={<Menu />} />
-                        <Route path="/login" element={<GuestGuard><Login /></GuestGuard>} />
-                        <Route path="/register" element={<GuestGuard><Register /></GuestGuard>} />
-                        <Route path="/details/:id" element={<Details />} />
-                        <Route element={<LoggedUserGuard />}>
-                            <Route path="/create" element={<Create />} />
-                            <Route path="/edit/:id" element={<Edit />} />
-                            <Route path="/user" element={<UserProfile />}>
-                                <Route path="edit-profile" element={<EditProfile />} />
-                                <Route path="edit-password" element={<EditPassword />} />
-                            </Route>
+        <React.StrictMode>
+            <Header />
+            <div className="router">
+                <Routes>
+                    <Route path="/" exact element={<Home />} />
+                    <Route path="/demo" element={<Demo />} />
+                    <Route path="/menu" element={<Menu />} />
+                    <Route path="/login" element={<GuestGuard><Login /></GuestGuard>} />
+                    <Route path="/register" element={<GuestGuard><Register /></GuestGuard>} />
+                    <Route path="/details/:id" element={<Details />} />
+                    <Route element={<LoggedUserGuard />}>
+                        <Route path="/create" element={<Create />} />
+                        <Route path="/edit/:id" element={<Edit />} />
+                        <Route path="/user" element={<UserProfile />}>
+                            <Route path="edit-profile" element={<EditProfile />} />
+                            <Route path="edit-password" element={<EditPassword />} />
                         </Route>
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </div>
-            </>
-        </AuthContext.Provider>
+                    </Route>
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </div>
+        </React.StrictMode>
     );
 }
 

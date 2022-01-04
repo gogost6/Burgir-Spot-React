@@ -1,13 +1,16 @@
 import "./EditProfile.css";
-import AuthContext from "../../../context/AuthContext";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { changeValue } from '../../../utils/functions';
 import { editHandled } from '../../../services/authService';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userAuthentication } from '../../../features/user/userSlice';
 
 const EditProfile = () => {
-    let { user, setUser, setUserState } = useContext(AuthContext);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    let user = useSelector((state) => state.user.value);
 
     let [userData, setUserData] = useState(user);
     let [isSubmitted, setIsSubmitted] = useState(false);
@@ -17,14 +20,23 @@ const EditProfile = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log(user);
+        const oldTelephone = user.telephone;
+        const oldUsername = user.username;
+        const oldEmail = user.email;
 
-        const result = Object.assign(userData,
-            {
-                oldTelephone: user.telephone,
-                oldUsername: user.username,
-                oldEmail: user.email
-            });
-        editHandled(result).then(res => { setUser(userData); setUserState(false) })
+        const oldData = {
+            oldTelephone,
+            oldUsername,
+            oldEmail
+        }
+
+        let result = Object.assign(userData, oldData);
+
+        editHandled(result)
+            .then(res => {
+                dispatch(userAuthentication(userData));
+            })
             .catch(err => setIsSubmitted(true));
     }
 
@@ -46,7 +58,10 @@ const EditProfile = () => {
         {!telephoneRegex.test(userData.telephone) && isSubmitted ? <p className="p-alert">Telephone should be valid Bulgarian number!</p> : ''}
         <button className="btn gray">Edit</button>
         <button className="btn burgir-color" style={{ 'margin': '15px 0' }}
-            onClick={(e) => { e.preventDefault(); navigate(-1); setUserState(false)}}>Go back</button>
+            onClick={(e) => {
+                e.preventDefault();
+                navigate('/user');
+            }}>Go back</button>
     </form >
     </>
     );

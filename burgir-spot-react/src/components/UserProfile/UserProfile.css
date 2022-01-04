@@ -1,15 +1,17 @@
 .user-container {
     background: rgba(0, 0, 0, 0.747);
+    display: flex;
     color: white;
     border-radius: 20px;
-    width: 40%;
+    width: 94%;
     max-height: 180vh;
-    margin: 0 auto;
+    margin: 5px auto;
 }
 
-.w {
+.align-user-profile {
     text-align: center;
     padding-top: 25px;
+    margin: 0 auto;
 }
 
 .profile-img {

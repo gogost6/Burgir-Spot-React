@@ -1,27 +1,33 @@
 import "./EditPassword.css";
-import UserContext from '../../../context/UserContext';
-import AuthContext from "../../../context/AuthContext";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { editPasswordHandled } from '../../../services/authService'
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userAuthentication } from "../../../features/user/userSlice";
 
 const EditPassword = () => {
     const navigate = useNavigate();
-    let { user, setUser, setUserState } = useContext(AuthContext);
+    const dispatch = useDispatch();
 
-    let [userData, setUserData] = useState(user);
+    const user = useSelector(state => state.user.value);
+    //let { user, setUser, setUserState } = useContext(AuthContext);
+
     let [oldPassword, setOldPassword] = useState('');
     let [newPassword, setNewPassword] = useState('');
     let [isSubmitted, setIsSubmitted] = useState(false);
-    let [oldPasswordErr, setOldPasswordErr] = useState(false);
+    // let [oldPasswordErr, setOldPasswordErr] = useState(false);
 
     const onSubmit = (e) => {
         e.preventDefault();
         setIsSubmitted(true);
         const data = { ...user, oldPassword, newPassword };
         editPasswordHandled(data)
-            .then(res => { setUser(userData); setUserState(false) })
+            .then(res => dispatch(userAuthentication(res)))
             .catch(err => console.log(err));
+    }
+
+    const goBackBtn = () => {
+        navigate('/user');
     }
 
     const editForm = (<><form method="POST" className="edit-form" onSubmit={onSubmit} >
@@ -34,7 +40,7 @@ const EditPassword = () => {
         {oldPassword !== newPassword && isSubmitted ? <p className="p-err">Passwords don't match!</p> : ''}
         <button className="btn gray">Edit</button>
         <button className="btn burgir-color" style={{ 'margin': '15px 0' }}
-            onClick={(e) => { e.preventDefault(); navigate(-1); setUserState(false)}}>Go back</button>
+            onClick={goBackBtn}>Go back</button>
     </form >
     </>
     );

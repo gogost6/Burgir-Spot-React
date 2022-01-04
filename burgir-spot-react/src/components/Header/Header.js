@@ -1,18 +1,18 @@
-import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import AuthContext from "../../context/AuthContext";
-import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { logoutHandled } from "../../services/authService";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../features/user/userSlice";
 
 const Header = () => {
-    let { user, setUser, setUserState } = useContext(AuthContext);
     let navigate = useNavigate();
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.value)
 
-    let logout = (e) => {
-        e.preventDefault();
-        setUser([]);
+    let logoutBtn = () => {
+        dispatch(logout())
         localStorage.removeItem('logged');
         logoutHandled().then(res => navigate('/')).catch(err => console.log(err));
     }
@@ -43,12 +43,12 @@ const Header = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link onClick={() => setUserState(false)} className="nav-link" to="/user">
+                        <Link onClick={() => console.log('fix setUserState(false)')} className="nav-link" to="/user">
                             User
                         </Link>
                     </li>
                     <li>
-                        <Link className="nav-link" to="/" onClick={logout}>
+                        <Link className="nav-link" to="/" onClick={logoutBtn}>
                             Logout
                         </Link>
                     </li>

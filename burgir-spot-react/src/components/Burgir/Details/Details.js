@@ -3,12 +3,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { burgirDetails, deleteBurgir } from '../../../services/foodService';
 import { fullUserDataByUsername } from '../../../services/authService'
-import AuthContext from "../../../context/AuthContext";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 
 const Details = () => {
     const navigate = useNavigate();
-    let { user } = useContext(AuthContext);
+    const user = useSelector((state) => state.user.value);
 
     const params = useParams();
     const { id } = params;

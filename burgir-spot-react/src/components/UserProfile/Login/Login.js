@@ -1,13 +1,14 @@
 import "./Login.css";
-import AuthContext from "../../../context/AuthContext";
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from '../../../services/authService';
-import * as utils from '../../../utils/styles'
-
+import * as utils from '../../../utils/styles';
+import { useDispatch } from "react-redux";
+import { userAuthentication } from "../../../features/user/userSlice";
 
 const Login = () => {
-    let { onLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     let [error, setError] = useState('');
     let [isSubmitted, setIsSubmitted] = useState(false);
     let [username, setUsername] = useState('');
@@ -26,7 +27,8 @@ const Login = () => {
         loginUser(data)
             .then(res => {
                 localStorage.setItem('logged', true);
-                onLogin(res);
+                dispatch(userAuthentication(res));
+                navigate('/');
             })
             .catch(err => {
                 setError(err);
@@ -64,38 +66,38 @@ const Login = () => {
                             ...(username === '' && isSubmitted ? utils.inputBorderStyle.error : null),
                         }}
                     />
-                        {username === '' && isSubmitted ? utils.inputErr('username') : ''}
-                        <label htmlFor="password" style={{ 'marginTop': '15px' }}>Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            placeholder="****"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            onMouseEnter={() => {
-                                setPasswordHover(true);
-                            }}
-                            onMouseLeave={() => {
-                                setPasswordHover(false);
-                            }}
-                            style={{
-                                ...utils.inputBorderStyle.normal,
-                                ...(passwordHover ? utils.inputBorderStyle.hover : null),
-                                ...(password === '' && isSubmitted ? utils.inputBorderStyle.error : null)
-                            }}
-                        />
-                        {password === '' && isSubmitted ? utils.inputErr('password') : ''}
-                        <section className="btn-wraper">
-                            <button type="submit" className="btn burgir-color">
-                                Login
-                            </button>
-                            <Link to="/register" className="btn gray">
-                                Create account
-                            </Link>
-                        </section>
-                        {error ? <p className={error !== '' 
-                        ? 'p-err hidethis': ''} style={{'opacity': 1}}>{error}</p> : ''}
+                    {username === '' && isSubmitted ? utils.inputErr('username') : ''}
+                    <label htmlFor="password" style={{ 'marginTop': '15px' }}>Password</label>
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="****"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        onMouseEnter={() => {
+                            setPasswordHover(true);
+                        }}
+                        onMouseLeave={() => {
+                            setPasswordHover(false);
+                        }}
+                        style={{
+                            ...utils.inputBorderStyle.normal,
+                            ...(passwordHover ? utils.inputBorderStyle.hover : null),
+                            ...(password === '' && isSubmitted ? utils.inputBorderStyle.error : null)
+                        }}
+                    />
+                    {password === '' && isSubmitted ? utils.inputErr('password') : ''}
+                    <section className="btn-wraper">
+                        <button type="submit" className="btn burgir-color">
+                            Login
+                        </button>
+                        <Link to="/register" className="btn gray">
+                            Create account
+                        </Link>
+                    </section>
+                    {error ? <p className={error !== ''
+                        ? 'p-err hidethis' : ''} style={{ 'opacity': 1 }}>{error}</p> : ''}
                 </form>
             </section>
         </div>

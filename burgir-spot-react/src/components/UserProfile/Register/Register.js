@@ -1,13 +1,16 @@
 import "./Register.css";
-import { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from '../../../services/authService';
-import AuthContext from "../../../context/AuthContext";
 import * as utils from '../../../utils/styles';
 import { usedUsername, usedEmail } from '../../../services/authService';
+import { useDispatch } from "react-redux";
+import { userAuthentication } from "../../../features/user/userSlice";
 
 const Register = () => {
-    let { onLogin } = useContext(AuthContext);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     let [isSubmitted, setIsSubmitted] = useState(false);
     let [username, setUsername] = useState('');
     let [usedUsernameState, setUsedUsernameState] = useState(false);
@@ -47,7 +50,8 @@ const Register = () => {
         registerUser(data)
             .then(res => {
                 localStorage.setItem('logged', true);
-                onLogin(res);
+                dispatch(userAuthentication(res));
+                navigate('/');
             })
             .catch(err => {
                 console.log(err);
