@@ -18,11 +18,15 @@
 .image-wrap {
     width: 80%;
     align-self: center;
+    margin-bottom: 20px;
 }
 
 .image-wrap img {
-    width: 100%;
-    height: auto;
+    max-width: 267px;
+    max-height: 296px;
+    border-radius: 15px;
+    display: block;
+    margin: 0 auto;
 }
 
 .cnt {

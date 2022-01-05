@@ -30,8 +30,8 @@ const Details = () => {
         if (userData._id) {
             if (userData.createdBurgirs.includes(id)) {
                 return (<>
-                    <Link className="btn gray" to={`/edit/${id}`}>Edit</Link>
-                    <Link className="btn red" to={`/menu`} onClick={onDelete}>Delete</Link>
+                    <Link className="btn gray" style={{ 'width': '70%' }} to={`/edit/${id}`}>Edit</Link>
+                    <Link className="btn red" style={{ 'width': '70%' }} to={`/menu`} onClick={onDelete}>Delete</Link>
                 </>);
             } else {
                 return '';
@@ -62,12 +62,14 @@ const Details = () => {
                     </div>
                     <div className="details-wrapper">
                         <h1>{burgir.name}</h1>
-                        <p><strong>Meat:</strong> {burgir.meat}</p>
-                        {burgir.vegetables ? (<p><strong>Vegetables:</strong> {burgir.vegetables.join(', ')}</p>) : ''}
-                        {burgir.spices ? (<p><strong>Spices:</strong> {burgir.spices.join(', ')}</p>) : ''}
-                        {burgir.sauces ? (<p><strong>Sauces:</strong> {burgir.sauces.join(', ')}</p>) : ''}
-                        {burgir.bonus ? (<p><strong>Bonus:</strong> {burgir.bonus.join(', ')}</p>) : ''}
-                        <label htmlFor="quantity"><strong>Quantity:</strong></label>
+                        <p>This custon burger is made with {burgir.meat} meat from our farm!
+                            The vegetables included are {burgir.vegetables.join(', ')} and we use only the fresh. 
+                            {burgir.sauces ? `Topped with ${burgir.sauces.join(', ')}. ` : ''}
+                            {burgir.spices ? `Little ${burgir.spices.join(', ')}. ` : ''}
+                            {burgir.bonus ? `And the best part ${burgir.bonus.join(', ')}.` : ''}
+                        </p>
+                        {burgir.description ? <p style={{'marginTop': '10px'}}>With love: {burgir.description}</p> : ''}
+                        <label htmlFor="quantity" style={{'marginTop': '10px'}}><strong>Quantity:</strong></label>
                         <input type="number" id="quantity" name="quantity" min={1} onChange={quantityHandler} value={quantity} />
                         <h3>Total: {burgir.price * quantity}$</h3>
                     </div>

@@ -43,4 +43,5 @@ export const bonusOptions = [
     { value: 'cheddar', label: 'Cheddar' },
     { value: 'egg', label: 'Egg' },
     { value: 'truffleSauce ', label: 'Truffle Sauce' },
+    { value: 'bacon ', label: 'Bacon' },
 ];

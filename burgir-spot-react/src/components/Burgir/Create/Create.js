@@ -38,7 +38,8 @@ const Create = () => {
         e.preventDefault();
         setError('');
         setIsSubmitted(true);
-        createBurgir(state).then(res => navigate('/menu')).catch(err => setError('Please fill all fields!'));
+        createBurgir(state).then(res => console.log('added')).catch(err => setError('Please fill all fields!'));
+        navigate('/menu');
     }
 
     return (<div className="container wrap">

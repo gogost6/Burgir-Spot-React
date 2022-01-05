@@ -39,7 +39,7 @@ function App() {
             .catch((err) => {
                 console.log(err);
             })
-    }, [user])
+    }, [user._id])
 
     return (
         <React.StrictMode>
