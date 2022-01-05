@@ -49,7 +49,6 @@ const Register = () => {
 
         registerUser(data)
             .then(res => {
-                localStorage.setItem('logged', true);
                 dispatch(userAuthentication(res));
                 navigate('/');
             })

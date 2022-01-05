@@ -24,25 +24,7 @@ import LoggedUserGuard from "./guards/LoggedUserGuard";
 import GuestGuard from './guards/GuestGuard';
 
 function App() {
-    // let navigate = useNavigate();
-    // const { state } = useLocation();
     const dispatch = useDispatch();
-    // let [userState, setUserState] = useState(false);
-
-    // let [user, setUser] = useState({
-    //     _id: "",
-    //     email: "",
-    //     username: "",
-    //     createdBurgirs: [],
-    //     favouriteBurgirs: [],
-    //     likedBurgirs: [],
-    //     telephone: ""
-    // });
-
-    // let onLogin = (userData) => {
-    //     setUser(userData);
-    //     navigate(state?.path || '/');
-    // };
 
     useEffect(() => {
         getUser()

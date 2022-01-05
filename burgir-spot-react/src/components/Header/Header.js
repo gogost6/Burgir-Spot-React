@@ -13,7 +13,6 @@ const Header = () => {
 
     let logoutBtn = () => {
         dispatch(logout())
-        localStorage.removeItem('logged');
         logoutHandled().then(res => navigate('/')).catch(err => console.log(err));
     }
 
@@ -43,7 +42,7 @@ const Header = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link onClick={() => console.log('fix setUserState(false)')} className="nav-link" to="/user">
+                        <Link className="nav-link" to="/user">
                             User
                         </Link>
                     </li>

@@ -26,7 +26,6 @@ const Login = () => {
 
         loginUser(data)
             .then(res => {
-                localStorage.setItem('logged', true);
                 dispatch(userAuthentication(res));
                 navigate('/');
             })
