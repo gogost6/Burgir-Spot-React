@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
-
+import { useSelector } from 'react-redux';
 const GuestGuard = ({ children }) => {
-    const logged = localStorage.getItem('logged');
+    const user = useSelector((state) => state.user.value)
 
-    if (logged !== null) {
+    if (user._id) {
         return <Navigate to='/' replace />;
     } else {
         return children;
