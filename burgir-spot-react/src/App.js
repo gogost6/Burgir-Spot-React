@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -16,7 +16,7 @@ import EditPassword from "./components/UserProfile/EditPassword/EditPassword";
 import NotFound from "./components/NotFound/NotFound";
 
 import { userAuthentication } from "./features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getUser } from "./services/authService";
 
@@ -25,16 +25,21 @@ import GuestGuard from './guards/GuestGuard';
 
 function App() {
     const dispatch = useDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
+    
+    const user = useSelector(state => state.user.value);
 
-    useEffect(() => {
+    useMemo(() => {
         getUser()
             .then(response => {
                 dispatch(userAuthentication(response));
+                navigate(location.state.path);
             })
             .catch((err) => {
                 console.log(err);
             })
-    }, [])
+    }, [user])
 
     return (
         <React.StrictMode>
@@ -43,8 +48,10 @@ function App() {
                 <Routes>
                     <Route path="/" exact element={<Home />} />
                     <Route path="/menu" element={<Menu />} />
-                    <Route path="/login" element={<GuestGuard><Login /></GuestGuard>} />
-                    <Route path="/register" element={<GuestGuard><Register /></GuestGuard>} />
+                    <Route element={<GuestGuard />}>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                    </Route>
                     <Route path="/details/:id" element={<Details />} />
                     <Route element={<LoggedUserGuard />}>
                         <Route path="/create" element={<Create />} />

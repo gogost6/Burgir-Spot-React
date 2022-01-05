@@ -8,7 +8,8 @@ let initialState = {
         createdBurgirs: [],
         favouriteBurgirs: [],
         likedBurgirs: [],
-        telephone: ""
+        telephone: "",
+        isLogged: false
     }
 };
 
@@ -18,6 +19,7 @@ const userSlice = createSlice({
     reducers: {
         userAuthentication: (state, action) => {
             state.value = action.payload;
+            state.value.isLogged = true;
         },
         logout: (state, action) => {
             state.value = initialState;

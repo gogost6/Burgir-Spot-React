@@ -5,7 +5,7 @@ const LoggedUserGuard = () => {
     const user = useSelector((state) => state.user.value)
     const location = useLocation();
     
-    if (user._id) {
+    if (user.isLogged) {
         return <Outlet/>
     } else {
         return <Navigate to='/login' replace state={{ path: location.pathname }} />;
