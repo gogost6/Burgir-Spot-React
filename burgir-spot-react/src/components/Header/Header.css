@@ -20,9 +20,14 @@
   border-radius: 15px;
 }
 
-.header-container ul li .nav-link:active {
+.active {
     background: rgb(88,88,88);
-    background: linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgba(136,172,180,1) 100%); 
+    background: linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgb(45, 189, 221) 100%); 
+}
+
+.header-container ul li .nav-link:hover {
+  background: linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgba(136,172,180,1) 100%); 
+  color: white;
 }
 
 .header-container ul li.grow {
