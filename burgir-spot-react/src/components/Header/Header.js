@@ -11,7 +11,7 @@ const Header = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.value);
-    console.log(location.pathname);
+    
     const active = (name) => location.pathname == name
         ? { background: 'linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgb(45, 189, 221) 100%)' }
         : {};
