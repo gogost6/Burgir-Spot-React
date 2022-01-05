@@ -22,7 +22,10 @@ const EditPassword = () => {
         setOldPasswordErr(false);
         const data = { ...user, oldPassword, newPassword };
         editPasswordHandled(data)
-            .then(res => dispatch(userAuthentication(res)))
+            .then(res => {
+                dispatch(userAuthentication(res));
+                navigate('/user');
+            })
             .catch(err => {
                 if(err.msg.includes('Old password is incorrect!')) {
                     setOldPasswordErr(true);
@@ -43,7 +46,6 @@ const EditPassword = () => {
 
         <label htmlFor="newPassword">New Password</label>
         <input type="password" name="newPassword" id="newPassword" onChange={(e) => setNewPassword(e.target.value)} />
-        {oldPassword !== newPassword && isSubmitted ? <p className="p-err">Passwords don't match!</p> : ''}
         <button className="btn gray">Edit</button>
         <button className="btn burgir-color" style={{ 'margin': '15px 0' }}
             onClick={goBackBtn}>Go back</button>
