@@ -5,8 +5,8 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Menu from "./components/Menu/Menu";
-import Login from "./components/UserProfile/Login/Login";
-import Register from "./components/UserProfile/Register/Register";
+import Login from "./components/userAuth/Login/Login";
+import Register from "./components/userAuth/Register/Register";
 import Create from "./components/Burgir/Create/Create";
 import Details from "./components/Burgir/Details/Details";
 import Edit from "./components/Burgir/Edit/Edit";
@@ -14,7 +14,6 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import EditProfile from "./components/UserProfile/EditProfile/EditProfile";
 import EditPassword from "./components/UserProfile/EditPassword/EditPassword";
 import NotFound from "./components/NotFound/NotFound";
-import Demo from "./components/Demo/Demo";
 
 import { userAuthentication } from "./features/user/userSlice";
 import { useDispatch } from "react-redux";
@@ -61,7 +60,6 @@ function App() {
             <div className="router">
                 <Routes>
                     <Route path="/" exact element={<Home />} />
-                    <Route path="/demo" element={<Demo />} />
                     <Route path="/menu" element={<Menu />} />
                     <Route path="/login" element={<GuestGuard><Login /></GuestGuard>} />
                     <Route path="/register" element={<GuestGuard><Register /></GuestGuard>} />
