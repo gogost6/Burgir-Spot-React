@@ -43,7 +43,12 @@ router.post(
         .withMessage("The username should be atleast 5 chars!"),
     body("telephone")
         .trim()
-        .custom((value) => {
+        .custom(async (value) => {
+            const isNotAvaible = await userService.getUserByTelephone(value);
+            if(isNotAvaible !== null) {
+                throw ('Telephone is used by other user!');
+            }
+
             const telephoneRegex = new RegExp(/\+359[0-9]{9}/);
             if (!telephoneRegex.test(value)) {
                 throw ('Telephone is invalid!');
@@ -74,11 +79,6 @@ router.post(
 
             const existingByEmail = await userService.getUserByEmail(email);
             const existingByUsername = await userService.getUserByUsername(username);
-            // const existingByTelephone = await userService.getUserByTelephone(
-            //     telephone
-            // );
-
-            //FIX THIS VALIDATOR
 
             if (existingByEmail) {
                 throw "Email is registered already";
@@ -87,10 +87,6 @@ router.post(
             if (existingByUsername) {
                 throw "Username is taken!";
             }
-
-            // if (existingByTelephone) {
-            //     throw "Telephone is being used by other user!";
-            // }
 
             const hashedPassword = await bcrypt.hash(password, 10);
             const user = await userService.createUser(
@@ -178,7 +174,7 @@ router.post(
         .withMessage("The email input should be valid!"),
     body("telephone")
         .trim()
-        .custom((value) => {
+        .custom(async (value) => {
             const telephoneRegex = new RegExp(/\+359[0-9]{9}/);
             if (!telephoneRegex.test(value)) {
                 throw ('Telephone is invalid!');
@@ -197,6 +193,7 @@ router.post(
                 oldTelephone,
                 oldEmail
             } = req.body;
+            let errorsArr = [];
 
             const errors = Object.values(validationResult(req).mapped());
 
@@ -205,21 +202,23 @@ router.post(
             }
 
             const existingByUsername = await userService.getUserByUsername(username);
-            const existingByTelephone = await userService.getUserByTelephone(
-                telephone
-            );
             const existingByEmail = await userService.getUserByEmail(email);
 
-            if (existingByUsername && username != oldUsername) {
-                throw "Username is taken!";
+            if (existingByUsername !== null && username != oldUsername) {
+                errorsArr.push("Username is taken!");
             }
 
-            if (existingByTelephone && oldTelephone != telephone) {
-                throw "Telephone is being used by other user!";
+            if (existingByEmail !== null && oldEmail != email) {
+                errorsArr.push("Email is taken!");
             }
 
-            if (existingByEmail && oldEmail != email) {
-                throw "Email is taken!";
+            const isNotAvaible = await userService.getUserByTelephone(telephone);
+            if(isNotAvaible !== null && oldTelephone != telephone) {
+                errorsArr.push('Telephone is used by other user!');
+            }
+            
+            if(errorsArr.length > 0) {
+                throw errorsArr;
             }
 
             const userUpdateModel = { username, telephone, email };

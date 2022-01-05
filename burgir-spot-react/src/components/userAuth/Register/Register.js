@@ -24,6 +24,7 @@ const Register = () => {
     let [telephoneHover, setTelephoneHover] = useState(false);
     let [passwordHover, setPasswordHover] = useState(false);
     let [repeatPasswordHover, setRepeatPasswordHover] = useState(false);
+    let [usedTelephone, setUsedTelephone] = useState(false);
 
     const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     const telephoneRegex = new RegExp(/\+359[0-9]{9}/);
@@ -31,6 +32,7 @@ const Register = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         setIsSubmitted(true);
+        setUsedTelephone(false);
 
         let formData = new FormData(e.currentTarget);
         let data = Object.fromEntries(formData);
@@ -53,6 +55,9 @@ const Register = () => {
                 navigate('/');
             })
             .catch(err => {
+                if(err.includes('Telephone is used by other user!')) {
+                    setUsedTelephone(true);
+                }
                 console.log(err);
             })
     };
@@ -133,6 +138,7 @@ const Register = () => {
                     />
                     {telephone === '' && isSubmitted ? utils.inputErr('telephone') : ''}
                     {!telephoneRegex.test(telephone) && isSubmitted ? utils.inputValidErr('Telephone') : ''}
+                    {usedTelephone && isSubmitted ? utils.usedErr('Telephone') : ''}
                     <label htmlFor="password" style={{ 'marginTop': '5px' }}>Password</label>
                     <input
                         type="password"
