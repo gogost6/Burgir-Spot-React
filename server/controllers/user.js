@@ -8,16 +8,19 @@ const { isAuth, isGuest } = require("../middlewares/guards");
 const userService = require("../services/user");
 
 router.get('/', async (req, res) => {
-
-    if (req.cookies[config.COOKIE_NAME]) {
-        try {
-            const user = jwt.verify(req.cookies[config.COOKIE_NAME], config.TOKEN_SECRET);
-            return res.json(user);
-        } catch (err) {
-            return res.clearCookie(req.cookies[config.COOKIE_NAME]);
+    try {
+        if (req.cookies[config.COOKIE_NAME]) {
+            try {
+                const user = jwt.verify(req.cookies[config.COOKIE_NAME], config.TOKEN_SECRET);
+                return res.json(user);
+            } catch (err) {
+                return res.clearCookie(req.cookies[config.COOKIE_NAME]);
+            }
         }
+        throw 'No user logged!';
+    } catch(err) {
+        res.status(401).json(err);
     }
-    return res.json('No user logged!');
 });
 
 router.post('/full-user-data-by-username', async (req, res) => {

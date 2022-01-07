@@ -3,11 +3,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { burgirDetails, deleteBurgir } from '../../../services/foodService';
 import { fullUserDataByUsername } from '../../../services/authService'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToBucket } from "../../../features/order/orderSlice";
 
 const Details = () => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.user.value);
+    // const order = useSelector((state) => state.value.order);
+    const dispatch = useDispatch();
 
     const params = useParams();
     const { id } = params;
@@ -44,14 +47,16 @@ const Details = () => {
         setQuantity(Number(newQuantity));
     }
 
-    // const buyBurgir = (e) => {
-    //     e.preventDefault();
-    //     addToBucket({
-    //         quantity,
-    //         price: burgir.price,
-    //         name: burgir.name
-    //     });
-    // }
+    const buyBurgir = (e) => {
+        e.preventDefault();
+        dispatch(addToBucket({
+            quantity,
+            price: burgir.price,
+            name: burgir.name,
+            imgUrl: burgir.imgUrl,
+            _id: burgir._id
+        }));
+    }
 
     return (
         <div className="container">
@@ -74,7 +79,7 @@ const Details = () => {
                         <h3>Total: {burgir.price * quantity}$</h3>
                     </div>
                     <div className="btn-wrapper">
-                        {/* <button className="btn burgir-color" onClick={buyBurgir}>Buy</button> */}
+                        <button className="btn burgir-color" style={{ 'width': '70%' }} onClick={buyBurgir}>Buy</button>
                         {userButtons()}
                     </div>
                 </div>)

@@ -11,7 +11,8 @@ const Header = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.value);
-    
+    const order = useSelector((state) => state.order.value);
+
     const active = (name) => location.pathname == name
         ? { background: 'linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgb(45, 189, 221) 100%)' }
         : {};
@@ -30,12 +31,12 @@ const Header = () => {
                             Home
                         </Link>
                     </li>
-                    {/* <li>
+                    <li>
                         <Link className="nav-link" to="/order">
                             <FontAwesomeIcon icon={faShoppingCart} />
-                            1
+                            {order.quantity}
                         </Link>
-                    </li> */}
+                    </li>
                     <li>
                         <Link className="nav-link" style={active('/menu')} to="/menu">
                             Menu
@@ -61,6 +62,12 @@ const Header = () => {
                 <li className="grow">
                     <Link className="nav-link" style={active('/')} to="/">
                         Home
+                    </Link>
+                </li>
+                <li>
+                    <Link className="nav-link" to="/order">
+                        <FontAwesomeIcon icon={faShoppingCart} />
+                        {order.quantity}
                     </Link>
                 </li>
                 <li>

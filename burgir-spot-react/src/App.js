@@ -14,6 +14,7 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import EditProfile from "./components/UserProfile/EditProfile/EditProfile";
 import EditPassword from "./components/UserProfile/EditPassword/EditPassword";
 import NotFound from "./components/NotFound/NotFound";
+import Order from "./components/Order/Order";
 
 import { userAuthentication } from "./features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,8 +34,8 @@ function App() {
     useMemo(() => {
         getUser()
             .then(response => {
-                dispatch(userAuthentication(response));
-                navigate(location.state.path);
+                dispatch(userAuthentication(response)); // FIX IN DB 401 not ok
+                navigate(location.state.path); //FIX THIS it said null
             })
             .catch((err) => {
                 console.log(err);
@@ -48,6 +49,7 @@ function App() {
                 <Routes>
                     <Route path="/" exact element={<Home />} />
                     <Route path="/menu" element={<Menu />} />
+                    <Route path="/order" element={<Order />} />
                     <Route element={<GuestGuard />}>
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
