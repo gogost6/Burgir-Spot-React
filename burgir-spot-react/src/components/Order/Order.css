@@ -38,13 +38,6 @@
     justify-content: space-between;
 }
 
-.right-side button {
-    font-size: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
 .order-head {
     display: flex;
     margin-left: 20px;
@@ -87,4 +80,10 @@
     align-items: flex-end;
     flex-basis: 35%;
     padding: 35px;
+}
+
+.trash-svg {
+    cursor: pointer;
+    margin-right: 20px;
+    font-size: 20px;
 }

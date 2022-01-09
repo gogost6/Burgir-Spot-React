@@ -35,7 +35,7 @@ function App() {
         getUser()
             .then(response => {
                 dispatch(userAuthentication(response)); // FIX IN DB 401 not ok
-                navigate(location.state.path); //FIX THIS it said null
+                navigate(location.state.path);
             })
             .catch((err) => {
                 console.log(err);

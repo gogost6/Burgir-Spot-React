@@ -1,16 +1,24 @@
+import "./Order.css";
 import { useDispatch, useSelector } from "react-redux";
-import { changeBurgirQuantity, removeBurgir } from "../../features/order/orderSlice";
+import { changeBurgirQuantity, removeBurgir, checkBusketForItems } from "../../features/order/orderSlice";
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import "./Order.css";
-
+import { Link } from 'react-router-dom';
+import { useState } from "react";
 
 const Order = () => {
     const dispatch = useDispatch();
     const order = useSelector(state => state.order.value);
+    const [code, setCode] = useState('');
+    const [deliveryPrice, setDeliveryPrice] = useState(2.99);
+    const [codeErr, setCodeErr] = useState('');
 
-    const finalPrice = (order.totalPrice + 2.99).toFixed(2);
+    if (order.quantity == 0) {
+        dispatch(checkBusketForItems());
+    }
+
+    let finalPrice = (order.totalPrice + deliveryPrice).toFixed(2);
 
     const quantityOptions = [
         { value: '1', label: '1' },
@@ -26,13 +34,27 @@ const Order = () => {
     ];
 
     const quantityChange = (e, burgirName) => {
-        console.log(burgirName);
         dispatch(changeBurgirQuantity({ quantity: e.value, name: burgirName }))
     }
 
     const removeItem = (e, _id) => {
         e.preventDefault();
         dispatch(removeBurgir(_id))
+    }
+
+    const promoCodeHandler = (e, code) => {
+        e.preventDefault();
+        if (code === 'IWANTFREEDELIVERY') {
+            setDeliveryPrice(0);
+            setCode('');
+            setCodeErr('');
+        } else {
+            setCodeErr('No such code!');
+        }
+    }
+
+    const codeInputHandler = (e) => {
+        setCode(e.target.value);
     }
 
     return (
@@ -56,9 +78,8 @@ const Order = () => {
                                         onChange={(e) => quantityChange(e, x.name)} />
                                 </div>
                                 <div className="right-side">
-                                    <button onClick={(e) => removeItem(e, x._id)}>
-                                        <FontAwesomeIcon icon={faTrash} />
-                                    </button>
+                                    <FontAwesomeIcon className="trash-svg" icon={faTrash}
+                                        onClick={(e) => removeItem(e, x._id)} />
                                     <p>{x.singlePrice * x.quantity} BGN</p>
                                 </div>
                             </div>)}
@@ -66,26 +87,33 @@ const Order = () => {
                         </div>
                     </div>
                     <div className="order-details" style={{
-                       
+
                     }}>
                         <div className="left-right">
                             <p>PRICE</p>
                             <p>{finalPrice} BGN</p>
                         </div>
-                        <div className="left-right" style={{'borderBottom': '1px solid gray'}}>
+                        <div className="left-right" style={{ 'borderBottom': '1px solid gray' }}>
                             <p>DELIVERY</p>
-                            <p>2.99 BGN</p>
+                            <p>{deliveryPrice === 0 ? 'FREE' : '2.99 BGN'}</p>
                         </div>
                         <button className="order-btn">COMPLETE ORDER</button>
                         <div className="left-right">
-                            <div style={{'flexGrow': '1'}}>
-                                <p>YOUR PROMO CODE</p> 
-                                <input type="text" placeholder="FREEDONUT" style={{'width': '90%'}}/>
+                            <div style={{ 'flexGrow': '1' }}>
+                                <p>YOUR PROMO CODE</p>
+                                <input type="text" placeholder="FREEDONUT"
+                                    value={code} style={{ 'width': '90%' }}
+                                    onChange={codeInputHandler} />
                             </div>
-                            <button style={{'width': '27%'}}>ADD</button>
+                            <button onClick={(e) => promoCodeHandler(e, code)} style={{ 'width': '27%' }}>ADD</button>
                         </div>
+                        {codeErr === 'No such code!' ? <p style={{ 'color': 'red' }}>{codeErr}</p> : ''}
                         <p>Pay with cash to the delivery dude!</p>
-                    </div> </> : <p>Nothing in the bucket!</p>
+                    </div> </> :
+                <div style={{ 'margin': 'auto', 'marginTop': '13%' }}>
+                    <h1>Your order is empty!</h1>
+                    <h3>If you want to see our menu click <Link to="/menu">Here</Link></h3>
+                </div>
             }
         </div>
     )

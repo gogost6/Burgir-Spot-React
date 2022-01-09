@@ -12,6 +12,12 @@ export const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
+    checkBusketForItems: (state, action) => {
+      const busket = JSON.parse(localStorage.getItem('order'));
+      if (busket.quantity !== 0) {
+        state.value = busket;
+      }
+    },
     addToBucket: (state, action) => {
       let totalPrice = 0;
       let quantity = 0;
@@ -36,6 +42,7 @@ export const orderSlice = createSlice({
 
       state.value.totalPrice = totalPrice
       state.value.quantity = quantity;
+      localStorage.setItem('order', JSON.stringify(state.value));
     },
     changeBurgirQuantity: (state, action) => {
       let totalPrice = 0;
@@ -50,9 +57,14 @@ export const orderSlice = createSlice({
 
       state.value.totalPrice = totalPrice
       state.value.quantity = quantity;
+      localStorage.setItem('order', JSON.stringify(state.value));
+
     },
     clearBucket: (state) => {
+      const orderDetails = JSON.parse(localStorage.getItem('order'));
+      console.log(orderDetails);
       state.value = initialState;
+      localStorage.setItem('order', JSON.stringify(state.value));
     },
     removeBurgir: (state, action) => {
       let totalPrice = 0;
@@ -71,10 +83,11 @@ export const orderSlice = createSlice({
 
       state.value.totalPrice = totalPrice
       state.value.quantity = quantity;
+      localStorage.setItem('order', JSON.stringify(state.value));
     },
   },
 })
 
-export const { addToBucket, clearBucket, changeBurgirQuantity, removeBurgir } = orderSlice.actions;
+export const { addToBucket, clearBucket, changeBurgirQuantity, removeBurgir, checkBusketForItems } = orderSlice.actions;
 
 export default orderSlice.reducer;
