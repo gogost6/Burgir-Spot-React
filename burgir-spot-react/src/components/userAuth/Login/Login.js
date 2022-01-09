@@ -35,11 +35,11 @@ const Login = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container" style={{marginTop: '6%'}}>
             <section className="img-wraper">
                 <img src="images/Man_eating_hamburger.jpg" alt="man-e-ham" />
             </section>
-            <section className="content-wraper right">
+            <section className="content-wraper" style={{margin: "auto"}}>
                 <div>
                     <h1>Welcome back!</h1>
                     <p>Login to start your tasty Burgir adventure!</p>

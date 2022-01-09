@@ -1,4 +1,4 @@
-.order-details {
+.order-card {
     margin-left: 20px;
     margin-top: 30px;
     margin-bottom: 13px;
@@ -8,7 +8,7 @@
     border-bottom: 1px solid black;
 }
 
-.order-details img {
+.order-card img {
     width: 130px;
     height: 180px;
     margin-right: 15px;
@@ -54,7 +54,7 @@
 .order-head p {
     display: inline;
     margin-left: 23px;
-    background: gray;
+    background: #ffcc00;
     padding: 3px;
 }
 
@@ -67,4 +67,24 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+}
+
+.order-btn {
+    width: 100%;
+    height: 50px;
+    margin: 50px 0;
+    font-size: 17px;
+    color: white;
+    background: #ffcc00;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+}
+
+.order-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-basis: 35%;
+    padding: 35px;
 }

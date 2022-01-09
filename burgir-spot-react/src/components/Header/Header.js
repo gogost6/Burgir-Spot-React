@@ -14,7 +14,7 @@ const Header = () => {
     const order = useSelector((state) => state.order.value);
 
     const active = (name) => location.pathname == name
-        ? { background: 'linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgb(45, 189, 221) 100%)' }
+        ? { color: 'white', background: '#FFCC00', borderRadius: '13px' }
         : {};
 
     let logoutBtn = () => {
@@ -32,7 +32,7 @@ const Header = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link className="nav-link" to="/order">
+                        <Link className="nav-link" style={active('/order')} to="/order">
                             <FontAwesomeIcon icon={faShoppingCart} />
                             {order.quantity}
                         </Link>
@@ -65,7 +65,7 @@ const Header = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-link" to="/order">
+                    <Link className="nav-link" style={active('/order')} to="/order">
                         <FontAwesomeIcon icon={faShoppingCart} />
                         {order.quantity}
                     </Link>

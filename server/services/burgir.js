@@ -8,7 +8,7 @@ async function getAll() {
 }
 
 async function getRecent() {
-  const burgirs = Burgir.find({}).sort({ date: -1 }).limit(3).lean();
+  const burgirs = Burgir.find({}).sort({ date: -1 }).lean();
   return burgirs;
 }
 

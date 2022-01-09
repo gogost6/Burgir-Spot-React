@@ -45,7 +45,7 @@ const Order = () => {
                             <p>Qty: {order.quantity}</p>
                         </div>
                         <div className="order-wrap-and-price">
-                            {order.burgirs.map(x => <div className="order-details" key={x._id}>
+                            {order.burgirs.map(x => <div className="order-card" key={x._id}>
                                 <img src={x.imgUrl} alt="img" />
                                 <div className="text-wraper">
                                     <p style={{ 'fontWeight': 'bold' }}>{x.name}</p>
@@ -65,9 +65,8 @@ const Order = () => {
 
                         </div>
                     </div>
-                    <div style={{
-                        'display': 'flex', 'flexDirection': 'column',
-                        'alignItems': 'flex-end', 'flexBasis': '35%', 'padding': '35px'
+                    <div className="order-details" style={{
+                       
                     }}>
                         <div className="left-right">
                             <p>PRICE</p>
@@ -77,14 +76,7 @@ const Order = () => {
                             <p>DELIVERY</p>
                             <p>2.99 BGN</p>
                         </div>
-                        <button style={{'width': '100%', 
-                        'height': '50px', 
-                        'margin': '50px 0',
-                        'fontSize': '17px',
-                        'color': 'white',
-                        'background': 'gray',
-                        'cursor': 'pointer',
-                        'border': 'none'}}>COMPLETE ORDER</button>
+                        <button className="order-btn">COMPLETE ORDER</button>
                         <div className="left-right">
                             <div style={{'flexGrow': '1'}}>
                                 <p>YOUR PROMO CODE</p> 

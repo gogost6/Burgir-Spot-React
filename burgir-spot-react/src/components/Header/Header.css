@@ -1,5 +1,10 @@
 .header-container {
+  position: sticky;
+  top: 0;
   display: flex;
+  background: white;
+  z-index: 1;
+  border-bottom: 1px solid black;
 }
 
 .header-container ul {
@@ -13,21 +18,16 @@
 .header-container ul li .nav-link {
   text-decoration: none;
   color: black;
-  background: rgb(235,235,235);
-  background: linear-gradient(90deg, rgba(235,235,235,1) 0%, rgba(218,218,218,1) 59%, rgba(136,172,180,1) 100%); 
-  filter: opacity(0.6);
+  /* background: rgb(235,235,235); */
+  /* background: linear-gradient(90deg, rgba(235,235,235,1) 0%, rgba(218,218,218,1) 59%, rgba(136,172,180,1) 100%);  */
+  /* filter: opacity(0.6); */
   padding: 10px 30px;
-  border-radius: 15px;
-}
-
-.active {
-    background: rgb(88,88,88);
-    background: linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgb(45, 189, 221) 100%); 
+  /* border-radius: 15px; */
 }
 
 .header-container ul li .nav-link:hover {
-  background: linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgba(136,172,180,1) 100%); 
-  color: white;
+  /* background: linear-gradient(90deg, rgba(88,88,88,1) 0%, rgba(219,143,143,1) 59%, rgba(136,172,180,1) 100%);  */
+  color: #ec981a;
 }
 
 .header-container ul li.grow {

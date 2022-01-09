@@ -5,9 +5,9 @@ body {
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-image: url("./utils/images/main-wallpaper.jpg");
+    /* background-image: url("./utils/images/main-wallpaper.jpg");
     background-size: 100%;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
 }
 
 code {
@@ -15,9 +15,9 @@ code {
         monospace;
 }
 
-#root {
+/* #root {
     height: 99vh;
-}
+} */
 
 .btn {
     cursor: pointer;
@@ -56,14 +56,14 @@ code {
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.712);
+    /* background-color: #FFCC00; */
     color: black;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 42px;
-    height: 99vh;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    /* margin: 10px 42px;*/
+    /* height: 99vh;  */
 }
 
 .container.wrap {

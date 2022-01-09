@@ -1,7 +1,7 @@
 .user-container {
-    background: rgba(0, 0, 0, 0.747);
+    /* background: rgba(0, 0, 0, 0.747); */
     display: flex;
-    color: white;
+    color: black;
     border-radius: 20px;
     width: 94%;
     max-height: 180vh;

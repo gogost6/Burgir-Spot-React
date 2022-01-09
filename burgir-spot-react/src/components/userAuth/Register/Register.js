@@ -55,7 +55,7 @@ const Register = () => {
                 navigate('/');
             })
             .catch(err => {
-                if(err.includes('Telephone is used by other user!')) {
+                if (err.includes('Telephone is used by other user!')) {
                     setUsedTelephone(true);
                 }
                 console.log(err);
@@ -63,8 +63,8 @@ const Register = () => {
     };
 
     return (
-        <div className="container">
-            <section className="content-wraper left">
+        <div className="container" style={{marginTop: '5%'}}>
+            <section className="content-wraper" style={{ margin: 'auto' }}>
                 <div>
                     <h1>You hungry?</h1>
                     <p>Register to start your tasty Burgir adventure!</p>
@@ -195,7 +195,7 @@ const Register = () => {
                     </section>
                 </form>
             </section>
-            <section className="img-wraper right">
+            <section className="img-wraper" style={{ margin: 'auto' }}>
                 <img src="images/hungry-man.jpg" alt="man-e-ham" />
             </section>
         </div>

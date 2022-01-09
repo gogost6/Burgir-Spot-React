@@ -59,7 +59,7 @@ const Details = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{marginTop: '7%'}}>
             {burgir.name ?
                 (<div className="details-card">
                     <div className="i-w">

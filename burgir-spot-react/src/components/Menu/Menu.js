@@ -10,6 +10,7 @@ const Menu = () => {
             setBurgirs(res);
         }).catch(err => console.log(err));
     }, []);
+    console.log(burgirs.length);
 
     return (
         <>
@@ -24,7 +25,9 @@ const Menu = () => {
                             <p>Price: {x.price}$</p>
                             <p>{x.description}</p>
                         </div>
-                        <Link to={`/details/${x._id}`} className="btn burgir-color">Details</Link>
+                        <Link to={`/details/${x._id}`} 
+                        className="details-btn"
+                        style={{  }}>Details</Link>
                     </div>)
                     )
                     : <p>No burgirs in DB!</p>
