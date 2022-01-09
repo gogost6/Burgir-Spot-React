@@ -151,7 +151,12 @@ const Edit = () => {
             </div>
         </form>
         <p style={{ 'marginLeft': '200px', 'fontSize': '12px' }}>Inputs with * are required!</p>
-        <p className={error !== '' ? 'p-err hidethis' : ''} style={{ 'opacity': 1, 'display': 'block' }}>{error}</p>
+        <p className={error !== '' ? 'p-err hidethis' : ''}
+            style={{
+                'opacity': 1, 'display': 'block', position: 'absolute',
+                top: '62%',
+                left: '25%'
+            }}>{error}</p>
     </div>);
 }
 

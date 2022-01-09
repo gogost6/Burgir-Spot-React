@@ -46,8 +46,8 @@ const EditPassword = () => {
 
         <label htmlFor="newPassword">New Password</label>
         <input type="password" name="newPassword" id="newPassword" onChange={(e) => setNewPassword(e.target.value)} />
-        <button className="btn gray">Edit</button>
-        <button className="btn burgir-color" style={{ 'margin': '15px 0' }}
+        <button className="btn gray" style={{ width: '100%' }}>Edit</button>
+        <button className="btn burgir-color" style={{ 'margin': '15px 0', width: '100%' }}
             onClick={goBackBtn}>Go back</button>
     </form >
     </>

@@ -21,7 +21,7 @@ const Create = () => {
     });
 
     const colorStyles = {
-        control: (styles) => ({...styles, 'border': '2px solid red'}),
+        control: (styles) => ({ ...styles, 'border': '2px solid red' }),
     }
 
     let [error, setError] = useState('');
@@ -38,8 +38,7 @@ const Create = () => {
         e.preventDefault();
         setError('');
         setIsSubmitted(true);
-        createBurgir(state).then(res => console.log('added')).catch(err => setError('Please fill all fields!'));
-        navigate('/menu');
+        createBurgir(state).then(res => navigate('/menu')).catch(err => setError('Please fill all fields!'));
     }
 
     return (<div className="container wrap">
@@ -83,9 +82,9 @@ const Create = () => {
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="meat">*Meat</label>
-                <Select options={option.meatOptions} name="meat" id="meat" 
-                onChange={(e) => changeMeatValue(e, setState)} 
-                styles={state.meat == '' && isSubmitted ? colorStyles : ''}
+                <Select options={option.meatOptions} name="meat" id="meat"
+                    onChange={(e) => changeMeatValue(e, setState)}
+                    styles={state.meat == '' && isSubmitted ? colorStyles : ''}
                 />
             </div>
             <div className="form-item-wrapper">
@@ -139,7 +138,14 @@ const Create = () => {
             </div>
         </form>
         <p style={{ 'marginLeft': '200px', 'fontSize': '12px' }}>Inputs with * are required!</p>
-        <p className={error !== '' ? 'p-err hidethis' : ''} style={{ 'opacity': 1, 'display': 'block' }}>{error}</p>
+        <p className={error !== '' ? 'p-err hidethis' : ''}
+            style={{
+                'opacity': 1,
+                'display': 'block',
+                position: 'absolute',
+                top: '62%',
+                left: '25%'
+            }}>{error}</p>
     </div>);
 }
 

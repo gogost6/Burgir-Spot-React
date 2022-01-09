@@ -1,9 +1,8 @@
 .edit-form {
     display: flex;
     flex-direction: column;
-    width: 53%;
-    align-items: center;
     margin: auto;
+    align-items: center;
     font-size: 20px;
 }
 

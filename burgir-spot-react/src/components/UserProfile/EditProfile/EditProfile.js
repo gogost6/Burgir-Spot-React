@@ -91,8 +91,8 @@ const EditProfile = () => {
         {!telephoneRegex.test(userData.telephone) && isSubmitted ? <p className="p-alert">Telephone should be valid Bulgarian number!</p> : ''}
         {usedTelephone && isSubmitted ? <p className="p-alert">Telephone is used by other user!</p> : ''}
 
-        <button className="btn gray">Edit</button>
-        <button className="btn burgir-color" style={{ 'margin': '15px 0' }}
+        <button className="btn gray" style={{ width: '100%' }}>Edit</button>
+        <button className="btn burgir-color" style={{ 'margin': '15px 0', width: '100%' }}
             onClick={(e) => {
                 e.preventDefault();
                 navigate('/user');
