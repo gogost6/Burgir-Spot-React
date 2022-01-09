@@ -1,10 +1,10 @@
 import "./Login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from '../../../services/authService';
-import * as utils from '../../../utils/styles';
+import { loginUser } from '../../services/authService';
+import * as utils from '../../utils/styles';
 import { useDispatch } from "react-redux";
-import { userAuthentication } from "../../../features/user/userSlice";
+import { userAuthentication } from "../../features/user/userSlice";
 
 const Login = () => {
     const navigate = useNavigate();

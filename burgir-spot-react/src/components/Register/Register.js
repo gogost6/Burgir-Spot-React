@@ -1,11 +1,11 @@
 import "./Register.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from '../../../services/authService';
-import * as utils from '../../../utils/styles';
-import { usedUsername, usedEmail } from '../../../services/authService';
+import { registerUser } from '../../services/authService';
+import * as utils from '../../utils/styles';
+import { usedUsername, usedEmail } from '../../services/authService';
 import { useDispatch } from "react-redux";
-import { userAuthentication } from "../../../features/user/userSlice";
+import { userAuthentication } from "../../features/user/userSlice";
 
 const Register = () => {
     const dispatch = useDispatch();
