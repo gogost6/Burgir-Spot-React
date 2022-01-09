@@ -1,10 +1,12 @@
 import "./Header.css";
+import OrderDetails from "./OrderDetails/OrderDetails";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logoutHandled } from "../../services/authService";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/user/userSlice";
+import { useState } from "react";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -12,6 +14,8 @@ const Header = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.value);
     const order = useSelector((state) => state.order.value);
+
+    const [showDivState, setShowDivState] = useState(false);
 
     const active = (name) => location.pathname == name
         ? { color: 'white', background: '#FFCC00', borderRadius: '13px' }
@@ -65,10 +69,13 @@ const Header = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-link" style={active('/order')} to="/order">
+                    <Link onMouseEnter={() => setShowDivState(true)}
+                        onMouseLeave={() => setShowDivState(false)}
+                        className="nav-link" style={active('/order')} to="/order">
                         <FontAwesomeIcon icon={faShoppingCart} />
                         {order.quantity}
                     </Link>
+                    <OrderDetails order={order} showDivState={showDivState} setShowDivState={setShowDivState}/>
                 </li>
                 <li>
                     <Link className="nav-link" style={active('/menu')} to="/menu">
@@ -87,7 +94,7 @@ const Header = () => {
                 </li>
             </ul>
             }
-        </header>
+        </header >
     );
 };
 
