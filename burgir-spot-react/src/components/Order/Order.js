@@ -71,7 +71,7 @@ const Order = () => {
                                 <img src={x.imgUrl} alt="img" />
                                 <div className="text-wraper">
                                     <p style={{ 'fontWeight': 'bold' }}>{x.name}</p>
-                                    <p>maybe ingridients</p>
+                                    <p>{x.description}</p>
                                     <Select options={quantityOptions}
                                         name="quantity" id="quantity"
                                         value={[{ value: x.quantity, label: x.quantity }]}
@@ -86,9 +86,7 @@ const Order = () => {
 
                         </div>
                     </div>
-                    <div className="order-details" style={{
-
-                    }}>
+                    <div className="order-details">
                         <div className="left-right">
                             <p>PRICE</p>
                             <p>{finalPrice} BGN</p>

@@ -51,6 +51,7 @@ const Details = () => {
         e.preventDefault();
         dispatch(addToBucket({
             quantity,
+            description: burgir.description,
             price: burgir.price,
             name: burgir.name,
             imgUrl: burgir.imgUrl,

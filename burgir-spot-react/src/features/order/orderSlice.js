@@ -31,7 +31,8 @@ export const orderSlice = createSlice({
           _id: action.payload._id,
           quantity: Number(action.payload.quantity),
           singlePrice: Number(action.payload.price),
-          imgUrl: action.payload.imgUrl
+          imgUrl: action.payload.imgUrl,
+          description: action.payload.description
         })
       }
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const OrderDetails = ({order, showDivState, setShowDivState}) => {
+const OrderDetails = ({ order, showDivState, setShowDivState }) => {
     return (<div className="items-header"
         onMouseEnter={() => setShowDivState(true)}
         onMouseLeave={() => setShowDivState(false)}
@@ -24,13 +24,18 @@ const OrderDetails = ({order, showDivState, setShowDivState}) => {
         </div>
         <div style={{ display: 'flex' }}>
             <h3>Delivery</h3>
-            <h6 style={{marginLeft: '10px'}}>2.99</h6>
+            <h6 style={{ marginLeft: '10px' }}>2.99</h6>
         </div>
         <div style={{ display: 'flex' }}>
             <h3>Total</h3>
-            <h6 style={{marginLeft: '10px'}}>{order.totalPrice} BGN</h6>
+            <h6 style={{ marginLeft: '10px' }}>{order.totalPrice} BGN</h6>
         </div>
-        <Link to="/order" style={{ width: '100%', textAlign: 'center', textDecoration: 'none', color: 'black', background: 'gray', borderRadius: '10px' }}>See order</Link>
+        <Link to="/order"
+            style={{
+                width: '100%', textAlign: 'center',
+                textDecoration: 'none', color: 'black',
+                background: 'gray', borderRadius: '10px'
+            }} >See order</Link>
     </div>)
 }
 
