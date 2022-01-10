@@ -29,8 +29,6 @@ function App() {
     const location = useLocation();
     const navigate = useNavigate();
     
-    const user = useSelector(state => state.user.value);
-
     useMemo(() => {
         getUser()
             .then(response => {
