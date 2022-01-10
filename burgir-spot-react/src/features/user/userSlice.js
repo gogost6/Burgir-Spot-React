@@ -19,10 +19,12 @@ const userSlice = createSlice({
     reducers: {
         userAuthentication: (state, action) => {
             state.value = action.payload;
-            state.value.isLogged = true;
+            if(action.payload._id) {
+                state.value.isLogged = true;
+            }
         },
         logout: (state, action) => {
-            state.value = initialState;
+            state.value = initialState.value;
         },
     }
 });

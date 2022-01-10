@@ -9,7 +9,6 @@ import { logout } from "../../features/user/userSlice";
 import { useState } from "react";
 
 const Header = () => {
-    const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.value);
@@ -22,8 +21,8 @@ const Header = () => {
         : {};
 
     let logoutBtn = () => {
-        dispatch(logout())
-        logoutHandled().then(res => navigate('/')).catch(err => console.log(err));
+        logoutHandled().then(res => console.log(res)).catch(err => console.log(err));
+        dispatch(logout());
     }
 
     return (

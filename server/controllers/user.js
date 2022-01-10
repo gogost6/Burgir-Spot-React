@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
         }
         throw 'No user logged!';
     } catch(err) {
-        res.status(401).json(err);
+        res.status(200).json({});
     }
 });
 
