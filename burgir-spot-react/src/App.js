@@ -34,17 +34,15 @@ function App() {
     useMemo(() => {
         getUser()
             .then(response => {
-                if(user.isLogged) {
                     dispatch(userAuthentication(response));
                     if(location.state != null) {
                         navigate(location.state.path);
                     }
-                }
             })
             .catch((err) => {
                 console.log(err);
             })
-    }, [user._id, location, dispatch, navigate])
+    }, [])
 
     return (
         <React.StrictMode>
