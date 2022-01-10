@@ -5,19 +5,12 @@ body {
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* background-image: url("./utils/images/main-wallpaper.jpg");
-    background-size: 100%;
-    background-repeat: no-repeat; */
 }
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
-
-/* #root {
-    height: 99vh;
-} */
 
 .btn {
     cursor: pointer;

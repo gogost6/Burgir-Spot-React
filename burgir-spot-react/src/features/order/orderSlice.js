@@ -14,7 +14,7 @@ export const orderSlice = createSlice({
   reducers: {
     checkBusketForItems: (state, action) => {
       const busket = JSON.parse(localStorage.getItem('order'));
-      if (busket.quantity !== 0) {
+      if (busket !== null && busket.quantity !== 0) {
         state.value = busket;
       }
     },
