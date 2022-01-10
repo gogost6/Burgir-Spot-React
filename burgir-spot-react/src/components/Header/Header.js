@@ -17,7 +17,7 @@ const Header = () => {
 
     const [showDivState, setShowDivState] = useState(false);
 
-    const active = (name) => location.pathname == name
+    const active = (name) => location.pathname === name
         ? { color: 'white', background: '#FFCC00', borderRadius: '13px' }
         : {};
 

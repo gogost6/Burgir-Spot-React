@@ -84,7 +84,7 @@ const Create = () => {
                 <label htmlFor="meat">*Meat</label>
                 <Select options={option.meatOptions} name="meat" id="meat"
                     onChange={(e) => changeMeatValue(e, setState)}
-                    styles={state.meat == '' && isSubmitted ? colorStyles : ''}
+                    styles={state.meat === '' && isSubmitted ? colorStyles : ''}
                 />
             </div>
             <div className="form-item-wrapper">

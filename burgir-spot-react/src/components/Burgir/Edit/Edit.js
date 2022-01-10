@@ -86,7 +86,7 @@ const Edit = () => {
                     style={{
                         ...utils.inputBorderStyle.normal,
                         ...(priceHover ? utils.inputBorderStyle.hover : null),
-                        ...(burgir.price == 0 && isSubmitted ? utils.inputBorderStyle.error : null),
+                        ...(burgir.price === 0 && isSubmitted ? utils.inputBorderStyle.error : null),
                         ...(burgir.price === '' && isSubmitted ? utils.inputBorderStyle.error : null),
                     }}
                 />
@@ -97,7 +97,7 @@ const Edit = () => {
                     name="meat" id="meat"
                     value={[{ value: burgir.meat, label: burgir.meat }]}
                     onChange={(e) => changeMeatValue(e, setBurgir)}
-                    styles={burgir.meat == '' && isSubmitted ? colorStyles : ''}
+                    styles={burgir.meat === '' && isSubmitted ? colorStyles : ''}
                 />
             </div>
             <div className="form-item-wrapper">

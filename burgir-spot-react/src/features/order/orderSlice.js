@@ -22,7 +22,7 @@ export const orderSlice = createSlice({
       let totalPrice = 0;
       let quantity = 0;
 
-      let existingBurgir = state.value.burgirs.find(x => x.name == action.payload.name);
+      let existingBurgir = state.value.burgirs.find(x => x.name === action.payload.name);
       if (existingBurgir) {
         existingBurgir.quantity += action.payload.quantity;
       } else {
@@ -48,7 +48,7 @@ export const orderSlice = createSlice({
       let totalPrice = 0;
       let quantity = 0;
 
-      let existingBurgir = state.value.burgirs.find(x => x.name == action.payload.name);
+      let existingBurgir = state.value.burgirs.find(x => x.name === action.payload.name);
       existingBurgir.quantity = Number(action.payload.quantity);
       state.value.burgirs.forEach(x => {
         totalPrice += (x.singlePrice * x.quantity);
@@ -70,7 +70,7 @@ export const orderSlice = createSlice({
       let totalPrice = 0;
       let quantity = 0;
 
-      let existingBurgirIndex = state.value.burgirs.findIndex(x => x._id == action.payload._id);
+      let existingBurgirIndex = state.value.burgirs.findIndex(x => x._id === action.payload._id);
 
       if (existingBurgirIndex) {
         state.value.burgirs.splice(existingBurgirIndex, 1);

@@ -14,7 +14,7 @@ const Order = () => {
     const [deliveryPrice, setDeliveryPrice] = useState(2.99);
     const [codeErr, setCodeErr] = useState('');
 
-    if (order.quantity == 0) {
+    if (order.quantity === 0) {
         dispatch(checkBusketForItems());
     }
 

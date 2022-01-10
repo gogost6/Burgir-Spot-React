@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -34,8 +34,10 @@ function App() {
     useMemo(() => {
         getUser()
             .then(response => {
-                dispatch(userAuthentication(response)); // FIX IN DB 401 not ok
-                navigate(location.state.path);
+                dispatch(userAuthentication(response));
+                if(location.state != null) {
+                    navigate(location.state.path);
+                }
             })
             .catch((err) => {
                 console.log(err);
