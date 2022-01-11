@@ -12,6 +12,32 @@ async function getRecent() {
   return burgirs;
 }
 
+async function addToFavourite(id, email) {
+  let user = await User.findOne({ email }).lean();
+  let burgir = await Burgir.find({_id: id});
+
+  const record = await User.findOneAndUpdate(
+    { email: email },
+    { $push: { favouriteBurgirs: burgir } },
+    { safe: true, multi: true, new: true }
+  );
+  await record.save();  
+  return user;
+}
+
+async function removeFromFavourite(id, email) {
+  let user = await User.findOne({ email }).lean();
+  
+  const record = await User.findOneAndUpdate(
+    { email: email },
+    { $pull: { favouriteBurgirs: new mongoose.mongo.ObjectId(id) } },
+    { safe: true, multi: true, new: true }
+  );
+
+  await record.save();
+  return user;
+}
+
 async function create(burgir, email) {
   let user = await User.findOne({ email });
   const burgerData = Object.assign(burgir, { owner: user });
@@ -58,5 +84,7 @@ module.exports = {
   getById,
   edit,
   deleteBurgir,
-  getRecent
+  getRecent,
+  addToFavourite,
+  removeFromFavourite
 };

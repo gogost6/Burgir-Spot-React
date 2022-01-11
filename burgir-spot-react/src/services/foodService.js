@@ -91,3 +91,43 @@ export const editBurgir = async (data, id) => {
         return result; 
     }
 }
+
+export const addToFavouriteHandler = async (id) => {
+    const data = {_id: id};
+    const responce = await fetch(`${url}/favourite`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+    });    
+
+    const result = await responce.json();
+    
+    if(!responce.ok) {
+        throw result;
+    } else {
+        return result; 
+    }
+}
+
+export const removeFromFavouriteHandler = async (id) => {
+    const data = {_id: id};
+    const responce = await fetch(`${url}/favourite`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+    });    
+
+    const result = await responce.json();
+    
+    if(!responce.ok) {
+        throw result;
+    } else {
+        return result; 
+    }
+}

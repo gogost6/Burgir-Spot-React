@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { body, validationResult } = require("express-validator");
 const { isAuth, isOwner } = require("../middlewares/guards");
 const { preloadBurgir } = require("../middlewares/preload");
+const config = require("../config");
+const jwt = require("jsonwebtoken");
 
 router.post(
   "/create-burgir",
@@ -117,4 +119,49 @@ router.post(
     }
   }
 );
+
+router.post(
+  "/favourite",
+  isAuth(),
+  async (req, res) => {
+    try {
+      const errors = Object.values(validationResult(req).mapped());
+
+      if (errors.length > 0) {
+        throw errors.map((e) => e.msg);
+      }
+      const userData = await req.storage.addToFavourite(req.body._id, req.user.email);
+      res.clearCookie(config.COOKIE_NAME);
+      const token = jwt.sign(userData, config.TOKEN_SECRET);
+      res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });
+      res.json(userData);
+    } catch (err) {
+      console.log(err);
+      res.status(406).json(err);
+    }
+  }
+);
+
+router.delete(
+  "/favourite",
+  isAuth(),
+  async (req, res) => {
+    try {
+      const errors = Object.values(validationResult(req).mapped());
+
+      if (errors.length > 0) {
+        throw errors.map((e) => e.msg);
+      }
+      const userData = await req.storage.removeFromFavourite(req.body._id, req.user.email);
+      res.clearCookie(config.COOKIE_NAME);
+      const token = jwt.sign(userData, config.TOKEN_SECRET);
+      res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });
+      res.json(userData);
+    } catch (err) {
+      console.log(err);
+      res.status(406).json(err);
+    }
+  }
+);
+
 module.exports = router;

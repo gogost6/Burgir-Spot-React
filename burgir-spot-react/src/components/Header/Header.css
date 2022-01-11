@@ -38,6 +38,16 @@
     flex-basis: 10%;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
 .items-header {
     position: absolute;
     background: white;
@@ -47,7 +57,19 @@
     max-height: 350px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  padding: 0;
+.user-menu {
+    display: flex;
+    position: absolute;
+    background: white;
+    top: 84%;
+    left: 86%;
+    flex-direction: column;
+    padding: 13px;
+    border: 1px solid black;
+}
+
+.user-menu-item {
+    margin-bottom: 7px;
+    border-bottom: 1px solid gray;
+    padding-bottom: 8px;
 }

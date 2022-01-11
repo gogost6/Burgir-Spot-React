@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
             }
         }
         throw 'No user logged!';
-    } catch(err) {
+    } catch (err) {
         res.status(200).json({});
     }
 });
@@ -27,7 +27,6 @@ router.post('/full-user-data-by-username', async (req, res) => {
     try {
         const { username } = req.body;
         const user = await userService.getUserByUsername(username);
-        console.log(user);
         return res.json(user);
     } catch (err) {
         return res.json(err);
@@ -48,7 +47,7 @@ router.post(
         .trim()
         .custom(async (value) => {
             const isNotAvaible = await userService.getUserByTelephone(value);
-            if(isNotAvaible !== null) {
+            if (isNotAvaible !== null) {
                 throw ('Telephone is used by other user!');
             }
 
@@ -73,7 +72,6 @@ router.post(
     async (req, res) => {
         try {
             const { email, username, telephone, password } = req.body;
-            console.log(telephone);
             const errors = Object.values(validationResult(req).mapped());
 
             if (errors.length > 0) {
@@ -103,7 +101,9 @@ router.post(
                 _id: user._id,
                 email: user.email,
                 username: user.username,
-                telephone: user.telephone
+                telephone: user.telephone,
+                createdBurgirs: user.createdBurgirs,
+                favouriteBurgirs: user.favouriteBurgirs
             };
             const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
 
@@ -148,7 +148,9 @@ router.post(
                         _id: user._id,
                         email: user.email,
                         username: user.username,
-                        telephone: user.telephone
+                        telephone: user.telephone,
+                        createdBurgirs: user.createdBurgirs,
+                        favouriteBurgirs: user.favouriteBurgirs
                     };
                     const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
 
@@ -216,11 +218,11 @@ router.post(
             }
 
             const isNotAvaible = await userService.getUserByTelephone(telephone);
-            if(isNotAvaible !== null && oldTelephone != telephone) {
+            if (isNotAvaible !== null && oldTelephone != telephone) {
                 errorsArr.push('Telephone is used by other user!');
             }
-            
-            if(errorsArr.length > 0) {
+
+            if (errorsArr.length > 0) {
                 throw errorsArr;
             }
 
@@ -231,7 +233,9 @@ router.post(
                 _id: user._id,
                 email: user.email,
                 username: user.username,
-                telephone: user.telephone
+                telephone: user.telephone,
+                createdBurgirs: user.createdBurgirs,
+                favouriteBurgirs: user.favouriteBurgirs
             };
             res.clearCookie(config.COOKIE_NAME);
             const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
@@ -278,11 +282,11 @@ router.post(
                 throw errors.map((e) => e.msg);
             }
 
-            if(newPassword === '' || newPassword.length < 4) {
+            if (newPassword === '' || newPassword.length < 4) {
                 throw 'New password error!';
             }
 
-            if(oldPassword === '' || oldPassword.length < 4) {
+            if (oldPassword === '' || oldPassword.length < 4) {
                 throw 'Old password error!';
             }
 
@@ -294,7 +298,9 @@ router.post(
                 _id: user._id,
                 email: user.email,
                 username: user.username,
-                telephone: user.telephone
+                telephone: user.telephone,
+                createdBurgirs: user.createdBurgirs,
+                favouriteBurgirs: user.favouriteBurgirs
             };
             res.clearCookie(config.COOKIE_NAME);
             const token = jwt.sign(userViewModel, config.TOKEN_SECRET);

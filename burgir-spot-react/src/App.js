@@ -28,14 +28,14 @@ function App() {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    
+
     useMemo(() => {
         getUser()
             .then(response => {
-                    dispatch(userAuthentication(response));
-                    if(location.state != null) {
-                        navigate(location.state.path);
-                    }
+                dispatch(userAuthentication(response));
+                if (location.state != null) {
+                    navigate(location.state.path);
+                }
             })
             .catch((err) => {
                 console.log(err);

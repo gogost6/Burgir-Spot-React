@@ -1,15 +1,17 @@
 import "./Details.css";
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useState } from "react";
-import { burgirDetails, deleteBurgir } from '../../../services/foodService';
-import { fullUserDataByUsername } from '../../../services/authService'
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { addToFavouriteHandler, burgirDetails, deleteBurgir, removeFromFavouriteHandler } from '../../../services/foodService';
+import { fullUserDataByUsername } from '../../../services/authService'
 import { addToBucket } from "../../../features/order/orderSlice";
+import { addToFavourite, checkForFavourite, removeFromFavourite } from "../../../features/user/userSlice";
 
 const Details = () => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.user.value);
-    // const order = useSelector((state) => state.value.order);
     const dispatch = useDispatch();
 
     const params = useParams();
@@ -18,12 +20,19 @@ const Details = () => {
     let [burgir, setBurgir] = useState({});
     let [quantity, setQuantity] = useState(1);
     let [userData, setUserData] = useState({});
+    let [isFavourite, setIsFavourite] = useState(false);
 
     useEffect(() => {
         fullUserDataByUsername(user.username).then(res => setUserData(res)).catch(err => console.log(err))
         burgirDetails(id).then(res => setBurgir(res)).catch(err => console.log(err));
-    }, [id, user]);
 
+        if (user._id && user.favouriteBurgirs.includes(burgir._id)) {
+            setIsFavourite(true);
+        } else {
+            setIsFavourite(false);
+        }
+        console.log(user);
+    }, [user.favouriteBurgirs, burgir._id]);
 
     const userButtons = () => {
         const onDelete = (e) => {
@@ -59,8 +68,19 @@ const Details = () => {
         }));
     }
 
+    const favouriteBtnHandler = (e, _id = burgir._id) => {
+        e.preventDefault();
+        if (isFavourite) {
+            dispatch(removeFromFavourite(_id));
+            removeFromFavouriteHandler(_id).then(res => console.log(res)).catch(err => console.log(err));
+        } else {
+            dispatch(addToFavourite(_id));
+            addToFavouriteHandler(_id).then(res => console.log(res)).catch(err => console.log(err));
+        }
+    }
+
     return (
-        <div className="container" style={{marginTop: '7%'}}>
+        <div className="container" style={{ marginTop: '7%' }}>
             {burgir.name ?
                 (<div className="details-card">
                     <div className="i-w">
@@ -69,17 +89,18 @@ const Details = () => {
                     <div className="details-wrapper">
                         <h1>{burgir.name}</h1>
                         <p>This custon burger is made with {burgir.meat} meat from our farm!
-                            The vegetables included are {burgir.vegetables.join(', ')} and we use only the fresh. 
+                            The vegetables included are {burgir.vegetables.join(', ')} and we use only the fresh.
                             {burgir.sauces ? `Topped with ${burgir.sauces.join(', ')}. ` : ''}
                             {burgir.spices ? `Little ${burgir.spices.join(', ')}. ` : ''}
                             {burgir.bonus ? `And the best part ${burgir.bonus.join(', ')}.` : ''}
                         </p>
-                        {burgir.description ? <p style={{'marginTop': '10px'}}>With love: {burgir.description}</p> : ''}
-                        <label htmlFor="quantity" style={{'marginTop': '10px'}}><strong>Quantity:</strong></label>
+                        {burgir.description ? <p style={{ 'marginTop': '10px' }}>With love: {burgir.description}</p> : ''}
+                        <label htmlFor="quantity" style={{ 'marginTop': '10px' }}><strong>Quantity:</strong></label>
                         <input type="number" id="quantity" name="quantity" min={1} onChange={quantityHandler} value={quantity} />
                         <h3>Total: {burgir.price * quantity}$</h3>
                     </div>
                     <div className="btn-wrapper">
+                        <button className="btn" onClick={favouriteBtnHandler} style={{ 'width': '70%' }}>{isFavourite ? 'Unlike' : 'Favourite'} <FontAwesomeIcon icon={faHeart} className="hearth" style={isFavourite ? { color: 'red' } : { color: 'blue' }} /></button>
                         <button className="btn burgir-color" style={{ 'width': '70%' }} onClick={buyBurgir}>Buy</button>
                         {userButtons()}
                     </div>
