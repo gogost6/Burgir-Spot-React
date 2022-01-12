@@ -130,6 +130,7 @@ router.post(
       if (errors.length > 0) {
         throw errors.map((e) => e.msg);
       }
+      await req.storage.addLikeBurgirModel(req.body._id, req.user.email);
       const userData = await req.storage.addToLiked(req.body._id, req.user.email);
 
       res.clearCookie(config.COOKIE_NAME);
@@ -153,6 +154,7 @@ router.delete(
       if (errors.length > 0) {
         throw errors.map((e) => e.msg);
       }
+      await req.storage.removeLikeBurgirModel(req.body._id, req.user.email);
       const userData = await req.storage.removeFromLiked(req.body._id, req.user.email);
 
       res.clearCookie(config.COOKIE_NAME);

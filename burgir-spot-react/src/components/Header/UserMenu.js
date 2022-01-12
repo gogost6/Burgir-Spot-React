@@ -30,8 +30,8 @@ const UserMenu = ({ showUserMenu, setShowUserMenu }) => {
             : ''}
 
         <li className="user-menu-item">
-            <Link className="nav-link" to="/favourite">
-                Favourite
+            <Link className="nav-link" to="/liked">
+                Liked
             </Link>
         </li>
         <li className="user-menu-item">

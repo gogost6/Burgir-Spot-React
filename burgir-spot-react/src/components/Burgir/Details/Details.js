@@ -100,6 +100,7 @@ const Details = () => {
                         <h3>Total: {burgir.price * quantity}$</h3>
                     </div>
                     <div className="btn-wrapper">
+                        <p className="p-likes">{burgir.likes.length == 1 ? '1 like' : `${burgir.likes.length} likes`} </p>
                         <button className="btn burgir-color" style={{ 'width': '70%' }} onClick={buyBurgir}>Buy</button>
                         {userButtons()}
                     </div>

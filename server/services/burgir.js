@@ -12,6 +12,28 @@ async function getRecent() {
   return burgirs;
 }
 
+async function addLikeBurgirModel(id, email) {
+  let user = await User.findOne({ email });
+
+  const record = await Burgir.findOneAndUpdate(
+    { _id: id },
+    { $push: { likes: user } },
+    { safe: true, multi: true, new: true }
+  );
+  await record.save();
+}
+
+async function removeLikeBurgirModel(id, email) {
+  let user = await User.findOne({ email });
+
+  const record = await Burgir.findOneAndUpdate(
+    { _id: id },
+    { $pull: { likes: new mongoose.mongo.ObjectId(user._id) } },
+    { safe: true, multi: true, new: true }
+  );
+  await record.save();
+}
+
 async function addToLiked(id, email) {
   let burgir = await Burgir.find({ _id: id });
 
@@ -83,5 +105,7 @@ module.exports = {
   deleteBurgir,
   getRecent,
   addToLiked,
-  removeFromLiked
+  removeFromLiked,
+  addLikeBurgirModel,
+  removeLikeBurgirModel
 };
