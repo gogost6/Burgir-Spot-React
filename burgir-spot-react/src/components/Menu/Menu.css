@@ -1,6 +1,7 @@
 .container.pad {
     padding: 35px;
     flex-wrap: wrap;
+    background: #7d7d7da3;
 }
 
 .container .header {
@@ -16,6 +17,8 @@
     position: relative;
     margin-right: 50px;
     margin-bottom: 15px;
+    border-radius: 15px;
+    background: white;
 }
 
 .image-wrap {
