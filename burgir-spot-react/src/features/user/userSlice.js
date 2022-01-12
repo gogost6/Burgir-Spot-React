@@ -9,7 +9,8 @@ let initialState = {
         favouriteBurgirs: [],
         likedBurgirs: [],
         telephone: "",
-        isLogged: false
+        isLogged: false,
+        isAdmin: false
     }
 };
 

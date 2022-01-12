@@ -62,7 +62,6 @@ export const orderSlice = createSlice({
 
     },
     clearBucket: (state) => {
-      const orderDetails = JSON.parse(localStorage.getItem('order'));
       state.value = initialState;
       localStorage.setItem('order', JSON.stringify(state.value));
     },

@@ -144,6 +144,11 @@ router.post(
                         favouriteBurgirs: user.favouriteBurgirs,
                         likedBurgirs: user.likedBurgirs
                     };
+
+                    if(user.isAdmin) {
+                        userViewModel.isAdmin = true;
+                    }
+                    
                     const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
 
                     res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });

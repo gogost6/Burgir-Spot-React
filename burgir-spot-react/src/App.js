@@ -17,7 +17,7 @@ import NotFound from "./components/NotFound/NotFound";
 import Order from "./components/Order/Order";
 
 import { userAuthentication } from "./features/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { getUser } from "./services/authService";
 

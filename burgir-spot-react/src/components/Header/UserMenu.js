@@ -1,10 +1,11 @@
-import { useDispatch } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { logoutHandled } from "../../services/authService";
 import { logout } from "../../features/user/userSlice";
 
 const UserMenu = ({ showUserMenu, setShowUserMenu }) => {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.user.value);
 
     let logoutBtn = () => {
         logoutHandled().then(res => console.log(res)).catch(err => console.log(err));
@@ -15,16 +16,19 @@ const UserMenu = ({ showUserMenu, setShowUserMenu }) => {
         onMouseEnter={() => setShowUserMenu(true)}
         onMouseLeave={() => setShowUserMenu(false)}
         style={showUserMenu ? { display: 'flex' } : { display: 'none' }}>
-        <li className="user-menu-item">
-            <Link className="nav-link" to="/create">
-                Create
-            </Link>
-        </li>
-        <li className="user-menu-item">
-            <Link className="nav-link" to="/owned">
-                Owned
-            </Link>
-        </li>
+        {user.isAdmin
+            ? <> <li className="user-menu-item">
+                <Link className="nav-link" to="/create">
+                    Create
+                </Link>
+            </li>
+                <li className="user-menu-item">
+                    <Link className="nav-link" to="/owned">
+                        Owned
+                    </Link>
+                </li> </>
+            : ''}
+
         <li className="user-menu-item">
             <Link className="nav-link" to="/favourite">
                 Favourite
