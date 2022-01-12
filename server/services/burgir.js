@@ -12,30 +12,27 @@ async function getRecent() {
   return burgirs;
 }
 
-async function addToFavourite(id, email) {
-  let user = await User.findOne({ email }).lean();
-  let burgir = await Burgir.find({_id: id});
+async function addToLiked(id, email) {
+  let burgir = await Burgir.find({ _id: id });
 
   const record = await User.findOneAndUpdate(
     { email: email },
-    { $push: { favouriteBurgirs: burgir } },
+    { $push: { likedBurgirs: burgir } },
     { safe: true, multi: true, new: true }
   );
-  await record.save();  
-  return user;
+  await record.save();
+  return JSON.stringify(record);
 }
 
-async function removeFromFavourite(id, email) {
-  let user = await User.findOne({ email }).lean();
-  
+async function removeFromLiked(id, email) {
   const record = await User.findOneAndUpdate(
     { email: email },
-    { $pull: { favouriteBurgirs: new mongoose.mongo.ObjectId(id) } },
+    { $pull: { likedBurgirs: new mongoose.mongo.ObjectId(id) } },
     { safe: true, multi: true, new: true }
   );
 
   await record.save();
-  return user;
+  return JSON.stringify(record);
 }
 
 async function create(burgir, email) {
@@ -85,6 +82,6 @@ module.exports = {
   edit,
   deleteBurgir,
   getRecent,
-  addToFavourite,
-  removeFromFavourite
+  addToLiked,
+  removeFromLiked
 };

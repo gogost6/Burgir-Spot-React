@@ -1,13 +1,12 @@
 import "./Details.css";
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { addToFavouriteHandler, burgirDetails, deleteBurgir, removeFromFavouriteHandler } from '../../../services/foodService';
-import { fullUserDataByUsername } from '../../../services/authService'
+import { addToLikedHandler, burgirDetails, deleteBurgir, removeFromFavouriteHandler } from '../../../services/foodService';
 import { addToBucket } from "../../../features/order/orderSlice";
-import { addToFavourite, checkForFavourite, removeFromFavourite } from "../../../features/user/userSlice";
+import { addToLiked, removeFromLiked } from "../../../features/user/userSlice";
 
 const Details = () => {
     const navigate = useNavigate();
@@ -19,34 +18,35 @@ const Details = () => {
 
     let [burgir, setBurgir] = useState({});
     let [quantity, setQuantity] = useState(1);
-    let [userData, setUserData] = useState({});
-    let [isFavourite, setIsFavourite] = useState(false);
+    let [isLiked, setIsLiked] = useState(false);
 
     useEffect(() => {
-        fullUserDataByUsername(user.username).then(res => setUserData(res)).catch(err => console.log(err))
         burgirDetails(id).then(res => setBurgir(res)).catch(err => console.log(err));
 
-        if (user._id && user.favouriteBurgirs.includes(burgir._id)) {
-            setIsFavourite(true);
+        if (user._id && user.likedBurgirs.includes(burgir._id)) {
+            setIsLiked(true);
         } else {
-            setIsFavourite(false);
+            setIsLiked(false);
         }
-        console.log(user);
-    }, [user.favouriteBurgirs, burgir._id]);
+    }, [user.likedBurgirs, burgir._id]);
 
     const userButtons = () => {
         const onDelete = (e) => {
             e.preventDefault();
             deleteBurgir(id).then(res => navigate('/')).catch(err => console.log(err))
         }
-        if (userData._id) {
-            if (userData.createdBurgirs.includes(id)) {
+        if (user._id) {
+            if (user.createdBurgirs.includes(id)) {
                 return (<>
                     <Link className="btn gray" style={{ 'width': '70%' }} to={`/edit/${id}`}>Edit</Link>
                     <Link className="btn red" style={{ 'width': '70%' }} to={`/menu`} onClick={onDelete}>Delete</Link>
                 </>);
             } else {
-                return '';
+                return <button className="btn" onClick={likeBtnHandler}
+                    style={{ 'width': '70%' }}>{isLiked ? 'Unlike' : 'Like'}
+                    <FontAwesomeIcon icon={faHeart} className="hearth"
+                        style={isLiked ? { color: 'red' } : { color: 'blue' }} />
+                </button>
             }
         }
     };
@@ -68,14 +68,14 @@ const Details = () => {
         }));
     }
 
-    const favouriteBtnHandler = (e, _id = burgir._id) => {
+    const likeBtnHandler = (e, _id = burgir._id) => {
         e.preventDefault();
-        if (isFavourite) {
-            dispatch(removeFromFavourite(_id));
+        if (isLiked) {
+            dispatch(removeFromLiked(_id));
             removeFromFavouriteHandler(_id).then(res => console.log(res)).catch(err => console.log(err));
         } else {
-            dispatch(addToFavourite(_id));
-            addToFavouriteHandler(_id).then(res => console.log(res)).catch(err => console.log(err));
+            dispatch(addToLiked(_id));
+            addToLikedHandler(_id).then(res => console.log(res)).catch(err => console.log(err));
         }
     }
 
@@ -100,7 +100,6 @@ const Details = () => {
                         <h3>Total: {burgir.price * quantity}$</h3>
                     </div>
                     <div className="btn-wrapper">
-                        <button className="btn" onClick={favouriteBtnHandler} style={{ 'width': '70%' }}>{isFavourite ? 'Unlike' : 'Favourite'} <FontAwesomeIcon icon={faHeart} className="hearth" style={isFavourite ? { color: 'red' } : { color: 'blue' }} /></button>
                         <button className="btn burgir-color" style={{ 'width': '70%' }} onClick={buyBurgir}>Buy</button>
                         {userButtons()}
                     </div>

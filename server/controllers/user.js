@@ -23,16 +23,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/full-user-data-by-username', async (req, res) => {
-    try {
-        const { username } = req.body;
-        const user = await userService.getUserByUsername(username);
-        return res.json(user);
-    } catch (err) {
-        return res.json(err);
-    }
-})
-
 router.post(
     "/register",
     isGuest(),
@@ -103,7 +93,8 @@ router.post(
                 username: user.username,
                 telephone: user.telephone,
                 createdBurgirs: user.createdBurgirs,
-                favouriteBurgirs: user.favouriteBurgirs
+                favouriteBurgirs: user.favouriteBurgirs,
+                likedBurgirs: user.likedBurgirs
             };
             const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
 
@@ -150,7 +141,8 @@ router.post(
                         username: user.username,
                         telephone: user.telephone,
                         createdBurgirs: user.createdBurgirs,
-                        favouriteBurgirs: user.favouriteBurgirs
+                        favouriteBurgirs: user.favouriteBurgirs,
+                        likedBurgirs: user.likedBurgirs
                     };
                     const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
 
@@ -235,7 +227,8 @@ router.post(
                 username: user.username,
                 telephone: user.telephone,
                 createdBurgirs: user.createdBurgirs,
-                favouriteBurgirs: user.favouriteBurgirs
+                favouriteBurgirs: user.favouriteBurgirs,
+                likedBurgirs: user.likedBurgirs
             };
             res.clearCookie(config.COOKIE_NAME);
             const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
@@ -300,7 +293,8 @@ router.post(
                 username: user.username,
                 telephone: user.telephone,
                 createdBurgirs: user.createdBurgirs,
-                favouriteBurgirs: user.favouriteBurgirs
+                favouriteBurgirs: user.favouriteBurgirs,
+                likedBurgirs: user.likedBurgirs
             };
             res.clearCookie(config.COOKIE_NAME);
             const token = jwt.sign(userViewModel, config.TOKEN_SECRET);

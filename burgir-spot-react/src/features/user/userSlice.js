@@ -23,15 +23,14 @@ const userSlice = createSlice({
                 state.value.isLogged = true;
             }
         },
-        addToFavourite: (state, action) => {
-            state.value.favouriteBurgirs.push(action.payload);
-            localStorage.setItem('favourite', JSON.stringify(state.value.favouriteBurgirs));
+        addToLiked: (state, action) => {
+            state.value.likedBurgirs.push(action.payload);
         },
-        removeFromFavourite: (state, action) => {
-            let index = state.value.favouriteBurgirs.findIndex(x => x._id === action.payload);
+        removeFromLiked: (state, action) => {
+            let index = state.value.likedBurgirs.findIndex(x => x._id === action.payload);
 
             if (index) {
-                state.value.favouriteBurgirs.splice(index, 1);
+                state.value.likedBurgirs.splice(index, 1);
             }
         },
         logout: (state, action) => {
@@ -40,6 +39,6 @@ const userSlice = createSlice({
     }
 });
 
-export const { userAuthentication, logout, addToFavourite, removeFromFavourite, checkForFavourite } = userSlice.actions;
+export const { userAuthentication, logout, addToLiked, removeFromLiked } = userSlice.actions;
 
 export default userSlice.reducer;

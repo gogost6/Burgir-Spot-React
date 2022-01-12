@@ -92,9 +92,9 @@ export const editBurgir = async (data, id) => {
     }
 }
 
-export const addToFavouriteHandler = async (id) => {
+export const addToLikedHandler = async (id) => {
     const data = {_id: id};
-    const responce = await fetch(`${url}/favourite`, {
+    const responce = await fetch(`${url}/like`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -114,7 +114,7 @@ export const addToFavouriteHandler = async (id) => {
 
 export const removeFromFavouriteHandler = async (id) => {
     const data = {_id: id};
-    const responce = await fetch(`${url}/favourite`, {
+    const responce = await fetch(`${url}/like`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'

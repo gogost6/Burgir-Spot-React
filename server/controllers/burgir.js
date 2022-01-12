@@ -121,7 +121,7 @@ router.post(
 );
 
 router.post(
-  "/favourite",
+  "/like",
   isAuth(),
   async (req, res) => {
     try {
@@ -130,7 +130,8 @@ router.post(
       if (errors.length > 0) {
         throw errors.map((e) => e.msg);
       }
-      const userData = await req.storage.addToFavourite(req.body._id, req.user.email);
+      const userData = await req.storage.addToLiked(req.body._id, req.user.email);
+
       res.clearCookie(config.COOKIE_NAME);
       const token = jwt.sign(userData, config.TOKEN_SECRET);
       res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });
@@ -143,7 +144,7 @@ router.post(
 );
 
 router.delete(
-  "/favourite",
+  "/like",
   isAuth(),
   async (req, res) => {
     try {
@@ -152,7 +153,8 @@ router.delete(
       if (errors.length > 0) {
         throw errors.map((e) => e.msg);
       }
-      const userData = await req.storage.removeFromFavourite(req.body._id, req.user.email);
+      const userData = await req.storage.removeFromLiked(req.body._id, req.user.email);
+
       res.clearCookie(config.COOKIE_NAME);
       const token = jwt.sign(userData, config.TOKEN_SECRET);
       res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });
