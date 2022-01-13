@@ -20,7 +20,7 @@ const Menu = ({type}) => {
                 setBurgirs(res);
             }).catch(err => console.log(err));
         }
-    }, []);
+    }, [type]);
 
     return (
         <>
