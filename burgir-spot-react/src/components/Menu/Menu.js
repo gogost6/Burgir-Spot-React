@@ -1,14 +1,22 @@
 import "./Menu.css"
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { recentBurgirs } from '../../services/foodService'
-const Menu = () => {
+import { recentBurgirs, getOwned, getLiked } from '../../services/foodService';
+
+const Menu = ({type}) => {
     let [burgirs, setBurgirs] = useState([]);
 
     useEffect(() => {
-        recentBurgirs().then(res => {
-            setBurgirs(res);
-        }).catch(err => console.log(err));
+        if(type === 'menu') {
+            recentBurgirs().then(res => {
+                setBurgirs(res);
+            }).catch(err => console.log(err));
+        } else if(type === 'owned') {
+            getOwned().then(res => {
+                console.log(res);
+                setBurgirs(res);
+            }).catch(err => console.log(err));
+        }
     }, []);
 
     return (

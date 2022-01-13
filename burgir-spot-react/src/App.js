@@ -48,7 +48,7 @@ function App() {
             <div className="router">
                 <Routes>
                     <Route path="/" exact element={<Home />} />
-                    <Route path="/menu" element={<Menu />} />
+                    <Route path="/menu" element={<Menu type={'menu'} />} />
                     <Route path="/order" element={<Order />} />
                     <Route element={<GuestGuard />}>
                         <Route path="/login" element={<Login />} />
@@ -56,6 +56,8 @@ function App() {
                     </Route>
                     <Route path="/details/:id" element={<Details />} />
                     <Route element={<LoggedUserGuard />}>
+                        <Route path="/owned" element={<Menu type={'owned'} />} />
+                        <Route path="/create" element={<Create />} />
                         <Route path="/create" element={<Create />} />
                         <Route path="/edit/:id" element={<Edit />} />
                         <Route path="/user" element={<UserProfile />}>

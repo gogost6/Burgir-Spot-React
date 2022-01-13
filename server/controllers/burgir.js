@@ -168,4 +168,24 @@ router.delete(
   }
 );
 
+router.get(
+  "/owned",
+  isAuth(),
+  async (req, res) => {
+    try {
+      const errors = Object.values(validationResult(req).mapped());
+
+      if (errors.length > 0) {
+        throw errors.map((e) => e.msg);
+      }
+
+      const owned = await req.storage.getOwned(req.user.email);
+      res.json(owned);
+    } catch (err) {
+      console.log(err);
+      res.status(406).json(err);
+    }
+  }
+);
+
 module.exports = router;

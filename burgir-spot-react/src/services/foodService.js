@@ -131,3 +131,39 @@ export const removeFromFavouriteHandler = async (id) => {
         return result; 
     }
 }
+
+export const getOwned =  async (id) => {
+    const responce = await fetch(`${url}/owned`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include'
+    });    
+
+    const result = await responce.json();
+    
+    if(!responce.ok) {
+        throw result;
+    } else {
+        return result; 
+    }
+}
+
+export const getLiked =  async (id) => {
+    const responce = await fetch(`${url}/liked-collection`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        },
+        credentials: 'include'
+    });    
+
+    const result = await responce.json();
+    
+    if(!responce.ok) {
+        throw result;
+    } else {
+        return result; 
+    }
+}

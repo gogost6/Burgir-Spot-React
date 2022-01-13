@@ -12,6 +12,12 @@ async function getRecent() {
   return burgirs;
 }
 
+async function getOwned(email) {
+  const user = await User.find({email}).lean();
+  const burgirs = await Burgir.find({_id: user[0].createdBurgirs});
+  return burgirs;
+}
+
 async function addLikeBurgirModel(id, email) {
   let user = await User.findOne({ email });
 
@@ -107,5 +113,6 @@ module.exports = {
   addToLiked,
   removeFromLiked,
   addLikeBurgirModel,
-  removeLikeBurgirModel
+  removeLikeBurgirModel,
+  getOwned
 };
