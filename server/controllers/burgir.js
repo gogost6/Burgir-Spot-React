@@ -188,4 +188,24 @@ router.get(
   }
 );
 
+router.get(
+  "/liked-collection",
+  isAuth(),
+  async (req, res) => {
+    try {
+      const errors = Object.values(validationResult(req).mapped());
+
+      if (errors.length > 0) {
+        throw errors.map((e) => e.msg);
+      }
+
+      const liked = await req.storage.getLiked(req.user.email);
+      res.json(liked);
+    } catch (err) {
+      console.log(err);
+      res.status(406).json(err);
+    }
+  }
+);
+
 module.exports = router;

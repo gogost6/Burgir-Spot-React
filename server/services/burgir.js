@@ -18,6 +18,12 @@ async function getOwned(email) {
   return burgirs;
 }
 
+async function getLiked(email) {
+  const user = await User.find({email}).lean();
+  const burgirs = await Burgir.find({_id: user[0].likedBurgirs});
+  return burgirs;
+}
+
 async function addLikeBurgirModel(id, email) {
   let user = await User.findOne({ email });
 
@@ -114,5 +120,6 @@ module.exports = {
   removeFromLiked,
   addLikeBurgirModel,
   removeLikeBurgirModel,
-  getOwned
+  getOwned,
+  getLiked
 };

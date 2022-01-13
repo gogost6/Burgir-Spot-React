@@ -57,6 +57,7 @@ function App() {
                     <Route path="/details/:id" element={<Details />} />
                     <Route element={<LoggedUserGuard />}>
                         <Route path="/owned" element={<Menu type={'owned'} />} />
+                        <Route path="/liked-collection" element={<Menu type={'liked'} />} />
                         <Route path="/create" element={<Create />} />
                         <Route path="/create" element={<Create />} />
                         <Route path="/edit/:id" element={<Edit />} />

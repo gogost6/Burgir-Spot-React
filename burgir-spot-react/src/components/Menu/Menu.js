@@ -13,7 +13,10 @@ const Menu = ({type}) => {
             }).catch(err => console.log(err));
         } else if(type === 'owned') {
             getOwned().then(res => {
-                console.log(res);
+                setBurgirs(res);
+            }).catch(err => console.log(err));
+        } else if(type === 'liked') {
+            getLiked().then(res => {
                 setBurgirs(res);
             }).catch(err => console.log(err));
         }
