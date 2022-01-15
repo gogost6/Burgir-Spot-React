@@ -23,6 +23,7 @@ import { getUser } from "./services/authService";
 
 import LoggedUserGuard from "./guards/LoggedUserGuard";
 import GuestGuard from './guards/GuestGuard';
+import AdminGuard from "./guards/AdminGuard";
 
 function App() {
     const dispatch = useDispatch();
@@ -55,12 +56,13 @@ function App() {
                         <Route path="/register" element={<Register />} />
                     </Route>
                     <Route path="/details/:id" element={<Details />} />
-                    <Route element={<LoggedUserGuard />}>
+                    <Route element={<AdminGuard />}>
                         <Route path="/owned" element={<Menu type={'owned'} />} />
-                        <Route path="/liked-collection" element={<Menu type={'liked'} />} />
-                        <Route path="/create" element={<Create />} />
                         <Route path="/create" element={<Create />} />
                         <Route path="/edit/:id" element={<Edit />} />
+                    </Route>
+                    <Route element={<LoggedUserGuard />}>
+                        <Route path="/liked-collection" element={<Menu type={'liked'} />} />
                         <Route path="/user" element={<UserProfile />}>
                             <Route path="edit-profile" element={<EditProfile />} />
                             <Route path="edit-password" element={<EditPassword />} />
