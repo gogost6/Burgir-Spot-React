@@ -1,0 +1,21 @@
+{
+  "name": "burgir-spot-react",
+  "version": "1.0.0",
+  "description": "First React project!\r Back end is Node.js with Express - REST with CRUD operations.\r Web site for burgers, you can create your own one if you register,\r or see the menu, which is done by the other user.\r The future of the project is to have registration for customers, which\r can order burgers for them or for their friends.",
+  "main": "index.js",
+  "scripts": {
+	"heroku-postbuild": "cd server && npm install && cd ../ && cd burgir-spot-react && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "cd server && node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gogost6/Burgir-Spot-React.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gogost6/Burgir-Spot-React/issues"
+  },
+  "homepage": "https://github.com/gogost6/Burgir-Spot-React#readme"
+}
