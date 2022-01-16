@@ -62,7 +62,7 @@ export const orderSlice = createSlice({
 
     },
     clearBucket: (state) => {
-      state.value = initialState;
+      state.value = initialState.value;
       localStorage.setItem('order', JSON.stringify(state.value));
     },
     removeBurgir: (state, action) => {

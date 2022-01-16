@@ -34,11 +34,11 @@ const UserMenu = ({ showUserMenu, setShowUserMenu }) => {
                 Liked
             </Link>
         </li>
-        <li className="user-menu-item">
+        {/* <li className="user-menu-item">
             <Link className="nav-link" to="/last-orders">
                 Last Orders
             </Link>
-        </li>
+        </li> */}
         <li>
             <Link className="nav-link" to="/" onClick={logoutBtn}>
                 Logout

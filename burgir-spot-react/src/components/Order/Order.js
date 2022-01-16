@@ -1,15 +1,17 @@
 import "./Order.css";
 import { useDispatch, useSelector } from "react-redux";
-import { changeBurgirQuantity, removeBurgir, checkBusketForItems } from "../../features/order/orderSlice";
+import { changeBurgirQuantity, removeBurgir, checkBusketForItems, clearBucket } from "../../features/order/orderSlice";
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 
 const Order = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const order = useSelector(state => state.order.value);
+
     const [code, setCode] = useState('');
     const [deliveryPrice, setDeliveryPrice] = useState(2.99);
     const [codeErr, setCodeErr] = useState('');
@@ -61,6 +63,12 @@ const Order = () => {
     const completeOrderBtn = (e) => {
         e.preventDefault();
         setCompleteOrder(true);
+    }
+
+    const homeBtn = (e) => {
+        e.preventDefault();
+        dispatch(clearBucket());
+        navigate('/');
     }
 
     return (
@@ -117,11 +125,11 @@ const Order = () => {
                     <div className="complete-order" style={completeOrder ? { display: 'block', cursor: 'notAllowed' } : { display: 'none' }}>
                         <h1>Thank you for your order!</h1>
                         <p>Delivery time 30 min.</p>
-                        <Link to="/" className="btn burgir-color" style={{
+                        <button onClick={homeBtn} className="btn burgir-color" style={{
                             width: '46%',
                             display: 'block',
                             margin: '0 auto'
-                        }}>Home</Link>
+                        }}>Home</button>
                     </div>
                 </> :
                 <div style={{ 'margin': 'auto', 'marginTop': '13%' }}>
