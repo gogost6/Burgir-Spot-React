@@ -29,12 +29,12 @@ const userSlice = createSlice({
                 }
             }
 
-            if(user.isAdmin) {
+            if(user !== null && user.isAdmin) {
                 action.payload = {
                     isAdmin: true,
                     isLogged: true
                 };
-            } else if(user.isLogged) {
+            } else if(user !== null && user.isLogged) {
                 action.payload = {
                     isLogged: true
                 };
