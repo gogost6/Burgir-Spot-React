@@ -13,7 +13,7 @@ const config = {
       api_secret: "DMgSYTcI9axXbDPqAssAihjgvtk"
     },
     CORS: {
-      origin: ["http://localhost:3000"],
+      origin: ["https://burgir-spot.herokuapp.com/", "http://localhost:5000", "http://localhost:3000"],
       credentials: true,
     },
   },
