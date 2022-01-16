@@ -1,10 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getUser } from '../features/user/userSlice';
 
 const AdminGuard = () => {
-    const isAdmin = useSelector((state) => state.user.value.isAdmin);
-    
-    if (isAdmin) {
+    const dispatch = useDispatch();
+    const user = dispatch(getUser());
+
+    if (user.payload.isAdmin) {
         return <Outlet/>
     } else {
         return <Navigate to='/not-found' replace />;

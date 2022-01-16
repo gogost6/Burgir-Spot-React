@@ -1,12 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useSelector } from 'react-redux';
-const GuestGuard = ({ children }) => {
-    const isLogged = useSelector((state) => state.user.value.isLogged);
+import { useDispatch } from 'react-redux';
+import { getUser } from '../features/user/userSlice';
 
-    if (isLogged) {
+const GuestGuard = () => {
+    const dispatch = useDispatch();
+    const user = dispatch(getUser());
+
+    if (user.payload.isLogged) {
         return <Navigate to='/' replace />;
     } else {
-        return <Outlet/>;
+        return <Outlet />;
     }
 }
 
