@@ -17,6 +17,16 @@ const config = {
       credentials: true,
     },
   },
+  production: {
+    PORT: process.env.PORT || 3000,
+    COOKIE_NAME: "SESSION_DATA",
+    TOKEN_SECRET: "very strong secret",
+    SALT_ROUNDS: 10,
+    CORS: {
+      origin: ["https://burgir-spot.herokuapp.com/", "http://localhost:3000"],
+      credentials: true,
+    },
+  },
 };
 
 module.exports = config[env];
