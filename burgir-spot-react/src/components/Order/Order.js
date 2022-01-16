@@ -13,6 +13,7 @@ const Order = () => {
     const [code, setCode] = useState('');
     const [deliveryPrice, setDeliveryPrice] = useState(2.99);
     const [codeErr, setCodeErr] = useState('');
+    const [completeOrder, setCompleteOrder] = useState(false);
 
     if (order.quantity === 0) {
         dispatch(checkBusketForItems());
@@ -57,11 +58,16 @@ const Order = () => {
         setCode(e.target.value);
     }
 
+    const completeOrderBtn = (e) => {
+        e.preventDefault();
+        setCompleteOrder(true);
+    }
+
     return (
         <div className="container" style={{ 'height': 'auto' }}>
             {order.burgirs.length > 0 ?
                 <>
-                    <div className="items-in-order">
+                    <div className="items-in-order" style={completeOrder ? { filter: 'opacity(10%)', pointerEvents: 'none' } : {}}>
                         <div className="order-head">
                             <h1 style={{ 'margin': '0' }}>Your order</h1>
                             <p>Qty: {order.quantity}</p>
@@ -86,7 +92,7 @@ const Order = () => {
 
                         </div>
                     </div>
-                    <div className="order-details">
+                    <div className="order-details" style={completeOrder ? { filter: 'opacity(10%)', pointerEvents: 'none' } : {}}>
                         <div className="left-right">
                             <p>PRICE</p>
                             <p>{finalPrice} BGN</p>
@@ -95,7 +101,7 @@ const Order = () => {
                             <p>DELIVERY</p>
                             <p>{deliveryPrice === 0 ? 'FREE' : '2.99 BGN'}</p>
                         </div>
-                        <button className="order-btn">COMPLETE ORDER</button>
+                        <button className="order-btn" onClick={completeOrderBtn}>COMPLETE ORDER</button>
                         <div className="left-right">
                             <div style={{ 'flexGrow': '1' }}>
                                 <p>YOUR PROMO CODE</p>
@@ -107,7 +113,17 @@ const Order = () => {
                         </div>
                         {codeErr === 'No such code!' ? <p style={{ 'color': 'red' }}>{codeErr}</p> : ''}
                         <p>Pay with cash to the delivery dude!</p>
-                    </div> </> :
+                    </div>
+                    <div className="complete-order" style={completeOrder ? { display: 'block', cursor: 'notAllowed' } : { display: 'none' }}>
+                        <h1>Thank you for your order!</h1>
+                        <p>Delivery time 30 min.</p>
+                        <Link to="/" className="btn burgir-color" style={{
+                            width: '46%',
+                            display: 'block',
+                            margin: '0 auto'
+                        }}>Home</Link>
+                    </div>
+                </> :
                 <div style={{ 'margin': 'auto', 'marginTop': '13%' }}>
                     <h1>Your order is empty!</h1>
                     <h3>If you want to see our menu click <Link to="/menu">Here</Link></h3>
