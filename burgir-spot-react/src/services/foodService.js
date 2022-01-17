@@ -1,4 +1,4 @@
-const url = 'http://localhost:5000/api/burgir';
+const url = '/api/burgir';
 
 export const recentBurgirs = async () => {
     const responce = await fetch(`${url}/recent-burgirs`, {
