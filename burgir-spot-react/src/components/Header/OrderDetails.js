@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
 
-const OrderDetails = ({ order, showDivState, setShowDivState }) => {
+const OrderDetails = ({ width, order, showDivState, setShowDivState }) => {
     return (<div className="items-header"
-        onMouseEnter={() => setShowDivState(true)}
-        onMouseLeave={() => setShowDivState(false)}
+        onMouseEnter={() =>
+            {if(width > 500) {
+                    setShowDivState(true)
+                }
+        }}
+        onMouseLeave={() =>
+            {if(width > 500) {
+                    setShowDivState(false)
+                }
+        }}
         style={showDivState ? { display: 'flex' } : { display: 'none' }}>
         <div style={{ overflow: 'auto' }}>
             {

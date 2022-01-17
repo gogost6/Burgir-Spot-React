@@ -61,13 +61,21 @@ const Header = () => {
                     </li>
                     <li onClick={closeMenu}>
                         <Link className="nav-link" style={active('/order')} to="/order"
-                            onMouseEnter={() => setShowDivState(true)}
-                            onMouseLeave={() => setShowDivState(false)}
+                            onMouseEnter={() =>
+                                {if(width > 500) {
+                                        setShowDivState(true)
+                                    }
+                            }}
+                            onMouseLeave={() =>
+                                {if(width > 500) {
+                                        setShowDivState(false)
+                                    }
+                            }}
                         >
                             <FontAwesomeIcon icon={faShoppingCart} />
                             {order.quantity}
                         </Link>
-                        <OrderDetails order={order} showDivState={showDivState} setShowDivState={setShowDivState} />
+                        <OrderDetails width={width} order={order} showDivState={showDivState} setShowDivState={setShowDivState} />
                     </li>
                     <li onClick={closeMenu}>
                         <Link className="nav-link" style={active('/menu')} to="/menu">
