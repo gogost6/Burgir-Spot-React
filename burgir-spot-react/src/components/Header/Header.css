@@ -73,3 +73,37 @@ h6 {
     border-bottom: 1px solid gray;
     padding-bottom: 8px;
 }
+
+.mobile-user-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+.complete-order {
+    padding: 11px;
+    text-align: center;
+}
+
+.mobile-user-item {
+    list-style-type: none;
+    padding: 23px 0;
+    border-bottom: 1px solid black;
+    background: white;
+}
+
+.mobile-user-item a {
+    color: black;
+    text-decoration: none;
+}
+
+.mobile-btn {
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+}

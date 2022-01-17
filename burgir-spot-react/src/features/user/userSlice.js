@@ -44,6 +44,7 @@ const userSlice = createSlice({
                 state.value.isLogged = false;
             } else {
                 state.value = action.payload;
+                state.value.isLogged = true;
             }
             localStorage.setItem('user', JSON.stringify(state.value));
         },

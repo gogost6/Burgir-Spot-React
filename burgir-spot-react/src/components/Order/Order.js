@@ -113,7 +113,7 @@ const Order = () => {
                         <div className="left-right">
                             <div style={{ 'flexGrow': '1' }}>
                                 <p>YOUR PROMO CODE</p>
-                                <input type="text" placeholder="FREEDONUT"
+                                <input className="code-input" type="text" placeholder="IWANTFREEDELIVERY"
                                     value={code} style={{ 'width': '90%' }}
                                     onChange={codeInputHandler} />
                             </div>
