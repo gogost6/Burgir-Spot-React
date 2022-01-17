@@ -1,4 +1,4 @@
-let baseUrl = 'http://localhost:5000/api/user';
+let baseUrl = '/api/user';
 
 export const getUser = async () => { 
     const response = await fetch(`${baseUrl}` , { 
