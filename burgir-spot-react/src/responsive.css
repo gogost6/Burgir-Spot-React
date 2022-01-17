@@ -3,6 +3,10 @@
         background: #acacac38;
     }
 
+    .header-container ul {
+        align-items: center;
+    }
+
     .header-container ul li {
         flex-basis: 21%;
     }
@@ -34,6 +38,10 @@
         margin-right: 0;
         padding-bottom: 13px;
         width: 100%;
+    }
+
+    .nav-link.order {
+        display: flex;
     }
 
     .img-wraper {

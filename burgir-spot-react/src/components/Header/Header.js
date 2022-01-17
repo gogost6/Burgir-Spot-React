@@ -60,7 +60,7 @@ const Header = () => {
                         </Link>
                     </li>
                     <li onClick={closeMenu}>
-                        <Link className="nav-link" style={active('/order')} to="/order"
+                        <Link className="nav-link order" style={active('/order')} to="/order"
                             onMouseEnter={() =>
                                 {if(width > 500) {
                                         setShowDivState(true)
@@ -83,7 +83,7 @@ const Header = () => {
                         </Link>
                     </li>
                     {user._id ? <>
-                        <li>
+                        <li style={{textAlign: 'center'}}>
                             {width > 500
                                 ? <Link
                                     onMouseEnter={() => setShowUserMenu(true)}
