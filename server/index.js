@@ -8,7 +8,7 @@ const storage = require("./middlewares/storage");
 
 const allowed = [".js", ".css", ".png", ".jpg"];
 
-const port = process.env.PORT || 'https://burgir-spot.herokuapp.com';
+const port = 'https://burgir-spot.herokuapp.com';
 const app = express();
 
 databaseConfig(app);
