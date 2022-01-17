@@ -18,7 +18,7 @@ const config = {
     },
   },
   production: {
-    PORT: process.env.PORT || 3000,
+    PORT: process.env.PORT || 'https://burgir-spot.herokuapp.com',
     COOKIE_NAME: "SESSION_DATA",
     TOKEN_SECRET: "very strong secret",
     SALT_ROUNDS: 10,
