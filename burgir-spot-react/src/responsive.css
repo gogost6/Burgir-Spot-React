@@ -1,0 +1,42 @@
+@media screen and (max-width: 500px) {
+    .header-container ul li {
+        flex-basis: 21%;
+    }
+
+    .header-container ul li.grow {
+        flex-grow: 0;
+    }
+
+    .container {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .card {
+        margin-bottom: 50px;
+    }
+
+    .img-wraper {
+        display: none;
+    }
+
+    .items-in-order {
+        width: 86%;
+        margin-left: 14px;
+    }
+
+    .right-landing {
+        left: 30%;
+        top: 55%;
+    }
+
+    .landing {
+        left: 15%;
+        top: 32%;
+    }
+
+    .langing-img {
+        position: relative;
+        width: auto;
+    }
+}
