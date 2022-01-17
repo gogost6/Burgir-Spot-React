@@ -51,7 +51,7 @@ const userSlice = createSlice({
             state.value.createdBurgirs.push(action.payload);
             localStorage.setItem('user', JSON.stringify(state.value));
         },
-        deletedBurgir: (state, action) => {
+        removeBurgirFromUserModel: (state, action) => {
             let index = state.value.createdBurgirs.findIndex(x => x === action.payload);
             if (index) {
                 state.value.createdBurgirs.splice(index, 1);
@@ -77,6 +77,6 @@ const userSlice = createSlice({
     }
 });
 
-export const { userAuthentication, logout, addToLiked, removeFromLiked, getUser, addBurgirToUserModel, deletedBurgir } = userSlice.actions;
+export const { userAuthentication, logout, addToLiked, removeFromLiked, getUser, addBurgirToUserModel, removeBurgirFromUserModel } = userSlice.actions;
 
 export default userSlice.reducer;

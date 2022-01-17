@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { addToLikedHandler, burgirDetails, deleteBurgir, removeFromFavouriteHandler } from '../../../services/foodService';
 import { addToBucket } from "../../../features/order/orderSlice";
-import { addToLiked, removeFromLiked } from "../../../features/user/userSlice";
+import { addToLiked, removeFromLiked, removeBurgirFromUserModel } from "../../../features/user/userSlice";
 
 const Details = () => {
     const navigate = useNavigate();
@@ -33,7 +33,12 @@ const Details = () => {
     const userButtons = () => {
         const onDelete = (e) => {
             e.preventDefault();
-            deleteBurgir(id).then(res => navigate('/')).catch(err => console.log(err))
+            deleteBurgir(id)
+                .then(res => {
+                    dispatch(removeBurgirFromUserModel(id));
+                    navigate('/');
+                })
+                .catch(err => console.log(err))
         }
         if (user._id) {
             if (user.createdBurgirs.includes(id)) {
