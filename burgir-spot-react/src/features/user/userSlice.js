@@ -47,6 +47,17 @@ const userSlice = createSlice({
             }
             localStorage.setItem('user', JSON.stringify(state.value));
         },
+        addBurgirToUserModel: (state, action) => {
+            state.value.createdBurgirs.push(action.payload);
+            localStorage.setItem('user', JSON.stringify(state.value));
+        },
+        deletedBurgir: (state, action) => {
+            let index = state.value.createdBurgirs.findIndex(x => x === action.payload);
+            if (index) {
+                state.value.createdBurgirs.splice(index, 1);
+            }
+            localStorage.setItem('user', JSON.stringify(state.value));
+        },
         addToLiked: (state, action) => {
             state.value.likedBurgirs.push(action.payload);
             localStorage.setItem('user', JSON.stringify(state.value));
@@ -66,6 +77,6 @@ const userSlice = createSlice({
     }
 });
 
-export const { userAuthentication, logout, addToLiked, removeFromLiked, getUser } = userSlice.actions;
+export const { userAuthentication, logout, addToLiked, removeFromLiked, getUser, addBurgirToUserModel, deletedBurgir } = userSlice.actions;
 
 export default userSlice.reducer;

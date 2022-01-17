@@ -76,7 +76,7 @@ async function create(burgir, email) {
   await record.save();
   user.createdBurgirs.push(record);
   await user.save();
-  return burgerData;
+  return record;
 }
 
 async function getById(id) {

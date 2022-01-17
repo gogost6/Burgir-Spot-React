@@ -1,13 +1,16 @@
 import "./Create.css";
 import Select from 'react-select';
 import * as option from '../options';
+import { useDispatch } from 'react-redux';
+import { addBurgirToUserModel } from '../../../features/user/userSlice';
 import { createBurgir } from '../../../services/foodService';
-import { arrHandler, changeValue, changeMeatValue } from '../index'
+import { arrHandler, changeValue, changeMeatValue } from '../index';
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import * as utils from '../../../utils/styles'
 
 const Create = () => {
+    const dispatch = useDispatch();
     let [state, setState] = useState({
         bonus: [],
         description: "",
@@ -38,7 +41,10 @@ const Create = () => {
         e.preventDefault();
         setError('');
         setIsSubmitted(true);
-        createBurgir(state).then(res => navigate('/menu')).catch(err => setError('Please fill all fields!'));
+        createBurgir(state).then(res => {
+            dispatch(addBurgirToUserModel(res._id));
+            navigate('/menu')
+        }).catch(err => setError('Please fill all fields!'));
     }
 
     return (<div className="container wrap">
