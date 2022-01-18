@@ -43,8 +43,8 @@ const Details = () => {
         if (user._id) {
             if (user.createdBurgirs.includes(id)) {
                 return (<>
-                    <Link className="btn gray" style={{ 'width': '70%' }} to={`/edit/${id}`}>Edit</Link>
-                    <Link className="btn red" style={{ 'width': '70%' }} to={`/menu`} onClick={onDelete}>Delete</Link>
+                    <Link className="btn gray" style={{ 'width': '70%', marginTop: '15px' }} to={`/edit/${id}`}>Edit</Link>
+                    <Link className="btn red" style={{ 'width': '70%', marginTop: '15px' }} to={`/menu`} onClick={onDelete}>Delete</Link>
                 </>);
             } else {
                 return <button className="btn" onClick={likeBtnHandler}

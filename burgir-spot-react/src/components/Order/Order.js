@@ -103,11 +103,15 @@ const Order = () => {
                     <div className="order-details" style={completeOrder ? { filter: 'opacity(10%)', pointerEvents: 'none' } : {}}>
                         <div className="left-right">
                             <p>PRICE</p>
-                            <p>{finalPrice} BGN</p>
+                            <p>{order.totalPrice} BGN</p>
                         </div>
-                        <div className="left-right" style={{ 'borderBottom': '1px solid gray' }}>
+                        <div className="left-right">
                             <p>DELIVERY</p>
                             <p>{deliveryPrice === 0 ? 'FREE' : '2.99 BGN'}</p>
+                        </div>
+                        <div className="left-right" style={{ 'borderBottom': '1px solid gray' }}>
+                            <p>TOTAL PRICE</p>
+                            <p>{finalPrice} BGN</p>
                         </div>
                         <button className="order-btn" onClick={completeOrderBtn}>COMPLETE ORDER</button>
                         <div className="left-right">
