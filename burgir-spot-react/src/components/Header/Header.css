@@ -13,6 +13,12 @@
     padding: 0 40px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.nav-link.order {
+    display: flex;
 }
 
 .header-container ul li .nav-link {
@@ -62,7 +68,7 @@ h6 {
     position: absolute;
     background: white;
     top: 84%;
-    left: 86%;
+    left: 87.3%;
     flex-direction: column;
     padding: 13px;
     border: 1px solid black;

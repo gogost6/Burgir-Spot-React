@@ -33,6 +33,32 @@
         flex-direction: column;
     }
 
+    .create-form {
+        flex-basis: 93%;
+    }
+
+    .form-item-wrapper {
+        flex-basis: 45%;
+        margin: 0 10px;
+    }
+    .container.wrap {
+        flex-wrap: nowrap;
+        height: 94vh;
+    }
+
+    .form-item-wrapper input {
+        height: 29%;
+    }
+
+    .btn-wrapper-create {
+        flex-basis: 45%;
+    }
+
+    .btn-wrapper-create button{
+        width: 100%;
+        background: orange;
+    }
+
     .card {
         margin-bottom: 50px;
         margin-right: 0;
@@ -47,7 +73,7 @@
     .img-wraper {
         display: none;
     }
-    
+
     .image-wrap {
         width: 100%;
     }

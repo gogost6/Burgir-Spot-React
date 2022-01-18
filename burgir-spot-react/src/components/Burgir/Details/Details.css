@@ -35,14 +35,10 @@
     flex-direction: column;
     justify-content: space-between;
     width: 400px;
-    height: 184px;
     margin: auto 0;
+    align-items: center;
 }
 
 .hearth {
     font-size: "30px";
-}
-
-.p-likes {
-    margin-left: 79px;
 }

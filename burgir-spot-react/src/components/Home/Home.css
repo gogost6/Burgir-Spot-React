@@ -9,9 +9,9 @@
 }
 
 .langing-img {
-    position: absolute;
     width: 100%;
-    top: -46px;
+    height: 99vh;
+    object-fit: cover;
 }
 
 .right-landing {
