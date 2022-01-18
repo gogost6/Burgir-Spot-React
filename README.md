@@ -12,7 +12,7 @@ There is options for guests to order, for users to like the meal and for admins 
 -   MERN Stack (MongoDB, Express, React, Node.js)
 -   Redux with Redux Toolkit
 -   Responsive design
--   Custom CSS (the only bootstrap is the SELECT)
+-   Custom CSS (the bootstrap is the SELECT and a Loader)
 -   Validation and error handling on both Front and Back end
 
 # Test it by yourself
