@@ -7,6 +7,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { addToLikedHandler, burgirDetails, deleteBurgir, removeFromFavouriteHandler } from '../../../services/foodService';
 import { addToBucket } from "../../../features/order/orderSlice";
 import { addToLiked, removeFromLiked, removeBurgirFromUserModel } from "../../../features/user/userSlice";
+import ThreeDotsLoader from "../../../utils/ThreeDotsLoader";
 
 const Details = () => {
     const navigate = useNavigate();
@@ -19,6 +20,8 @@ const Details = () => {
     let [burgir, setBurgir] = useState({});
     let [quantity, setQuantity] = useState(1);
     let [isLiked, setIsLiked] = useState(false);
+
+    const btnStyles = { 'width': '70%', marginTop: '15px' };
 
     useEffect(() => {
         burgirDetails(id).then(res => setBurgir(res)).catch(err => console.log(err));
@@ -43,12 +46,12 @@ const Details = () => {
         if (user._id) {
             if (user.createdBurgirs.includes(id)) {
                 return (<>
-                    <Link className="btn gray" style={{ 'width': '70%', marginTop: '15px' }} to={`/edit/${id}`}>Edit</Link>
-                    <Link className="btn red" style={{ 'width': '70%', marginTop: '15px' }} to={`/menu`} onClick={onDelete}>Delete</Link>
+                    <Link className="btn gray" style={btnStyles} to={`/edit/${id}`}>Edit</Link>
+                    <Link className="btn red" style={btnStyles} to={`/menu`} onClick={onDelete}>Delete</Link>
                 </>);
             } else {
                 return <button className="btn" onClick={likeBtnHandler}
-                    style={{ 'width': '70%' }}>{isLiked ? 'Unlike' : 'Like'}
+                    style={btnStyles}>{isLiked ? 'Unlike' : 'Like'}
                     <FontAwesomeIcon icon={faHeart} className="hearth"
                         style={isLiked ? { color: 'red' } : { color: 'blue' }} />
                 </button>
@@ -101,8 +104,9 @@ const Details = () => {
                         </p>
                         {burgir.description ? <p style={{ 'marginTop': '10px' }}>With love: {burgir.description}</p> : ''}
                         <label htmlFor="quantity" style={{ 'marginTop': '10px' }}><strong>Quantity:</strong></label>
-                        <input type="number" id="quantity" name="quantity" min={1} onChange={quantityHandler} value={quantity} />
-                        <h3>Total: {burgir.price * quantity}$</h3>
+                        <input className="quantity" type="number" id="quantity" name="quantity" min={1} onChange={quantityHandler} value={quantity} />
+                        <h3>Price: {burgir.price} BGN</h3>
+                        {quantity > 1 ? <h3>Total: {burgir.price * quantity}BGN</h3> : ''}
                     </div>
                     <div className="btn-wrapper">
                         <p className="p-likes">{burgir.likes.length == 1 ? '1 like' : `${burgir.likes.length} likes`} </p>
@@ -110,7 +114,7 @@ const Details = () => {
                         {userButtons()}
                     </div>
                 </div>)
-                : <p>Loading...</p>}
+                : <ThreeDotsLoader style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />}
         </div>
     )
 }

@@ -9,26 +9,28 @@ There is options for guests to order, for users to like the meal and for admins 
 
 # Technology
 
-* MERN Stack (MongoDB, Express, React, Node.js)
-* Redux with Redux Toolkit
-* Responsive design
-* Custom CSS (the only bootstrap is the SELECT)
-* Validation and error handling on both Front and Back end
+-   MERN Stack (MongoDB, Express, React, Node.js)
+-   Redux with Redux Toolkit
+-   Responsive design
+-   Custom CSS (the only bootstrap is the SELECT)
+-   Validation and error handling on both Front and Back end
 
 # Test it by yourself
 
 If you want to see the project localy on your PC, you can follow these steps in the console:
 
-* git clone https://github.com/gogost6/Burgir-Spot-React.git to a folder
+-   git clone https://github.com/gogost6/Burgir-Spot-React.git to a folder
 
-* Open first console
+-   Open first console
+
 ```
-cd ./burgir-spot-react 
+cd ./burgir-spot-react
 npm install
 npm start
 ```
 
-* Second console
+-   Second console
+
 ```
 cd ./server
 npm install

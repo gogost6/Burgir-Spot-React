@@ -2,20 +2,23 @@ import "./Menu.css"
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { recentBurgirs, getOwned, getLiked } from '../../services/foodService';
+import ThreeDotsLoader from "../../utils/ThreeDotsLoader";
 
-const Menu = ({type}) => {
+const Menu = ({ type }) => {
     let [burgirs, setBurgirs] = useState([]);
+    const [loader, setLoader] = useState(true);
 
     useEffect(() => {
-        if(type === 'menu') {
+        if (type === 'menu') {
             recentBurgirs().then(res => {
+                setLoader(false);
                 setBurgirs(res);
             }).catch(err => console.log(err));
-        } else if(type === 'owned') {
+        } else if (type === 'owned') {
             getOwned().then(res => {
                 setBurgirs(res);
             }).catch(err => console.log(err));
-        } else if(type === 'liked') {
+        } else if (type === 'liked') {
             getLiked().then(res => {
                 setBurgirs(res);
             }).catch(err => console.log(err));
@@ -40,8 +43,9 @@ const Menu = ({type}) => {
                         >Details</Link>
                     </div>)
                     )
-                    : <p>No burgirs in DB!</p>
+                    : <ThreeDotsLoader style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
                 }
+                {burgirs.length === 0 && loader === false ? <p>No burgers in the menu.</p> : ''}
             </div>
         </>
     )
