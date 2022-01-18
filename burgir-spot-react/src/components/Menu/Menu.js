@@ -35,7 +35,7 @@ const Menu = ({ type }) => {
                         </div>
                         <div className="cnt">
                             <p><strong>{x.name}</strong></p>
-                            <p>Price: {x.price}$</p>
+                            <p>Price: {x.price} BGN</p>
                             <p>{x.description}</p>
                         </div>
                         <Link to={`/details/${x._id}`}
