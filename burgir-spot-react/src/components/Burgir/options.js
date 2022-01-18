@@ -17,7 +17,8 @@ export const vegetableOptions = [
     { value: 'boiledPotatoes', label: 'Boiled Potatoes' },
     { value: 'spinach', label: 'Spinach' },
     { value: 'sweetPotato', label: 'Sweet Potato' },
-    { value: 'tomato', label: 'Tomato' }
+    { value: 'tomato', label: 'Tomato' },
+    { value: 'vealCucumber', label: 'Veal Cucumber' }
 ];
 
 export const spicesOptions = [
@@ -35,8 +36,9 @@ export const spicesOptions = [
 export const saucesOptions = [
     { value: 'ranch', label: 'Ranch' },
     { value: 'garlic', label: 'Garlic' },
-    { value: 'ketchup', label: 'ketchup' },
-    { value: 'mayonnaise', label: 'Mayonnaise' }
+    { value: 'ketchup', label: 'Ketchup' },
+    { value: 'mayonnaise', label: 'Mayonnaise' },
+    { value: 'pesto', label: 'Pesto' }
 ];
 
 export const bonusOptions = [
@@ -44,4 +46,5 @@ export const bonusOptions = [
     { value: 'egg', label: 'Egg' },
     { value: 'truffleSauce ', label: 'Truffle Sauce' },
     { value: 'bacon ', label: 'Bacon' },
+    { value: 'moccarela ', label: 'Moccarela' },
 ];
