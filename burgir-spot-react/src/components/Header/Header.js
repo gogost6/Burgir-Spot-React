@@ -61,15 +61,15 @@ const Header = () => {
                     </li>
                     <li onClick={closeMenu}>
                         <Link className="nav-link order" style={active('/order')} to="/order"
-                            onMouseEnter={() =>
-                                {if(width > 500) {
-                                        setShowDivState(true)
-                                    }
+                            onMouseEnter={() => {
+                                if (width > 500) {
+                                    setShowDivState(true)
+                                }
                             }}
-                            onMouseLeave={() =>
-                                {if(width > 500) {
-                                        setShowDivState(false)
-                                    }
+                            onMouseLeave={() => {
+                                if (width > 500) {
+                                    setShowDivState(false)
+                                }
                             }}
                         >
                             <FontAwesomeIcon icon={faShoppingCart} />
@@ -83,7 +83,7 @@ const Header = () => {
                         </Link>
                     </li>
                     {user._id ? <>
-                        <li style={{textAlign: 'center'}}>
+                        <li style={{ textAlign: 'center' }}>
                             {width > 500
                                 ? <Link
                                     onMouseEnter={() => setShowUserMenu(true)}
@@ -117,9 +117,8 @@ const Header = () => {
                     }
                 </ul>
             </header >
-            <MobileUserMenu closeMenu={closeMenu} showMobileUserMenu={showMobileUserMenu} width={width} />
+            {width <= 500 ? <MobileUserMenu closeMenu={closeMenu} showMobileUserMenu={showMobileUserMenu} width={width} /> : ''}
         </>
-
     );
 };
 
