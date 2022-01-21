@@ -6,7 +6,6 @@ const schema = {
     telephone: { type: String, required: true },
     hashedPassword: { type: String, required: true },
     createdBurgirs: [{ type: Schema.Types.ObjectId, ref: 'Burgir' }],
-    favouriteBurgirs: [{ type: Schema.Types.ObjectId, ref: 'Burgir' }],
     likedBurgirs:  [{ type: Schema.Types.ObjectId, ref: 'Burgir' }],
 };
 

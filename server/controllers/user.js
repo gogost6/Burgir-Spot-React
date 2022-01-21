@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
         }
         throw 'No user logged!';
     } catch (err) {
-        res.status(200).json({isLogged: false});
+        res.status(200).json({ isLogged: false });
     }
 });
 
@@ -93,7 +93,6 @@ router.post(
                 username: user.username,
                 telephone: user.telephone,
                 createdBurgirs: user.createdBurgirs,
-                favouriteBurgirs: user.favouriteBurgirs,
                 likedBurgirs: user.likedBurgirs
             };
             const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
@@ -141,14 +140,13 @@ router.post(
                         username: user.username,
                         telephone: user.telephone,
                         createdBurgirs: user.createdBurgirs,
-                        favouriteBurgirs: user.favouriteBurgirs,
                         likedBurgirs: user.likedBurgirs
                     };
 
-                    if(user.isAdmin) {
+                    if (user.isAdmin) {
                         userViewModel.isAdmin = true;
                     }
-                    
+
                     const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
 
                     res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });
@@ -232,7 +230,6 @@ router.post(
                 username: user.username,
                 telephone: user.telephone,
                 createdBurgirs: user.createdBurgirs,
-                favouriteBurgirs: user.favouriteBurgirs,
                 likedBurgirs: user.likedBurgirs
             };
             res.clearCookie(config.COOKIE_NAME);
@@ -298,7 +295,6 @@ router.post(
                 username: user.username,
                 telephone: user.telephone,
                 createdBurgirs: user.createdBurgirs,
-                favouriteBurgirs: user.favouriteBurgirs,
                 likedBurgirs: user.likedBurgirs
             };
             res.clearCookie(config.COOKIE_NAME);
