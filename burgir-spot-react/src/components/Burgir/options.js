@@ -2,6 +2,7 @@ export const meatOptions = [
     { value: 'chicken', label: 'Chicken' },
     { value: 'pork', label: 'Pork' },
     { value: 'veal', label: 'Veal' },
+    { value: 'pulledBeaf', label: 'Pulled Beaf' },
 ];
 
 export const vegetableOptions = [
@@ -38,7 +39,10 @@ export const saucesOptions = [
     { value: 'garlic', label: 'Garlic' },
     { value: 'ketchup', label: 'Ketchup' },
     { value: 'mayonnaise', label: 'Mayonnaise' },
-    { value: 'pesto', label: 'Pesto' }
+    { value: 'pesto', label: 'Pesto' },
+    { value: 'bbq', label: 'BBQ' },
+    { value: 'clili', label: 'Chili' },
+    { value: 'milky', label: 'Milky' },
 ];
 
 export const bonusOptions = [

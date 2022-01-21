@@ -1,6 +1,6 @@
 import "./Order.css";
 import { useDispatch, useSelector } from "react-redux";
-import { changeBurgirQuantity, removeBurgir, checkBusketForItems, clearBucket } from "../../features/order/orderSlice";
+import { changeBurgirQuantity, removeBurgir, checkBusketForItems, clearBucket, freeDelivery } from "../../features/order/orderSlice";
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,6 @@ const Order = () => {
     const order = useSelector(state => state.order.value);
 
     const [code, setCode] = useState('');
-    const [deliveryPrice, setDeliveryPrice] = useState(2.99);
     const [codeErr, setCodeErr] = useState('');
     const [completeOrder, setCompleteOrder] = useState(false);
 
@@ -21,7 +20,7 @@ const Order = () => {
         dispatch(checkBusketForItems());
     }
 
-    let finalPrice = (order.totalPrice + deliveryPrice).toFixed(2);
+    let finalPrice = (order.totalPrice + order.deliveryPrice).toFixed(2);
 
     const quantityOptions = [
         { value: '1', label: '1' },
@@ -48,9 +47,8 @@ const Order = () => {
     const promoCodeHandler = (e, code) => {
         e.preventDefault();
         if (code === 'IWANTFREEDELIVERY') {
-            setDeliveryPrice(0);
             setCode('');
-            setCodeErr('');
+            dispatch(freeDelivery());
         } else {
             setCodeErr('No such code!');
         }
@@ -107,7 +105,7 @@ const Order = () => {
                         </div>
                         <div className="left-right">
                             <p>DELIVERY</p>
-                            <p>{deliveryPrice === 0 ? 'FREE' : '2.99 BGN'}</p>
+                            <p>{order.deliveryPrice === 0 ? 'FREE' : `${order.deliveryPrice} BGN`}</p>
                         </div>
                         <div className="left-right" style={{ 'borderBottom': '1px solid gray' }}>
                             <p>TOTAL PRICE</p>

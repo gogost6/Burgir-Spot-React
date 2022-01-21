@@ -4,7 +4,8 @@ const initialState = {
   value: {
     totalPrice: 0,
     quantity: 0,
-    burgirs: []
+    burgirs: [],
+    deliveryPrice: 2.99
   },
 }
 
@@ -12,6 +13,9 @@ export const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
+    freeDelivery: (state, action) => {
+      state.value.deliveryPrice = 0;
+    },
     checkBusketForItems: (state, action) => {
       const busket = JSON.parse(localStorage.getItem('order'));
       if (busket !== null && busket.quantity !== 0) {
@@ -87,6 +91,6 @@ export const orderSlice = createSlice({
   },
 })
 
-export const { addToBucket, clearBucket, changeBurgirQuantity, removeBurgir, checkBusketForItems } = orderSlice.actions;
+export const { addToBucket, clearBucket, changeBurgirQuantity, removeBurgir, checkBusketForItems, freeDelivery } = orderSlice.actions;
 
 export default orderSlice.reducer;

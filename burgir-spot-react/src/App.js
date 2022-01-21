@@ -17,7 +17,8 @@ import NotFound from "./components/NotFound/NotFound";
 import Order from "./components/Order/Order";
 
 import { userAuthentication } from "./features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { checkBusketForItems } from "./features/order/orderSlice";
 
 import { getUser } from "./services/authService";
 
@@ -29,6 +30,7 @@ function App() {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
+    const order = useSelector(state => state.order.value);
 
     useMemo(() => {
         getUser()
@@ -41,7 +43,11 @@ function App() {
             .catch((err) => {
                 console.log(err);
             })
-    }, [])
+    }, []);
+
+    if (order.quantity === 0) {
+        dispatch(checkBusketForItems());
+    }
 
     return (
         <React.StrictMode>

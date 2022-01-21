@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const OrderDetails = ({ width, order, showDivState, setShowDivState }) => {
+    const deliveryPrice = useSelector(state => state.order.value.deliveryPrice);
+
     return (<div className="items-header"
         onMouseEnter={() =>
             {if(width > 500) {
@@ -32,7 +35,7 @@ const OrderDetails = ({ width, order, showDivState, setShowDivState }) => {
         </div>
         <div style={{ display: 'flex' }}>
             <h3>Delivery</h3>
-            <h6 style={{ marginLeft: '10px' }}>2.99</h6>
+            <h6 style={{ marginLeft: '10px' }}>{deliveryPrice} BGN</h6>
         </div>
         <div style={{ display: 'flex' }}>
             <h3>Total</h3>

@@ -19,6 +19,7 @@
 
 .nav-link.order {
     display: flex;
+    width: 68%;
 }
 
 .header-container ul li .nav-link {
