@@ -50,7 +50,7 @@ function App() {
     }
 
     return (
-        <React.StrictMode>
+        <>
             <Header />
             <div className="router">
                 <Routes>
@@ -77,7 +77,7 @@ function App() {
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
-        </React.StrictMode>
+        </>
     );
 }
 
