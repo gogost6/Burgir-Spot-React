@@ -62,12 +62,12 @@ const Header = () => {
                     <li onClick={closeMenu}>
                         <Link className="nav-link order" style={active('/order')} to="/order"
                             onMouseEnter={() => {
-                                if (width > 500) {
+                                if (width > 768) {
                                     setShowDivState(true)
                                 }
                             }}
                             onMouseLeave={() => {
-                                if (width > 500) {
+                                if (width > 768) {
                                     setShowDivState(false)
                                 }
                             }}
@@ -84,7 +84,7 @@ const Header = () => {
                     </li>
                     {user._id ? <>
                         <li style={{ textAlign: 'center' }}>
-                            {width > 500
+                            {width > 768
                                 ? <Link
                                     onMouseEnter={() => setShowUserMenu(true)}
                                     onMouseLeave={() => setShowUserMenu(false)}
@@ -117,7 +117,7 @@ const Header = () => {
                     }
                 </ul>
             </header >
-            {width <= 500 ? <MobileUserMenu closeMenu={closeMenu} showMobileUserMenu={showMobileUserMenu} width={width} /> : ''}
+            {width <= 768 ? <MobileUserMenu closeMenu={closeMenu} showMobileUserMenu={showMobileUserMenu} width={width} /> : ''}
         </>
     );
 };
