@@ -6,7 +6,9 @@
   "scripts": {
     "heroku-postbuild": "cd server && npm install && cd ../ && cd burgir-spot-react && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd server && node index.js"
+    "start": "cd server && node index.js",
+	"server": "cd server && nodemon index.js",
+	"fe": "cd burgir-spot-react && npm start"
   },
   "repository": {
     "type": "git",

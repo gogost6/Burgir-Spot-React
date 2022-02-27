@@ -1,0 +1,162 @@
+@media screen and (max-width: 768px) {
+    html {
+        background: #acacac38;
+    }
+
+    .header-container {
+        ul {
+            align-items: center;
+        }
+
+        li.grow {
+            flex-grow: 0;
+        }
+
+        .nav-link {
+            padding: 10px 15px;
+        }
+    }
+
+    .text-wraper {
+        flex-basis: 26%;
+    }
+
+    .code-input {
+        height: 45px;
+    }
+
+    .container.pad {
+        background-color: none;
+
+        .card {
+            margin-bottom: 50px;
+            margin-right: 0;
+            padding-bottom: 13px;
+            width: 100%;
+
+            .image-wrap {
+                width: 100%;
+
+                img {
+                    width: 100%;
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+        }
+    }
+
+    .container {
+        background-color: none;
+        justify-content: center;
+        flex-direction: column;
+
+        .img-wraper {
+            display: none;
+        }
+
+        .items-in-order {
+            width: 86%;
+            margin-left: 14px;
+        }
+
+        .details-card {
+            flex-direction: column;
+
+            .details-wrapper {
+                margin-right: 0;
+                text-align: center;
+            }
+
+            .btn-wrapper {
+                margin: auto 0;
+                align-items: center;
+                width: auto;
+                height: auto;
+
+                .p-likes {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+    .container.wrap {
+        flex-wrap: nowrap;
+        height: 94vh;
+
+        .create-form {
+            flex-basis: 79%;
+            width: 100%;
+            flex-direction: column;
+            flex-wrap: nowrap;
+
+            .form-item-wrapper {
+                flex-basis: 45%;
+                margin: 0 10px;
+
+                input {
+                    height: 64%;
+                }
+            }
+            
+            .btn-wrapper-create {
+                flex-basis: 45%;
+
+                button {
+                    width: 92%;
+                    background: orange;
+                }
+            }
+        }
+    }
+
+    .nav-link.order {
+        display: flex;
+    }
+
+    .btn {
+        margin: 9px 18px;
+    }
+
+    .right-landing {
+        position: relative;
+        color: black;
+        left: 0;
+        top: 0;
+        text-align: center;
+
+        a {
+            display: inline-block;
+            width: 35%;
+            background-color: rgb(204, 200, 200);
+            color: black;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+    }
+
+    .landing {
+        position: relative;
+        color: black;
+        left: 0;
+        top: 0;
+        margin: 116px 0px;
+    }
+
+    .langing-img {
+        display: none;
+    }
+
+    .user-container {
+        flex-direction: column;
+    }
+
+    .register-class {
+        display: none;
+    }
+}
