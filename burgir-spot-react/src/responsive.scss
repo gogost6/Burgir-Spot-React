@@ -6,14 +6,13 @@
     .header-container {
         ul {
             align-items: center;
+            .nav-link {
+                padding: 10px 15px!important;
+            }
         }
 
         li.grow {
             flex-grow: 0;
-        }
-
-        .nav-link {
-            padding: 10px 15px;
         }
     }
 
