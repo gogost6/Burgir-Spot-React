@@ -5,7 +5,7 @@ The project is hosted on heroku and the database is Mongo DB Atlas.
 # Description
 
 First React project! It's an online fast food restaurant.
-There is options for guests to order, for users to like the meal and for admins to create burgers!
+There are options for guests to order, for users to like the meal and for admins to create burgers!
 
 # Technology
 
