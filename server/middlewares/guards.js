@@ -19,7 +19,9 @@ module.exports = {
     },
     isOwner() {
         return (req, res, next) => {
-            if (req.data.burgir && req.user && (req.data.burgir.owner.email == req.user.email)) {
+            const id = req.data.burgir._id.toHexString()
+
+            if (req.data.burgir && req.user && req.user.createdBurgirs.includes(id)) {
                 next();
             } else {
                 res.status(400);

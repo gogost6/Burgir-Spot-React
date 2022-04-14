@@ -80,12 +80,12 @@ async function create(burgir, email) {
 }
 
 async function getById(id) {
-  const burgir = Burgir.findOne({ _id: id }).populate("owner").lean();
+  const burgir = Burgir.findOne({ _id: id }).lean();
   return burgir;
 }
 
 async function edit(id, data) {
-  let record = await Burgir.findByIdAndUpdate({ _id: id }, data);
+  let record = await Burgir.findOneAndUpdate({ _id: id }, data);
   return record.save();
 }
 
