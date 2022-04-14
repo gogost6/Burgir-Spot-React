@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import React, { useMemo } from "react";
+import React, { useEffect } from "react";
 
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -32,7 +32,7 @@ function App() {
     const navigate = useNavigate();
     const order = useSelector(state => state.order.value);
 
-    useMemo(() => {
+    useEffect(() => {
         getUser()
             .then(response => {
                 dispatch(userAuthentication(response));
