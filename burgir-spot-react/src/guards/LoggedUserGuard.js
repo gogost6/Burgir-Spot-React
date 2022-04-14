@@ -1,13 +1,11 @@
 import { Navigate, useLocation, Outlet } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { getUser } from '../features/user/userSlice';
+import { useSelector } from 'react-redux';
 
 const LoggedUserGuard = () => {
-    const dispatch = useDispatch();
-    const user = dispatch(getUser());
+    const user = useSelector(state => state.user.value)
     const location = useLocation();
     
-    if (user.payload.isLogged) {
+    if (user.isLogged) {
         return <Outlet/>
     } else {
         return <Navigate to='/login' replace state={{ path: location.pathname }} />;
