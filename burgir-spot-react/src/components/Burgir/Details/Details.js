@@ -17,7 +17,7 @@ const Details = () => {
     const params = useParams();
     const { id } = params;
 
-    let [burgir, setBurgir] = useState({});
+    let [burgir, setBurgir] = useState({_id: id});
     let [quantity, setQuantity] = useState(1);
     let [isLiked, setIsLiked] = useState(false);
 
@@ -25,13 +25,15 @@ const Details = () => {
 
     useEffect(() => {
         burgirDetails(id).then(res => setBurgir(res)).catch(err => console.log(err));
+    }, [burgir._id]);
 
+    useEffect(() => {
         if (user._id && user.likedBurgirs.includes(burgir._id)) {
             setIsLiked(true);
         } else {
             setIsLiked(false);
         }
-    }, [user.likedBurgirs, burgir._id]);
+    }, [user.likedBurgirs])
 
     const userButtons = () => {
         const onDelete = (e) => {
@@ -80,10 +82,10 @@ const Details = () => {
         e.preventDefault();
         if (isLiked) {
             dispatch(removeFromLiked(_id));
-            removeFromFavouriteHandler(_id).then(res => console.log(res)).catch(err => console.log(err));
+            removeFromFavouriteHandler(_id).then(res => setIsLiked(false)).catch(err => console.log(err));
         } else {
             dispatch(addToLiked(_id));
-            addToLikedHandler(_id).then(res => console.log(res)).catch(err => console.log(err));
+            addToLikedHandler(_id).then(res => setIsLiked(true)).catch(err => console.log(err));
         }
     }
 
