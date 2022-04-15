@@ -14,7 +14,7 @@ async function createUser(email, username, telephone, hashedPassword) {
 }
 
 async function updateUser(id, body) {
-    const user = await User.findOneAndUpdate(id, body, { safe: true, multi: true, new: true });
+    const user = await User.findOneAndUpdate({id}, {body}, { safe: true, multi: true, new: true });
     await user.save();
     return user;
 }
