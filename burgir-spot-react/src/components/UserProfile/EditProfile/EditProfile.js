@@ -51,6 +51,7 @@ const EditProfile = () => {
 
         editHandled(result)
             .then(res => {
+                console.log(res);
                 dispatch(userAuthentication(res));
                 navigate('/user');
             })
