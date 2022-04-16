@@ -223,7 +223,7 @@ router.post(
 
             const userUpdateModel = { username, telephone, email };
             const user = await userService.updateUser(_id, userUpdateModel);
-
+            
             const userViewModel = {
                 _id: user._id,
                 email: user.email,
@@ -232,7 +232,7 @@ router.post(
                 createdBurgirs: user.createdBurgirs,
                 likedBurgirs: user.likedBurgirs
             };
-
+            
             if (user.isAdmin) {
                 userViewModel.isAdmin = true;
             }
@@ -302,6 +302,11 @@ router.post(
                 createdBurgirs: user.createdBurgirs,
                 likedBurgirs: user.likedBurgirs
             };
+
+            if (user.isAdmin) {
+                userViewModel.isAdmin = true;
+            }
+            
             res.clearCookie(config.COOKIE_NAME);
             const token = jwt.sign(userViewModel, config.TOKEN_SECRET);
             res.cookie(config.COOKIE_NAME, token, { httpOnly: true, sameSite: "Lax" });
