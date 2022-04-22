@@ -11,7 +11,7 @@ const Order = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const order = useAppSelector(state => state.order.value);
-
+    
     const [code, setCode] = useState('');
     const [codeErr, setCodeErr] = useState('');
     const [completeOrder, setCompleteOrder] = useState(false);
@@ -92,7 +92,7 @@ const Order = () => {
                                 <div className="right-side">
                                     <FontAwesomeIcon className="trash-svg" icon={faTrash}
                                         onClick={(e) => removeItem(e, x._id)} />
-                                    <p>{x.singlePrice * x.quantity} BGN</p>
+                                    <p>{x.price * x.quantity} BGN</p>
                                 </div>
                             </div>)}
 
