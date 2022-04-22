@@ -17,7 +17,6 @@ import NotFound from "./components/NotFound/NotFound";
 import Order from "./components/Order/Order";
 
 import { userAuthentication } from "./features/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { checkBusketForItems } from "./features/order/orderSlice";
 
 import { getUser } from "./services/authService";
@@ -25,12 +24,13 @@ import { getUser } from "./services/authService";
 import LoggedUserGuard from "./guards/LoggedUserGuard";
 import GuestGuard from './guards/GuestGuard';
 import AdminGuard from "./guards/AdminGuard";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
 
 function App() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const order = useSelector(state => state.order.value);
+    const order = useAppSelector((state) => state.order.value);
 
     useEffect(() => {
         getUser()
@@ -54,7 +54,7 @@ function App() {
             <Header />
             <div className="router">
                 <Routes>
-                    <Route path="/" exact element={<Home />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/menu" element={<Menu type={'menu'} />} />
                     <Route path="/order" element={<Order />} />
                     <Route element={<GuestGuard />}>
