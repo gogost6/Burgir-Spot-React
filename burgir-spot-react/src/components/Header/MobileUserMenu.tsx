@@ -3,7 +3,12 @@ import { logoutHandled } from "../../services/authService";
 import { logout } from "../../features/user/userSlice";
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
-const UserMenu = ({ showUserMenu, setShowUserMenu }) => {
+interface PropsType {
+    closeMenu: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+    showMobileUserMenu: boolean;
+}
+
+const MobileUserMenu = (props: PropsType) => {
     const dispatch = useAppDispatch();
     const user = useAppSelector(state => state.user.value);
 
@@ -12,34 +17,38 @@ const UserMenu = ({ showUserMenu, setShowUserMenu }) => {
         dispatch(logout());
     }
 
-    return <div className="user-menu"
-        onMouseEnter={() => setShowUserMenu(true)}
-        onMouseLeave={() => setShowUserMenu(false)}
-        style={showUserMenu ? { display: 'flex' } : { display: 'none' }}>
+    return <div style={props.showMobileUserMenu
+        ? { display: 'flex' }
+        : { display: 'none' }} className="mobile-user-menu">
         {user.isAdmin
-            ? <> <li className="user-menu-item">
+            ? <> <li onClick={props.closeMenu} className="mobile-user-item">
                 <Link className="nav-link" to="/create">
                     Create
                 </Link>
             </li>
-                <li className="user-menu-item">
+                <li onClick={props.closeMenu} className="mobile-user-item">
                     <Link className="nav-link" to="/owned">
                         Owned
                     </Link>
                 </li> </>
             : ''}
 
-        <li className="user-menu-item">
+        <li onClick={props.closeMenu} className="mobile-user-item">
             <Link className="nav-link" to="/liked-collection">
                 Liked
             </Link>
         </li>
-        {/* <li className="user-menu-item">
+        <li onClick={props.closeMenu} className="mobile-user-item">
+            <Link className="nav-link" to="/user">
+                User Profile
+            </Link>
+        </li>
+        {/* <li className="mobile-user-item">
             <Link className="nav-link" to="/last-orders">
                 Last Orders
             </Link>
         </li> */}
-        <li>
+        <li onClick={props.closeMenu} className="mobile-user-item">
             <Link className="nav-link" to="/" onClick={logoutBtn}>
                 Logout
             </Link>
@@ -47,4 +56,4 @@ const UserMenu = ({ showUserMenu, setShowUserMenu }) => {
     </div>
 }
 
-export default UserMenu;
+export default MobileUserMenu;
