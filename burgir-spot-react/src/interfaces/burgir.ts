@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface Burgir {
     _id: string;
     name: string;
@@ -19,7 +21,7 @@ export interface Burgir {
 
 export interface OrderBurgir {
     quantity: number;
-    totalPrice: number; 
+    totalPrice: number;
     singlePrice: number;
     description: string;
     price: number;
