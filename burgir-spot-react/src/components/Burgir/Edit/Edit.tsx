@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import * as utils from '../../../utils/styles';
+import { InitialBurgir } from '../../../interfaces/burgir';
 
 const Edit = () => {
     const params = useParams();
@@ -19,7 +20,7 @@ const Edit = () => {
     let [priceHover, setPriceHover] = useState(false);
     let [imgUrlHover, setImgHover] = useState(false);
 
-    let [burgir, setBurgir] = useState({
+    let [burgir, setBurgir] = useState<InitialBurgir>({
         bonus: [],
         description: "",
         imgUrl: "",
@@ -32,7 +33,7 @@ const Edit = () => {
     });
 
     const colorStyles = {
-        control: (styles) => ({ ...styles, 'border': '2px solid red' }),
+        control: (styles: {}) => ({ ...styles, 'border': '2px solid red' }),
     }
 
     useEffect(() => {
@@ -44,12 +45,14 @@ const Edit = () => {
         }
     }, [id]);
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError('');
+        setError("");
         setIsSubmitted(true);
-        editBurgir(burgir, id).then(res => navigate('/menu')).catch(err => setError('Please fill all fields!'));
-    }
+        editBurgir(burgir, id!)
+            .then((res) => navigate("/menu"))
+            .catch((err) => setError("Please fill all fields!"));
+    };
 
     return (<div className="container wrap">
         <h1 className="h1">Edit your burgir!</h1>
@@ -87,7 +90,6 @@ const Edit = () => {
                         ...utils.inputBorderStyle.normal,
                         ...(priceHover ? utils.inputBorderStyle.hover : null),
                         ...(burgir.price === 0 && isSubmitted ? utils.inputBorderStyle.error : null),
-                        ...(burgir.price === '' && isSubmitted ? utils.inputBorderStyle.error : null),
                     }}
                 />
             </div>
@@ -97,28 +99,28 @@ const Edit = () => {
                     name="meat" id="meat"
                     value={[{ value: burgir.meat, label: burgir.meat }]}
                     onChange={(e) => changeMeatValue(e, setBurgir)}
-                    styles={burgir.meat === '' && isSubmitted ? colorStyles : ''}
+                    styles={burgir.meat === '' && isSubmitted ? colorStyles : {}}
                 />
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="vegetables">Vegetables</label>
                 <Select options={option.vegetableOptions} isClearable={true} isMulti={true}
-                    name="vegetables" id="vegetables" onChange={(e) => arrHandler(e, 'vegetables', setBurgir)} value={arrValueHandler(burgir, 'vegetables')} />
+                    name="vegetables" id="vegetables" onChange={(e) => arrHandler(e, 'vegetables', setBurgir)} value={arrValueHandler(burgir.vegetables)} />
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="spices">Spices</label>
                 <Select options={option.spicesOptions} isClearable={true} isMulti={true}
-                    name="spices" id="spices" onChange={(e) => arrHandler(e, 'spices', setBurgir)} value={arrValueHandler(burgir, 'spices')} />
+                    name="spices" id="spices" onChange={(e) => arrHandler(e, 'spices', setBurgir)} value={arrValueHandler(burgir.spices)} />
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="sauses">Sauces</label>
                 <Select options={option.saucesOptions} isClearable={true} isMulti={true}
-                    name="sauses" id="sauses" onChange={(e) => arrHandler(e, 'sauses', setBurgir)} value={arrValueHandler(burgir, 'sauses')} />
+                    name="sauses" id="sauses" onChange={(e) => arrHandler(e, 'sauses', setBurgir)} value={arrValueHandler(burgir.sauses)} />
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="Bonus">Bonus</label>
                 <Select options={option.bonusOptions} isClearable={true} isMulti={true}
-                    name="bonus" id="bonus" onChange={(e) => arrHandler(e, 'bonus', setBurgir)} value={arrValueHandler(burgir, 'bonus')} />
+                    name="bonus" id="bonus" onChange={(e) => arrHandler(e, 'bonus', setBurgir)} value={arrValueHandler(burgir.bonus)} />
             </div>
             <div className="form-item-wrapper">
                 <label htmlFor="description">Description:</label>
