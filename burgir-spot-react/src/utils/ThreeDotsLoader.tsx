@@ -1,7 +1,6 @@
-import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const ThreeDotsLoader = props => (
+const ThreeDotsLoader = (props: {style: {}}) => (
     <ContentLoader
       viewBox="0 0 400 160"
       height={160}
