@@ -8,10 +8,11 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import * as utils from '../../../utils/styles'
 import { useAppDispatch } from "../../../app/hooks";
+import { InitialBurgir } from "../../../interfaces/burgir";
 
 const Create = () => {
     const dispatch = useAppDispatch();
-    let [state, setState] = useState({
+    let [state, setState] = useState<InitialBurgir>({
         bonus: [],
         description: "",
         imgUrl: "",
@@ -24,7 +25,7 @@ const Create = () => {
     });
 
     const colorStyles = {
-        control: (styles) => ({ ...styles, 'border': '2px solid red' }),
+        control: (styles: {}) => ({ ...styles, 'border': '2px solid red' }),
     }
 
     let [error, setError] = useState('');
@@ -37,15 +38,17 @@ const Create = () => {
 
     const navigate = useNavigate();
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError('');
+        setError("");
         setIsSubmitted(true);
-        createBurgir(state).then(res => {
-            dispatch(addBurgirToUserModel(res._id));
-            navigate('/menu')
-        }).catch(err => setError('Please fill all fields!'));
-    }
+        createBurgir(state)
+            .then((res) => {
+                dispatch(addBurgirToUserModel(res._id));
+                navigate("/menu");
+            })
+            .catch((err) => setError("Please fill all fields!"));
+    };
 
     return (<div className="container wrap">
         <h1 className="h1">Share your own Burgir!</h1>
@@ -82,7 +85,6 @@ const Create = () => {
                         ...utils.inputBorderStyle.normal,
                         ...(priceHover ? utils.inputBorderStyle.hover : null),
                         ...(state.price === 0 && isSubmitted ? utils.inputBorderStyle.error : null),
-                        ...(state.price === '' && isSubmitted ? utils.inputBorderStyle.error : null),
                     }}
                 />
             </div>
@@ -90,7 +92,7 @@ const Create = () => {
                 <label htmlFor="meat">*Meat</label>
                 <Select options={option.meatOptions} name="meat" id="meat"
                     onChange={(e) => changeMeatValue(e, setState)}
-                    styles={state.meat === '' && isSubmitted ? colorStyles : ''}
+                    styles={state.meat === '' && isSubmitted ? colorStyles : {}}
                 />
             </div>
             <div className="form-item-wrapper">

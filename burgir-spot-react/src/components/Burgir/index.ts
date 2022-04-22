@@ -1,5 +1,5 @@
 import { MultiValue, SingleValue } from "react-select";
-import { Burgir } from "../../interfaces/burgir";
+import { InitialBurgir } from "../../interfaces/burgir";
 
 export const arrHandler = (
     e: MultiValue<{
@@ -7,7 +7,7 @@ export const arrHandler = (
         label: string;
     }>,
     type: string,
-    fnc: React.Dispatch<React.SetStateAction<Burgir>>
+    fnc: React.Dispatch<React.SetStateAction<InitialBurgir>>
 ) => {
     const arr = e.map((x) => x.value);
     fnc((oldState) => {
@@ -35,7 +35,7 @@ export const arrValueHandler = (state: IndexType, type: string) => {
 export const changeValue = (
     e: React.ChangeEvent<HTMLInputElement>,
     type: string,
-    fnc: React.Dispatch<React.SetStateAction<Burgir>>
+    fnc: React.Dispatch<React.SetStateAction<InitialBurgir>>
 ) => {
     const newValue = e.target.value;
     fnc((state) => {
@@ -51,7 +51,7 @@ export const changeMeatValue = (
         value: string;
         label: string;
     }>,
-    fnc: React.Dispatch<React.SetStateAction<Burgir>>
+    fnc: React.Dispatch<React.SetStateAction<InitialBurgir>>
 ) => {
     const newValue = e!.value;
     fnc((state) => {
