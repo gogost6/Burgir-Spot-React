@@ -19,8 +19,7 @@ export interface RegisterData {
 }
 
 export interface LoginData {
-    username: string;
-    password: string;
+    [k: string]: FormDataEntryValue;
 }
 
 export interface EditProfileData {
