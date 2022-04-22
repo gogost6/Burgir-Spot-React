@@ -1,3 +1,5 @@
+import { InitialBurgir } from "../interfaces/burgir";
+
 const url = '/api/burgir';
 
 export const recentBurgirs = async () => {
@@ -18,7 +20,7 @@ export const recentBurgirs = async () => {
     }
 }
 
-export const burgirDetails =  async (id) => {
+export const burgirDetails =  async (id: string) => {
     const responce = await fetch(`${url}/details/${id}`, {
         method: 'GET',
         headers: {
@@ -36,26 +38,26 @@ export const burgirDetails =  async (id) => {
     }
 }
 
-export const createBurgir = async (data) => {
+export const createBurgir = async (data: InitialBurgir) => {
     const responce = await fetch(`${url}/create-burgir`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'content-type': 'application/json'
+            "content-type": "application/json",
         },
         body: JSON.stringify(data),
-        credentials: 'include'
-    });    
+        credentials: "include",
+    });
 
     const result = await responce.json();
-    
-    if(!responce.ok) {
+
+    if (!responce.ok) {
         throw result;
     } else {
-        return result; 
+        return result;
     }
-}
+};
 
-export const deleteBurgir = async (id) => {
+export const deleteBurgir = async (id: string) => {
     const responce = await fetch(`${url}/delete/${id}`, {
         method: 'GET',
         headers: {
@@ -73,7 +75,7 @@ export const deleteBurgir = async (id) => {
     }
 }
 
-export const editBurgir = async (data, id) => {
+export const editBurgir = async (data: InitialBurgir, id: string) => {
     const responce = await fetch(`${url}/edit/${id}`, {
         method: 'POST',
         headers: {
@@ -92,7 +94,7 @@ export const editBurgir = async (data, id) => {
     }
 }
 
-export const addToLikedHandler = async (id) => {
+export const addToLikedHandler = async (id: string) => {
     const data = {_id: id};
     const responce = await fetch(`${url}/like`, {
         method: 'POST',
@@ -112,7 +114,7 @@ export const addToLikedHandler = async (id) => {
     }
 }
 
-export const removeFromFavouriteHandler = async (id) => {
+export const removeFromFavouriteHandler = async (id: string) => {
     const data = {_id: id};
     const responce = await fetch(`${url}/like`, {
         method: 'DELETE',
@@ -132,7 +134,7 @@ export const removeFromFavouriteHandler = async (id) => {
     }
 }
 
-export const getOwned =  async (id) => {
+export const getOwned =  async (id: string) => {
     const responce = await fetch(`${url}/owned`, {
         method: 'GET',
         headers: {
@@ -150,7 +152,7 @@ export const getOwned =  async (id) => {
     }
 }
 
-export const getLiked =  async (id) => {
+export const getLiked =  async (id: string) => {
     const responce = await fetch(`${url}/liked-collection`, {
         method: 'GET',
         headers: {
