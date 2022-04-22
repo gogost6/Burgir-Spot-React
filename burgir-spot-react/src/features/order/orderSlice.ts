@@ -47,7 +47,7 @@ export const orderSlice = createSlice({
             }
 
             state.value.burgirs.forEach((x) => {
-                totalPrice += x.singlePrice * x.quantity;
+                totalPrice += x.price * x.quantity;
                 quantity += x.quantity;
             });
 
@@ -68,7 +68,7 @@ export const orderSlice = createSlice({
 
             existingBurgir!.quantity = Number(action.payload.quantity);
             state.value.burgirs.forEach((x) => {
-                totalPrice += x.singlePrice * x.quantity;
+                totalPrice += x.price * x.quantity;
                 quantity += x.quantity;
             });
 
@@ -93,7 +93,7 @@ export const orderSlice = createSlice({
             }
 
             state.value.burgirs.forEach((x) => {
-                totalPrice += x.singlePrice * x.quantity;
+                totalPrice += x.price * x.quantity;
                 quantity += x.quantity;
             });
 
