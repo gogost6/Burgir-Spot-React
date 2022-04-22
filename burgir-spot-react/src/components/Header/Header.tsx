@@ -30,11 +30,13 @@ const Header = () => {
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [showMobileUserMenu, setShowMobileUserMenu] = useState(false);
 
-    const active = (name) => location.pathname === name
+    const active = (name: string) => location.pathname === name
         ? { color: 'white', background: '#FFCC00', borderRadius: '13px' }
         : {};
 
-    const mobileMenuBtn = (e) => {
+    const mobileMenuBtn = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
         e.preventDefault();
 
         if (showMobileUserMenu) {
@@ -42,12 +44,12 @@ const Header = () => {
         } else {
             setShowMobileUserMenu(true);
         }
-    }
+    };
 
-    const closeMenu = (e) => {
+    const closeMenu = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
         e.preventDefault();
         setShowMobileUserMenu(false);
-    }
+    };
 
     return (
         <>
@@ -117,7 +119,7 @@ const Header = () => {
                     }
                 </ul>
             </header >
-            {width <= 768 ? <MobileUserMenu closeMenu={closeMenu} showMobileUserMenu={showMobileUserMenu} width={width} /> : ''}
+            {width <= 768 ? <MobileUserMenu closeMenu={closeMenu} showMobileUserMenu={showMobileUserMenu} /> : ''}
         </>
     );
 };
