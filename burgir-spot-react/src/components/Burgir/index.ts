@@ -18,17 +18,14 @@ export const arrHandler = (
     });
 };
 
-interface IndexType {
-    [prop: string]: []
-}
 
-export const arrValueHandler = (state: IndexType, type: string) => {
-    if (state[type]) {
-        return state[type].map((x) => {
+export const arrValueHandler = (state: string[]) => {
+    if (state) {
+        return state.map((x) => {
             return { value: x, label: x };
         });
     } else {
-        return "";
+        return { value: '', label: '' };
     }
 };
 
