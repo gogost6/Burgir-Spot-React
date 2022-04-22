@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
 
 const OrderDetails = ({ width, order, showDivState, setShowDivState }) => {
-    const deliveryPrice = useSelector(state => state.order.value.deliveryPrice);
+    const deliveryPrice = useAppSelector(state => state.order.value.deliveryPrice);
 
     return (<div className="items-header"
         onMouseEnter={() =>

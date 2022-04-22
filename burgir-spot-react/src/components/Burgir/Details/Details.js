@@ -1,18 +1,18 @@
 import "./Details.css";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { addToLikedHandler, burgirDetails, deleteBurgir, removeFromFavouriteHandler } from '../../../services/foodService';
 import { addToBucket } from "../../../features/order/orderSlice";
 import { addToLiked, removeFromLiked, removeBurgirFromUserModel } from "../../../features/user/userSlice";
 import ThreeDotsLoader from "../../../utils/ThreeDotsLoader";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 const Details = () => {
     const navigate = useNavigate();
-    const user = useSelector((state) => state.user.value);
-    const dispatch = useDispatch();
+    const user = useAppSelector((state) => state.user.value);
+    const dispatch = useAppDispatch();
 
     const params = useParams();
     const { id } = params;

@@ -2,14 +2,14 @@ import "./EditPassword.css";
 import { useState } from "react";
 import { editPasswordHandled } from '../../../services/authService'
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { userAuthentication } from "../../../features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 const EditPassword = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const user = useSelector(state => state.user.value);
+    const user = useAppSelector(state => state.user.value);
 
     let [oldPassword, setOldPassword] = useState('');
     let [newPassword, setNewPassword] = useState('');

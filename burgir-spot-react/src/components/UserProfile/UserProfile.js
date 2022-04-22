@@ -5,10 +5,10 @@ import "./UserProfile.css";
 // import { faFacebook, faTwitter, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 import { Link, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../app/hooks";
 
 const UserProfile = () => {
-    const user = useSelector((state) => state.user.value);
+    const user = useAppSelector((state) => state.user.value);
 
     return (
         <div className="user-container">

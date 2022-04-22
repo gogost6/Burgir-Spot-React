@@ -3,12 +3,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from '../../services/authService';
 import * as utils from '../../utils/styles';
-import { useDispatch } from "react-redux";
 import { userAuthentication } from "../../features/user/userSlice";
+import { useAppDispatch } from "../../app/hooks";
 
 const Login = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     let [error, setError] = useState('');
     let [isSubmitted, setIsSubmitted] = useState(false);
     let [username, setUsername] = useState('');

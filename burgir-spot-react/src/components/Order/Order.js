@@ -1,16 +1,16 @@
 import "./Order.css";
-import { useDispatch, useSelector } from "react-redux";
 import { changeBurgirQuantity, removeBurgir, checkBusketForItems, clearBucket, freeDelivery } from "../../features/order/orderSlice";
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 const Order = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const order = useSelector(state => state.order.value);
+    const order = useAppSelector(state => state.order.value);
 
     const [code, setCode] = useState('');
     const [codeErr, setCodeErr] = useState('');

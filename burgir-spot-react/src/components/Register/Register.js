@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from '../../services/authService';
 import * as utils from '../../utils/styles';
 import { usedUsername, usedEmail } from '../../services/authService';
-import { useDispatch } from "react-redux";
 import { userAuthentication } from "../../features/user/userSlice";
+import { useAppDispatch } from "../../app/hooks";
 
 const Register = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     let [isSubmitted, setIsSubmitted] = useState(false);

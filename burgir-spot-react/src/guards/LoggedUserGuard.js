@@ -1,8 +1,8 @@
 import { Navigate, useLocation, Outlet } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useAppSelector } from "../app/hooks";
 
 const LoggedUserGuard = () => {
-    const user = useSelector(state => state.user.value)
+    const user = useAppSelector(state => state.user.value)
     const location = useLocation();
     
     if (user.isLogged) {

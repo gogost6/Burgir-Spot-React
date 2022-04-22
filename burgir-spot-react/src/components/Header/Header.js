@@ -4,13 +4,13 @@ import UserMenu from "./UserMenu";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faArrowAltCircleDown, faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import MobileUserMenu from "./MobileUserMenu";
+import { useAppSelector } from "../../app/hooks";
 
 const Header = () => {
-    const user = useSelector((state) => state.user.value);
-    const order = useSelector((state) => state.order.value);
+    const user = useAppSelector((state) => state.user.value);
+    const order = useAppSelector((state) => state.order.value);
     const location = useLocation();
     const [width, setWindowWidth] = useState(0);
 

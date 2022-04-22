@@ -3,14 +3,14 @@ import { useState } from "react";
 import { changeValue } from '../../../utils/functions';
 import { editHandled } from '../../../services/authService';
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { userAuthentication } from '../../../features/user/userSlice';
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 const EditProfile = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    let user = useSelector((state) => state.user.value);
+    let user = useAppSelector((state) => state.user.value);
 
     let [userData, setUserData] = useState({
         username: user.username,

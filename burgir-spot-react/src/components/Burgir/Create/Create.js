@@ -1,16 +1,16 @@
 import "./Create.css";
 import Select from 'react-select';
 import * as option from '../options';
-import { useDispatch } from 'react-redux';
 import { addBurgirToUserModel } from '../../../features/user/userSlice';
 import { createBurgir } from '../../../services/foodService';
 import { arrHandler, changeValue, changeMeatValue } from '../index';
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import * as utils from '../../../utils/styles'
+import { useAppDispatch } from "../../../app/hooks";
 
 const Create = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     let [state, setState] = useState({
         bonus: [],
         description: "",

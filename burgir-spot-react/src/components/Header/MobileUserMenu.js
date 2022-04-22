@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutHandled } from "../../services/authService";
 import { logout } from "../../features/user/userSlice";
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 const MobileUserMenu = ({ closeMenu, showMobileUserMenu }) => {
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user.value);
+    const dispatch = useAppDispatch();
+    const user = useAppSelector(state => state.user.value);
 
     let logoutBtn = () => {
         logoutHandled().then(res => console.log(res)).catch(err => console.log(err));

@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useAppSelector } from "../app/hooks";
 
 const GuestGuard = () => {
-    const user = useSelector(state => state.user.value)
+    const user = useAppSelector(state => state.user.value)
 
     if (user.isLogged) {
         return <Navigate to='/' replace />;
