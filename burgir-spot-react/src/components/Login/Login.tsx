@@ -1,50 +1,54 @@
 import "./Login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from '../../services/authService';
-import * as utils from '../../utils/styles';
+import { loginUser } from "../../services/authService";
+import * as utils from "../../utils/styles";
 import { userAuthentication } from "../../features/user/userSlice";
 import { useAppDispatch } from "../../app/hooks";
 
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    let [error, setError] = useState('');
+    let [error, setError] = useState("");
     let [isSubmitted, setIsSubmitted] = useState(false);
-    let [username, setUsername] = useState('');
-    let [password, setPassword] = useState('');
+    let [username, setUsername] = useState("");
+    let [password, setPassword] = useState("");
     let [usernameHover, setUsernameHover] = useState(false);
     let [passwordHover, setPasswordHover] = useState(false);
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError('');
+        setError("");
         setIsSubmitted(true);
 
         let formData = new FormData(e.currentTarget);
         let data = Object.fromEntries(formData);
 
         loginUser(data)
-            .then(res => {
+            .then((res) => {
                 dispatch(userAuthentication(res));
-                navigate('/');
+                navigate("/");
             })
-            .catch(err => {
+            .catch((err) => {
                 setError(err);
-            })
+            });
     };
 
     return (
-        <div className="container" style={{marginTop: '6%'}}>
+        <div className="container" style={{ marginTop: "6%" }}>
             <section className="img-wraper">
                 <img src="images/Man_eating_hamburger.jpg" alt="man-e-ham" />
             </section>
-            <section className="content-wraper" style={{margin: "auto"}}>
+            <section className="content-wraper" style={{ margin: "auto" }}>
                 <div>
                     <h1>Welcome back!</h1>
                     <p>Login to start your tasty Burgir adventure!</p>
                 </div>
-                <form method="POST" className="login-form" onSubmit={onSubmit}>
+                <form
+                    method="POST"
+                    className="login-form"
+                    onSubmit={onSubmit}
+                >
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -61,12 +65,20 @@ const Login = () => {
                         }}
                         style={{
                             ...utils.inputBorderStyle.normal,
-                            ...(usernameHover ? utils.inputBorderStyle.hover : null),
-                            ...(username === '' && isSubmitted ? utils.inputBorderStyle.error : null),
+                            ...(usernameHover
+                                ? utils.inputBorderStyle.hover
+                                : null),
+                            ...(username === "" && isSubmitted
+                                ? utils.inputBorderStyle.error
+                                : null),
                         }}
                     />
-                    {username === '' && isSubmitted ? utils.inputErr('username') : ''}
-                    <label htmlFor="password" style={{ 'marginTop': '15px' }}>Password</label>
+                    {username === "" && isSubmitted
+                        ? utils.inputErr("username")
+                        : ""}
+                    <label htmlFor="password" style={{ marginTop: "15px" }}>
+                        Password
+                    </label>
                     <input
                         type="password"
                         name="password"
@@ -82,11 +94,17 @@ const Login = () => {
                         }}
                         style={{
                             ...utils.inputBorderStyle.normal,
-                            ...(passwordHover ? utils.inputBorderStyle.hover : null),
-                            ...(password === '' && isSubmitted ? utils.inputBorderStyle.error : null)
+                            ...(passwordHover
+                                ? utils.inputBorderStyle.hover
+                                : null),
+                            ...(password === "" && isSubmitted
+                                ? utils.inputBorderStyle.error
+                                : null),
                         }}
                     />
-                    {password === '' && isSubmitted ? utils.inputErr('password') : ''}
+                    {password === "" && isSubmitted
+                        ? utils.inputErr("password")
+                        : ""}
                     <section className="btn-wraper">
                         <button type="submit" className="btn burgir-color">
                             Login
@@ -95,8 +113,16 @@ const Login = () => {
                             Create account
                         </Link>
                     </section>
-                    {error ? <p className={error !== ''
-                        ? 'p-err hidethis' : ''} style={{ 'opacity': 1 }}>{error}</p> : ''}
+                    {error ? (
+                        <p
+                            className={error !== "" ? "p-err hidethis" : ""}
+                            style={{ opacity: 1 }}
+                        >
+                            {error}
+                        </p>
+                    ) : (
+                        ""
+                    )}
                 </form>
             </section>
         </div>
