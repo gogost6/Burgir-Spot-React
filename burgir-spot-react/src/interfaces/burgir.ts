@@ -34,3 +34,15 @@ export interface BurgirQuantity {
     quantity: number;
     name: string;
 }
+
+export interface InitialBurgir {
+    bonus: string[];
+    description: string;
+    imgUrl: string;
+    meat: string;
+    name: string;
+    price: number;
+    sauses: string[];
+    spices: string[];
+    vegetables: string[];
+}
