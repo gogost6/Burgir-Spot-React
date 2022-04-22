@@ -69,9 +69,9 @@ const Details = () => {
     const buyBurgir = (e) => {
         e.preventDefault();
         dispatch(addToBucket({
-            quantity,
+            quantity: +quantity,
             description: burgir.description,
-            price: burgir.price,
+            price: +burgir.price,
             name: burgir.name,
             imgUrl: burgir.imgUrl,
             _id: burgir._id
