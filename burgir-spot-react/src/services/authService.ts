@@ -1,3 +1,5 @@
+import { EditPasswordData, EditProfileData, LoginData, RegisterData } from "../interfaces/user";
+
 let baseUrl = '/api/user';
 
 export const getUser = async () => { 
@@ -18,7 +20,7 @@ export const getUser = async () => {
     }
 }
 
-export const fullUserDataByUsername = async (username) => { 
+export const fullUserDataByUsername = async (username: string) => { 
     const response = await fetch(`${baseUrl}/full-user-data-by-username` , { 
         method: 'POST',
         headers: {
@@ -37,7 +39,7 @@ export const fullUserDataByUsername = async (username) => {
     }
 }
 
-export const registerUser = async (data) => {
+export const registerUser = async (data: RegisterData) => {
     const response = await fetch(`${baseUrl}/register`, {
         method: 'POST',
         headers: {
@@ -56,7 +58,7 @@ export const registerUser = async (data) => {
     }
 }
 
-export const loginUser = async (data) => {
+export const loginUser = async (data: LoginData) => {
     const response = await fetch(`${baseUrl}/login`, {
         method: 'POST',
         headers: {
@@ -91,7 +93,7 @@ export const logoutHandled = async () => {
     }
 }
 
-export const editHandled = async (data) => {
+export const editHandled = async (data: EditProfileData) => {
     const response = await fetch(`${baseUrl}/edit`, {
         method: 'POST',
         headers: {
@@ -109,7 +111,7 @@ export const editHandled = async (data) => {
     }
 }
 
-export const editPasswordHandled = async (data) => {
+export const editPasswordHandled = async (data: EditPasswordData) => {
     const response = await fetch(`${baseUrl}/edit-password`, {
         method: 'POST',
         headers: {
@@ -127,7 +129,7 @@ export const editPasswordHandled = async (data) => {
     }
 }
 
-export const usedUsername = async (username) => {
+export const usedUsername = async (username: string) => {
     const response = await fetch(`${baseUrl}/free-username/${username}`, {
         method: 'GET',
         headers: {
@@ -144,7 +146,7 @@ export const usedUsername = async (username) => {
     }
 }
 
-export const usedEmail = async (email) => {
+export const usedEmail = async (email: string) => {
     const response = await fetch(`${baseUrl}/free-email/${email}`, {
         method: 'GET',
         headers: {
