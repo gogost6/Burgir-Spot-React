@@ -6,28 +6,27 @@ export interface Burgir {
     price: number;
     quantity: number;
     meat: string;
-    vegetables: [];
-    spices: [];
-    sauses: [];
-    bonus: [];
+    vegetables: string[];
+    spices: string[];
+    sauses: string[];
+    bonus: string[];
     description: string;
     date: Date;
     imgUrl: string;
     owner: User;
-    likes: [];
-    comments: [];
+    likes: string[];
+    comments: string[];
     singlePrice: number;
 }
 
 export interface OrderBurgir {
     quantity: number;
-    totalPrice: number;
-    singlePrice: number;
     description: string;
     price: number;
     name: string;
     imgUrl: string;
     _id: string;
+    totalPrice?: number;
 }
 
 export interface BurgirQuantity {
