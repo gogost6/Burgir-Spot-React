@@ -42,3 +42,9 @@ export interface EditPasswordData {
     oldPassword: string;
     newPassword: string;
 }
+
+export interface EditProfileState {
+    username: string;
+    telephone: string;
+    email: string;
+}
