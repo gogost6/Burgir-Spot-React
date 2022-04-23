@@ -5,6 +5,7 @@ import { editHandled } from '../../../services/authService';
 import { useNavigate } from "react-router-dom";
 import { userAuthentication } from '../../../features/user/userSlice';
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { EditProfileState } from "../../../interfaces/user";
 
 const EditProfile = () => {
     const dispatch = useAppDispatch();
@@ -12,10 +13,10 @@ const EditProfile = () => {
 
     let user = useAppSelector((state) => state.user.value);
 
-    let [userData, setUserData] = useState({
+    let [userData, setUserData] = useState<EditProfileState>({
         username: user.username,
         telephone: user.telephone,
-        email: user.email
+        email: user.email,
     });
     let [isSubmitted, setIsSubmitted] = useState(false);
     let [usedTelephone, setUsedTelephone] = useState(false);
@@ -25,7 +26,7 @@ const EditProfile = () => {
     const telephoneRegex = new RegExp(/\+359[0-9]{9}/);
     const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setUsedTelephone(false);
         setUsedEmail(false);
@@ -33,7 +34,7 @@ const EditProfile = () => {
         setIsSubmitted(true);
 
         let formData = new FormData(e.currentTarget);
-        let data = Object.fromEntries(formData);
+        let data = Object.fromEntries(formData) as any; //can't find solution
 
         setUserData(data);
 
@@ -44,31 +45,31 @@ const EditProfile = () => {
         const oldData = {
             oldTelephone,
             oldUsername,
-            oldEmail
-        }
+            oldEmail,
+        };
 
         let result = { ...userData, ...oldData };
 
         editHandled(result)
-            .then(res => {
+            .then((res) => {
                 console.log(res);
                 dispatch(userAuthentication(res));
-                navigate('/user');
+                navigate("/user");
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
 
-                if (err.msg.includes('Username is taken!')) {
+                if (err.msg.includes("Username is taken!")) {
                     setUsedUsername(true);
                 }
-                if (err.msg.includes('Telephone is used by other user!')) {
+                if (err.msg.includes("Telephone is used by other user!")) {
                     setUsedTelephone(true);
                 }
-                if (err.msg.includes('Email is taken!')) {
+                if (err.msg.includes("Email is taken!")) {
                     setUsedEmail(true);
                 }
             });
-    }
+    };
 
     const editForm = (<><form method="POST" className="edit-form" onSubmit={onSubmit} >
         <label htmlFor="email">Email</label>

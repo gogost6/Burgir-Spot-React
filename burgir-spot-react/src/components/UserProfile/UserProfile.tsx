@@ -30,7 +30,7 @@ const UserProfile = () => {
                     <li><a target="_blank" rel="noreferrer" href="https://instagram.com"><FontAwesomeIcon icon={faInstagram} /></a></li>
                 </ul> */}
             </div>
-                <Outlet style={{'float': 'right'}}/>
+                <Outlet />
         </div>
     )
 }

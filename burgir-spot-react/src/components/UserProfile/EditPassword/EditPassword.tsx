@@ -16,22 +16,22 @@ const EditPassword = () => {
     let [isSubmitted, setIsSubmitted] = useState(false);
     let [oldPasswordErr, setOldPasswordErr] = useState(false);
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitted(true);
         setOldPasswordErr(false);
         const data = { ...user, oldPassword, newPassword };
         editPasswordHandled(data)
-            .then(res => {
+            .then((res) => {
                 dispatch(userAuthentication(res));
-                navigate('/user');
+                navigate("/user");
             })
-            .catch(err => {
-                if(err.msg.includes('Old password is incorrect!')) {
+            .catch((err) => {
+                if (err.msg.includes("Old password is incorrect!")) {
                     setOldPasswordErr(true);
                 }
             });
-    }
+    };
 
     const goBackBtn = () => {
         navigate('/user');
