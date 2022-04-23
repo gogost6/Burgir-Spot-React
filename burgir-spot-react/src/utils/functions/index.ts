@@ -1,5 +1,4 @@
 import { MultiValue } from "react-select";
-import { Burgir } from "../../interfaces/burgir";
 
 interface Fnc {
     bonus: [];
@@ -40,13 +39,11 @@ export const arrHandler = (
 //     }
 // };
 
-export const changeValue = (
+export function changeValue<T>(
     e: React.ChangeEvent<HTMLInputElement>,
     type: string,
-    fnc: React.Dispatch<
-        React.SetStateAction<Burgir>
-    >
-) => {
+    fnc: React.Dispatch<React.SetStateAction<T>>
+) {
     const newValue = e.target.value;
     fnc((state) => {
         return {
@@ -54,7 +51,7 @@ export const changeValue = (
             [type]: newValue,
         };
     });
-};
+}
 
 // export const changeMeatValue = (e, fnc) => {
 //     const newValue = e.value;
