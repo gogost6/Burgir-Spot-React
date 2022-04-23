@@ -134,7 +134,7 @@ export const removeFromFavouriteHandler = async (id: string) => {
     }
 }
 
-export const getOwned =  async (id: string) => {
+export const getOwned =  async () => {
     const responce = await fetch(`${url}/owned`, {
         method: 'GET',
         headers: {
@@ -152,7 +152,7 @@ export const getOwned =  async (id: string) => {
     }
 }
 
-export const getLiked =  async (id: string) => {
+export const getLiked =  async () => {
     const responce = await fetch(`${url}/liked-collection`, {
         method: 'GET',
         headers: {
