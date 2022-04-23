@@ -3,27 +3,38 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { recentBurgirs, getOwned, getLiked } from '../../services/foodService';
 import ThreeDotsLoader from "../../utils/ThreeDotsLoader";
+import { Burgir } from "../../interfaces/burgir";
 
-const Menu = ({ type }) => {
-    let [burgirs, setBurgirs] = useState([]);
+interface PropsType {
+    type: string;
+}
+
+const Menu = (props: PropsType) => {
+    let [burgirs, setBurgirs] = useState<Burgir[]>([]);
     const [loader, setLoader] = useState(true);
 
     useEffect(() => {
-        if (type === 'menu') {
-            recentBurgirs().then(res => {
-                setLoader(false);
-                setBurgirs(res);
-            }).catch(err => console.log(err));
-        } else if (type === 'owned') {
-            getOwned().then(res => {
-                setBurgirs(res);
-            }).catch(err => console.log(err));
-        } else if (type === 'liked') {
-            getLiked().then(res => {
-                setBurgirs(res);
-            }).catch(err => console.log(err));
+        if (props.type === "menu") {
+            recentBurgirs()
+                .then((res) => {
+                    setLoader(false);
+                    setBurgirs(res);
+                })
+                .catch((err) => console.log(err));
+        } else if (props.type === "owned") {
+            getOwned()
+                .then((res) => {
+                    setBurgirs(res);
+                })
+                .catch((err) => console.log(err));
+        } else if (props.type === "liked") {
+            getLiked()
+                .then((res) => {
+                    setBurgirs(res);
+                })
+                .catch((err) => console.log(err));
         }
-    }, [type]);
+    }, [props.type]);
 
     return (
         <>
