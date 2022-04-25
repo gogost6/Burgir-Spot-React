@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { OrderBurgir } from "../../interfaces/burgir";
+import "./OrderDetails.scss";
 
 interface Order {
     totalPrice: number;
@@ -17,7 +18,18 @@ interface PropsType {
 }
 
 const OrderDetails = (props: PropsType) => {
-    const deliveryPrice = useAppSelector(state => state.order.value.deliveryPrice);
+    const deliveryPrice = useAppSelector(
+        (state) => state.order.value.deliveryPrice
+    );
+    const navigate = useNavigate();
+    
+    const onImgClick = (
+        e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        id: string
+    ) => {
+        e.preventDefault();
+        navigate(`/details/${id}`);
+    };
 
     return (
         <div
@@ -36,61 +48,25 @@ const OrderDetails = (props: PropsType) => {
                 props.showDivState ? { display: "flex" } : { display: "none" }
             }
         >
-            <div style={{ overflow: "auto" }}>
+            <div className="order-content">
                 {props.order.quantity > 0
                     ? props.order.burgirs.map((x) => (
-                          <div key={x._id}>
-                              <div
-                                  style={{
-                                      display: "flex",
-                                      border: "1px solid black",
-                                  }}
-                              >
-                                  <img
-                                      src={x.imgUrl}
-                                      style={{
-                                          width: "100px",
-                                          height: "100px",
-                                          objectFit: "cover",
-                                      }}
-                                      alt="img"
-                                  />
-                                  <div style={{ display: "flex" }}>
-                                      <h3>{x.name}</h3>
-                                      <h4 style={{ paddingTop: "57px" }}>
-                                          {x.price} BGN
-                                      </h4>
-                                  </div>
-                              </div>
+                          <div className="order-img-wrap" key={x._id} onClick={e => onImgClick(e, x._id)}>
+                              <img src={x.imgUrl} alt="img" />
                           </div>
                       ))
                     : ""}
             </div>
-            <div style={{ display: "flex" }}>
+            <div className="flex-order">
                 <h3>Delivery</h3>
-                <h6 style={{ marginLeft: "10px" }}>{deliveryPrice} BGN</h6>
+                <h6>{deliveryPrice} BGN</h6>
             </div>
-            <div style={{ display: "flex" }}>
+            <div className="flex-order">
                 <h3>Total</h3>
-                <h6 style={{ marginLeft: "10px" }}>
-                    {props.order.totalPrice} BGN
-                </h6>
+                <h6>{props.order.totalPrice} BGN</h6>
             </div>
-            <Link
-                to="/order"
-                style={{
-                    width: "100%",
-                    textAlign: "center",
-                    textDecoration: "none",
-                    color: "black",
-                    background: "gray",
-                    borderRadius: "10px",
-                }}
-            >
-                See order
-            </Link>
         </div>
     );
-}
+};
 
 export default OrderDetails;
