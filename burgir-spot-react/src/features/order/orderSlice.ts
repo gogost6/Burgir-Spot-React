@@ -88,7 +88,7 @@ export const orderSlice = createSlice({
                 (x) => x._id === action.payload._id
             );
 
-            if (existingBurgirIndex) {
+            if (existingBurgirIndex !== -1) {
                 state.value.burgirs.splice(existingBurgirIndex, 1);
             }
 
