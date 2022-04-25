@@ -37,7 +37,7 @@ const Details = () => {
         burgirDetails(id!)
             .then((res) => setBurgir(res))
             .catch((err) => console.log(err));
-    }, [burgir._id]);
+    }, [burgir._id, id]);
 
     useEffect(() => {
         if (user._id && user.likedBurgirs.includes(burgir._id!)) {
