@@ -49,14 +49,9 @@ code {
 }
 
 .container {
-    /* background-color: #FFCC00; */
     color: black;
-    /* border-radius: 20px; */
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    /* margin: 10px 42px;*/
-    /* height: 99vh;  */
 }
 
 .container.wrap {
